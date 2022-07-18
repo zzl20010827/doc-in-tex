@@ -1,2 +1,2 @@
 # TEX
-#latex编写用
+latex编写用
