@@ -1,0 +1,51 @@
+@PhdThesis{侯月月,
+  author = {侯月月},
+  school = {青岛理工大学},
+  title  = {限购,人才落户政策对房价的影响研究},
+}
+
+@PhdThesis{游智瑛2019,
+  author = {游智瑛},
+  school = {西南财经大学},
+  title  = {成都市房地产调控政策的研究(2010——2018)},
+  year   = {2019},
+}
+
+@Book{司守奎2011,
+  author    = {司守奎 and 孙玺菁},
+  publisher = {数学建模算法与应用},
+  title     = {数学建模算法与应用},
+  year      = {2011},
+}
+
+ 
+@Article{肖启荣2019,
+  author  = {肖启荣},
+  journal = {商业经济研究},
+  title   = {流通性减弱环境下房地产经济发展趋势分析},
+  year    = {2019},
+  month   = {1},
+  number  = {7},
+  pages   = {177-179},
+}
+
+@Article{韩婷2015,
+  author  = {韩婷},
+  journal = {东方企业文化},
+  title   = {住宅价格与成交量关系的协整研究},
+  year    = {2015},
+  number  = {19},
+  pages   = {1},
+}
+
+@Misc{链家,
+  howpublished = {\url{https://xa.lianjia.com/ershoufang/rs/}},
+  title        = {西安二手房房源\_西安二手房出售|买卖|交易信息(西安链家)},
+}
+
+@Misc{,
+  howpublished = {\url{https://xa.anjuke.com/market/}},
+  title        = {西安房价网，2022西安房价走势图，西安二手房价格-安居客},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

@@ -1,0 +1,456 @@
+\documentclass[UTF8]{ctexbeamer}
+\usepackage{latexsym}
+\usepackage{amsmath,amssymb}
+\usepackage{color,xcolor}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{amsthm}
+\usepackage{amsfonts,amssymb}
+\usepackage{mathrsfs}
+\usepackage{indentfirst}
+\usepackage{bm}
+\usepackage{bookmark}
+\usetheme{Madrid}
+\usefonttheme[onlymath]{serif}
+\renewcommand{\baselinestretch}{1.5}
+\usecolortheme{whale}
+\newtheorem{thm}{定理}
+\renewcommand\proofname{证明}
+\title{数学分析}
+\subtitle{2021年数学分析期中复习讲座}
+\author{张卓立}
+\institute{励志书院学业中心}
+\date{2021年11月13日}
+\begin{document}
+    \begin{frame}    
+        \titlepage
+    \end{frame}
+    \begin{frame}
+        \large{目录}
+        \tableofcontents
+    \end{frame}
+    \section{重点内容回顾}
+    \subsection{集合与映射}
+    \begin{frame}
+        \begin{block}{\begin{center}重点内容回顾\end{center}}
+            \begin{center}
+                \Huge{集合与映射}
+            \end{center}
+        \end{block}
+    \end{frame}
+    \begin{frame}{一.集合与映射}
+        (1)$A,B$为两个集合,$A=B\Longleftrightarrow A\subseteq B,B\subseteq A$.
+        \\(2)单射的等价命题:
+        \begin{center}
+            $f:X\longrightarrow Y$为单射
+        \end{center}
+        $$\begin{aligned}
+            &\Longleftrightarrow \forall x_1,x_2\in X,x_1\neq x_2\Longrightarrow f(x_1)\neq f(x_2)\\
+            &\Longleftrightarrow \forall x_1,x_2\in X,f(x_1)=f(x_2)\Longrightarrow  x_1=x_2.
+        \end{aligned}$$
+    \end{frame}
+    \begin{frame}{二.可数集}
+        可数集基本结论:
+        \\(1)$A$是可数集当且仅当$A$中元素可以按照某种方式排成一列.
+        \\(2)至多可数集的任意子集仍然是至多可数集.
+        \\(3)至多可数个的可数集的并仍然是可数集.
+        \\(4)$\mathbb{Q}$可数,$\mathbb{R}$和$(0,1)$不可数.事实上,任意两个区间有相同的势,那么$\mathbb{R}$上任意区间都是不可数集.
+    \end{frame}
+    \subsection{实数理论}
+    \begin{frame}
+        \begin{block}{\begin{center}重点内容回顾\end{center}}
+            \begin{center}
+                \Huge{实数理论}
+            \end{center}
+        \end{block}
+    \end{frame}
+    \begin{frame}{一.实数完备性定理的互推}
+        \textbf{实数完备性定理:}(1)Dedekind定理,(2)确界定理,(3)有限覆盖定理,(4)单调有界收敛原理,(5)Cauchy收敛准则,(6)Bolzano-Weierstrass定理,(7)闭区间套定理.
+        \\只给出部分较困难的证明：
+        \\1.闭区间套$\implies$确界定理
+        \pause
+        \\\textbf{证明:}设$A$是$\mathbb{R}$的一个非空子集,且有上界.先证明有上确界.任取$a_1\in A$并取$A$的上界$b_1>a_1$,得到闭区间$\left[a_1,b_1\right]$.
+        将其二等分,若$\left[\dfrac{a_1+b_1}{2},b_1\right]\cap A\neq\varnothing$,则将$\left[\dfrac{a_1+b_1}{2},b_1\right]$记为$\left[a_2,b_2\right]$,否则将
+        $\left[a_1,\dfrac{a_1+b_1}{2}\right]$记作$[a_2,b_2]$,反复操作可得闭区间列${[a_n,b_n]}$,其满足:
+    \end{frame}
+    \begin{frame}
+        (1)对任意的$n$均有$\left[a_{n+1},b_{n+1}\right]\subseteq[a_n,b_n]$,
+        \\(2)$\lim\limits_{n\to\infty}(b_n-a_n)=\lim\limits_{n\to\infty}(b_1-a_1)/2^{n-1}=0$,
+        \\(3)对任意的$n$有$[a_n,b_n]\cap A\neq\varnothing$且$b_n$均是$A$的上界.
+        \\由闭区间套定理知存在$\xi$使得$\bigcap\limits_{n=1}^{\infty}[a_n,b_n]={\xi}$.下证$\xi=\mathrm{sup}A$.
+        \indent 一方面，对任意的$x\in A$及$n\in\mathbb{Z}_{>0}$,有$x\leqslant b_n$,令$n\to\infty$可对任意的$x\in A$得到$x\leqslant\xi$.另一方面,
+        由$\lim\limits_{n\to\infty}a_n=\xi$可知,对任意的$\epsilon>0$,存在$n_{\epsilon}$使得$a_{n_{\epsilon}}>\xi-\epsilon$,
+        注意到$[a_{n_{\epsilon}},b_{n_\epsilon}]\cap A\neq\varnothing$所以存在$x\in A$使得$x>\xi-\epsilon$.因此$\xi=\mathrm{sup}A$.
+    \end{frame}
+    \begin{frame}
+        2.Dedekind定理$\implies$Bolzano-Weierstrass定理
+        \pause
+        \\\textbf{证明:}设$\{x_n\}$是一个有界数列,记
+        \begin{center}
+            $M=$\{$y\in\mathbb{R}$:存在无穷多个$n$使得$x_n\leqslant y$\}
+        \end{center}
+        以及$L=\mathbb{R}\backslash M$.首先,由${x_n}$有上界知$M\neq\varnothing$,由${x_n}$有下界知$L\neq\varnothing$.其次,对任意的$x\in L$及$y\in M$而言,
+        由$M$的定义知存在${x_n}$的子列${x_{n_k}}$使得$x_{n_k}\leqslant y(\forall k)$,再由$L$的定义知存在$k$使得$x_{n_k}>x$,因此$x<y$.
+        于是由Dedekind定理知存在$z\in\mathbb{R}$使得
+        $$x\leqslant z\leqslant y\quad(\forall x\in L,y\in M).$$
+    \end{frame}
+    \begin{frame}
+        现考虑任意的$\epsilon>0$,一方面，由上述不等式可得$z+\epsilon\in M$,于是存在无穷多个$n$,使得$x_n\leqslant z+\epsilon$;另一方面,$z-\epsilon\in L$,因此,
+        ${x_n}$中至多有有限多项不超过$z-\epsilon$,换句话说,存在$N$,使得当$n>N$时均有$x_n>z-\epsilon$.
+        \\综上便知$z$时${x_n}$的某个子列的极限.即证Bolzano-Weierstrass定理.
+    \end{frame}
+    \begin{frame}{二.确界和确界定理}
+        1.上确界可理解为"最小上界",同理下确界可理解为"最大下界".($A\subseteq\mathbb{R}$有界,若$\exists b,c\in\mathbb{R}$,使得对$\forall a_1,a_2\in A$有$b\geqslant a_1,c\leqslant a_2$,则$b\geqslant\mathrm{sup}\,A,c\leqslant\mathrm{inf}\,A$).
+        \\2.根据确界定理,若上(下)界存在,则上(下)确界也存在,且必定唯一.
+        \\3.证明关于的确界的等式(可以证明左边$\leqslant$右边,右边$\leqslant$左边)
+        \\例:设$A,B\subseteq\mathbb{R}$且$A,B$非空,记$A+B=\{a+b:a\in A,b\in B\}$,证明:$\mathrm{inf}\,(A+B)=\mathrm{inf}\,A+\mathrm{inf}\,B$.
+    \end{frame}
+    \begin{frame}
+        \textbf{证明:}一方面,记$c_1=\mathrm{inf}\,A,c_2=\mathrm{inf}\,B,c=\mathrm{inf}\,(A+B)$则对$\forall a\in A,b\in B$有$c_1+c_2\leqslant a+b$,即$c_1+c_2$是$A+B$的一个下界,则$c_1+c_2\leqslant c$.
+        \\另一方面,对$\forall \epsilon>0,\exists a_0\in A,b_0\in B$,使$a_0<c_1+\epsilon,b_0<c_2+\epsilon$则,$c\leqslant a_0+b_0<c_1+c_2+2\epsilon$,即$c\leqslant c_1+c_2$.综上，等式得证.
+    \end{frame}
+    \begin{frame}{三.有限覆盖定理}
+        (1)有限覆盖定理的条件不可改动:将条件中有界闭区间改为开区间或是无界区间,或者将开覆盖中每个开区间改成闭区间,则结论不再成立.
+        \\(2)可以利用有限覆盖定理将有界闭区间的各个点邻域的局部性质拓展到整个区间上.
+        \\例:设$f(x)$是定义在有界闭区间$I$上的一个函数,且对$\forall a\in I$,存在$a$的邻域$I_a$,使得$f(x)$在$I_a\cap I$上有界.证明$f(x)$在$I$上有界.
+    \end{frame}
+    \begin{frame}
+        \textbf{证明:}$\exists M_a\geqslant 0,f$在$I_a\cap I$上满足$|f(x)|\leqslant M_a$,又$I\subseteq \bigcup\limits_{a\in I}I_a$,每个$I_a$为开区间,
+        则$\bigcup\limits_{a\in I}I_a$为$I$的一个开覆盖,则根据有限覆盖定理,可得$\exists m\in\mathbb{N}_{>0}$及$a_1,a_2,\cdots,a_m\in I$,使得$I\subseteq\bigcup\limits_{n=1}^{m}I_{a_n}$.
+        \\现取$M=\mathrm{max}(M_{a_1},\cdots,M_{a_m})$,则对$\forall a\in I$,$\exists a_k\in \{a_1,\cdots,a_m\}$,使$a\in I_{a_k}$,则$|f(a)|\leqslant M_{a_k}\leqslant M$.命题得证.
+    \end{frame}
+    \begin{frame}
+        (3)可以利用闭区间每点生成的邻域构造开覆盖.
+        \\例:利用有限覆盖定理证明Bolzano-Weierstrass定理.
+        \pause
+        \\\textbf{证明:}设${x_n}$是有界数列,则存在$M>0$使得$x_n\in [-M,M](\forall n)$.记
+        \[S=\{x_n:n\in\mathbb{Z}_{>0}\},\]
+        若$S$是有限集,那么由抽屉原理,知${x_n}$有一个通项恒等于常数的子列,这一子列当然收敛.现设$S$是无限集.并反设 ${x_n}$无收敛子列,那么对$\forall a\in [-M,M]$,
+        必存在$a$的邻域$I_a$使得$I_a\cap S$至多含有一个元素.
+    \end{frame}
+    \begin{frame}
+        因为$[-M,M]\subseteq \bigcup\limits_{a\in [-M,M]}I_a$,故由有限覆盖定理知$\exists a_1,\cdots,a_k$,使得$[-M,M]\subseteq\bigcup\limits_{j=1}^{k}I_{a_j}$,当然$S\subseteq \bigcup\limits_{j=1}^{k}I_{a_j}$,
+        但是每个$I_{a_j}$至多含有$S$中的一个元素,这与$S$是无限集矛盾.
+    \end{frame}
+    \begin{frame}{四.常用不等式}
+        1.(算术平均-几何平均-调和平均不等式)$a_1,\cdots,a_n$是\textbf{正实数},则
+        \[\frac{a_1+\cdots a_n}{n}\geqslant \sqrt[n]{a_1\cdots a_n}\geqslant\frac{n}{\dfrac{1}{a_1}+\cdots+\dfrac{1}{a_n}}. \]
+        等号成立当且仅当$a_1=\cdots=a_n$.
+        \\2.$(\mathrm{Cauchy-Schwarz}$不等式).设$a_k$和$b_k(k=1,\cdots,n)$均为\textbf{实数},则
+        $$\left(\sum_{k=1}^{n}a_kb_k\right)^2\leqslant \left(\sum_{k=1}^{n}a_k^2\right)\left(\sum_{k=1}^{n}b_k^2\right).$$
+    \end{frame}
+    \begin{frame}
+        3.($\mathrm{Minkowski}$不等式)设$a_k,b_k\,(k=1,\cdots,n)$均为\textbf{实数},则有
+        \[\left(\sum_{k=1}^{n}(a_k+b_k)^2\right)^{\frac{1}{2}}\leqslant \left(\sum_{k=1}^{n}a_k^2\right)^{\frac{1}{2}}+\left(\sum_{k=1}^{n}b_k^2\right)^{\frac{1}{2}}.\]
+    \end{frame}
+    \subsection{数列的极限}
+    \begin{frame}
+        \begin{block}{\begin{center}重点内容回顾\end{center}}
+            \begin{center}
+                \Huge{数列的极限}
+            \end{center}
+        \end{block}
+    \end{frame}
+    \begin{frame}{一.数列敛散性的判断和证明}
+        1.数列发散
+        \\(1)用定义证明.对$\forall a\in\mathbb{R},\exists \epsilon_0>0$,使得对$\forall N\in\mathbb{Z}_{>0},\exists n>N$,使$|x_n-a|\geqslant \epsilon_0$,则数列发散.
+        当$a$取定时可以证明数列不收敛于$a$.\textbf{注意:无穷大量一定发散,但发散数列不一定是无穷大量.}
+        \\(2)若数列存在两个子列,它们至少一个发散,或者收敛于不同值时,原数列发散.
+    \end{frame}
+    \begin{frame}
+        (3)$\mathrm{Cauchy}$收敛准则:若$\exists\epsilon_0>0$,对$\forall N\in\mathbb{Z}_{>0}$,存在$m,n\in\mathbb{Z}$且$m,n>N$,使得$|x_m-x_n|\geqslant \epsilon_0$,则$\{x_n\}$发散.
+        \\例:$S_n=1+\dfrac{1}{2}+\cdots+\dfrac{1}{n}$,证明$\{S_n\}$发散.
+        \pause
+        \\\textbf{证明:}对$\forall n\in \mathbb{Z}_{>0},$
+        \[\begin{aligned}
+            |S_{2n}-S_n|&=\left|\dfrac{1}{n+1}+\cdots+\dfrac{1}{2n}\right|\\
+            &\geqslant n\cdot\dfrac{1}{2n}=\dfrac{1}{2}.
+        \end{aligned}\]
+        则${S_n}$发散.
+    \end{frame}
+    \begin{frame}
+        2.数列收敛
+        \\(1)数列收敛定义.
+        \\例:证明$\lim\limits_{n\to\infty}\dfrac{3^n}{n!}=0$.
+        \pause
+        \\\textbf{证明:}对任意的正整数$n>3,\dfrac{3^n}{n!}\leqslant \dfrac{9}{2}\cdot \left(\dfrac{3}{4}\right)^{n-3}$.则对$\forall\epsilon>0$,
+        取$n_\epsilon=\mathrm{max}\left(\left[\mathrm{log}_{\frac{3}{4}}\dfrac{2\epsilon}{9}\right]+4,4\right)$,则对$\forall n>n_\epsilon$,有
+        $\left|\dfrac{3^n}{n!}\right|<\epsilon$,则$$\lim\limits_{n\to\infty}\dfrac{3^n}{n!}=0.$$
+        (2)$\mathrm{Cauchy}$收敛准则.
+    \end{frame}
+    \begin{frame}
+        (3)压缩映像原理.(注意定理要求$f$是从闭区间$I$到$I$上的一个函数.)
+        \\例:设数列$\{a_n\},\{b_n\}$满足$a_1=b_1=1$,且
+        $$a_{n+1}=a_n+2b_n,\,b_{n+1}=a_n+b_n,\quad \forall n\in\mathbb{Z}_{>0}.$$
+        证明极限$\lim\limits_{n\to\infty}\dfrac{a_n}{b_n}$存在.
+        \pause
+        \\\textbf{证明:}令$x_n=\dfrac{a_n}{b_n}$,则$x_n\geqslant 1$且$x_{n+1}=\dfrac{x_n+2}{x_n+1}$.
+        \\令$f:[1,+\infty)\longrightarrow [1,+\infty),f(x)=\dfrac{x+2}{x+1}$.则$x_{n+1}=f(x_n)$.又对$\forall x,y\in[0,1),|f(x)-f(y)|=\dfrac{\left|x-y\right|}{(x+1)(y+1)}\leqslant\dfrac{|x-y|}{4}$,
+        \\由压缩映像原理可得收敛.
+    \end{frame}
+    \begin{frame}
+        (4)单调有界收敛原理.
+        \\若数列$\{a_n\}$单调递增有上界,则极限存在且$\sup\limits_{n\in\mathbb{Z}_{>0}}\{a_n\}=\lim\limits_{n\to\infty}a_n\geqslant a_n\,(\forall n)$.
+        \\若数列$\{a_n\}$单调递减有下界,则极限存在且$\inf\limits_{n\in\mathbb{Z}_{>0}}\{a_n\}=\lim\limits_{n\to\infty}a_n\leqslant a_n\,(\forall n)$.
+    \end{frame}
+    \begin{frame}{二.数列极限的计算}
+        (1)四则运算.
+        \\(2)夹逼定理.
+        \\思路:将较难以直接处理的数列用两个较简单的数列“夹住”,如果两个简单数列收敛于同一极限,那么问题解决.
+        \\例:设$a>0,b>0,$求极限$\lim\limits_{n\to\infty}(a^n+b^n)^{\frac{1}{n}}$
+        \pause
+        \\\textbf{解:}设$a\leqslant b,$则$(a^n+b^n)^{\frac{1}{n}}=b\left(\dfrac{a^n}{b^n}+1\right)^\frac{1}{n}$,又$$b\leqslant b\left(\dfrac{a^n}{b^n}+1\right)^\frac{1}{n}\leqslant b\sqrt[n]{2}$$
+        则可以得到极限为$b$.当$a>b$时类似处理可以得到极限为$\max(a,b)$.
+    \end{frame}
+    \begin{frame}
+        (3)$\mathrm{Stolz}$定理.
+        \\1.$\dfrac{\ast}{+\infty}$型:设数列$\{y_n\}$\textbf{自某项开始严格单调递增且趋于$+\infty$},那么,对任意的数列$\{x_n\}$,只要有
+        $$\lim_{n\to\infty}\frac{x_n-x_{n-1}}{y_n-y_{n-1}}=a,$$
+        就有$\lim\limits_{n\to\infty}\dfrac{x_n}{y_n}=a$,其中$a$可以是实数,$+\infty,-\infty$.
+        \\2.$\dfrac{0}{0}$型.\textbf{$\{x_n\},\{y_n\}$都是无穷小量},且$\{y_n\}$\textbf{自某项后要严格单调递减}.其余部分与$\dfrac{\ast}{+\infty}$型相同.
+        \\3.$\mathrm{Stolz}$定理的逆命题未必成立.
+    \end{frame}
+    \begin{frame}
+        4.当分子和分母上的数列有明显的递推关系时,可以使用$\mathrm{Stolz}$定理.
+        \\例:设$k$是正整数,计算$\lim\limits_{n\to\infty}\dfrac{1^k+2^k+\cdots+n^k}{n^{k+1}}$.
+        \pause
+        \\\textbf{解:}记$\{x_n\}=1^k+\cdots +n^k,\{y_n\}=n^{k+1}$,则
+        $$\begin{aligned}
+            \lim\limits_{n\to\infty}\dfrac{x_{n+1}-x_n}{y_{n+1}-y_n}&=\lim\limits_{n\to\infty}\dfrac{(n+1)^k}{(n+1)^{k+1}-n^{k+1}}\\
+            &=\lim\limits_{n\to\infty}\dfrac{(n+1)^k}{(n+1)^k+(n+1)^{k-1}\cdot n+\cdots+n^k}\\
+            &=\dfrac{1}{k+1}.
+        \end{aligned}$$
+        则原极限为$\dfrac{1}{k+1}$.
+    \end{frame}
+    \begin{frame}{三.上下极限}
+        (1)基本结论:
+        \\\hspace*{20pt}1.若数列$\{x_n\}$有界,则上下极限都存在.
+        \\\hspace*{20pt}2.若上下极限存在,则上下极限分别是所有聚点的最大者和最小者.
+        \\\hspace*{20pt}3.$\{x_n\}$有界,则$\varlimsup\limits_{n\to\infty}x_n\geqslant \varliminf\limits_{n\to\infty}x_n$.
+        \\(2)用上下极限证明极限存在.
+        \\$\{x_n\}$收敛的充要条件是$\varlimsup\limits_{n\to\infty}x_n=\varliminf\limits_{n\to\infty}x_n$.
+        事实上，只需要证明$\varlimsup\limits_{n\to\infty}x_n\leqslant \varliminf\limits_{n\to\infty}x_n$,就可以证明原数列收敛.
+    \end{frame}
+    \begin{frame}{四.其余一些重要结论}
+        (1)$\mathrm{Euler}$常数$\gamma=\lim\limits_{n\to\infty}\left(1+\dfrac{1}{2}+\cdots+\dfrac{1}{n}-\mathrm{log}\,n\right)$.
+        \\(2)$\left\{\left(1+\dfrac{1}{n}\right)^n\right\}$单调递增且收敛,$\left\{\left(1+\dfrac{1}{n}\right)^{n+1}\right\}$单调递减且收敛.
+        且它们有共同的极限,即为自然对数的底$e$.
+        \\(3)$\lim\limits_{n\to\infty}\sqrt[n]{n}=1;a>0,\lim\limits_{n\to\infty}\sqrt[n]{a}=1$.
+        \\(4)可以用$\mathrm{Bolzano}$二分法构造闭区间套,再利用闭区间套定理证明.
+        \\\hspace*{15pt}例如:用闭区间套定理证明$\mathrm{Blozano-Weierstrass}$定理.(课本72页定理3.8).
+    \end{frame}
+    \subsection{数项级数}
+    \begin{frame}
+        \begin{block}{\begin{center}重点内容回顾\end{center}}
+            \begin{center}
+                \Huge{数项级数}
+            \end{center}
+        \end{block}
+    \end{frame}
+    \begin{frame}{数项级数敛散性}
+        \begin{center}
+            数列$\longleftrightarrow$部分和序列\quad 数列收敛$\longleftrightarrow $部分和序列收敛.
+        \end{center}
+            1.$\mathrm{Cauchy}$收敛准则:
+            级数$\sum\limits_{n=1}^{\infty}u_n$收敛的充要条件是:
+            对任意的$\epsilon> 0$,均存在$n_\epsilon \in \mathbb{Z}_{> 0}$,使得对任意的$m> n> n_{\epsilon}$,均有
+            \[\mid S_m-S_n\mid=\left|\sum_{k=n+1}^{m}u_k\right|<\epsilon\]
+    \end{frame}
+    \begin{frame}
+        例：判断级数$\sum\limits_{n=1}^{\infty}\dfrac{1}{n^s}\left(s\in\mathbb{R}_{>1} \right)$的敛散性.
+        \pause
+        \\\textbf{解:}对任意的正整数$m>n>2$,必存在$u,v\in\mathbb{Z}_{>0}$使得$2^u<n\leqslant2^{u+1}$以及$m\leqslant2^v$.于是
+        
+            \[\begin{aligned}
+                \left|\sum_{k=n+1}^{m}\frac{1}{k^s}\right|&\leqslant\sum_{k=2^u+1}^{2^v}\frac{1}{k^s}=\sum_{j=u}^{v-1}\sum_{k=2^j+1}^{2^{j+1}}\frac{1}{k^s}\\
+                &\leqslant\sum_{j=u}^{v-1}2^j\cdot \frac{1}{(2^j)^s}=\sum_{j=u}^{v-1}\frac{1}{(2^{s-1})^j}=\frac{\frac{1}{(2^{s-1})^u}-\frac{1}{(2^{s-1})^v)}}{1-\frac{1}{2^{s-1}}}\\
+                &<\frac{2^{s-1}}{2^{s-1}-1}\cdot\frac{1}{(2^u)^{s-1}}\leqslant\frac{4^{s-1}}{2^{s-1}-1}\cdot\frac{1}{n^{s-1}}
+            \end{aligned}\]
+            由$\mathrm{Cauchy}$收敛准则可知级数收敛.
+    \end{frame}
+    \begin{frame}{一.正项级数敛散性的判断和证明}
+        更为常用的是各种判别法的极限形式.
+        \\1.比较判别法.
+        \\2.$\mathrm{Cauchy}$判别法.(当级数的通项次数较高时)
+        \\例:判断级数$\sum\limits_{n=2}^{\infty}\dfrac{n^{\log n}}{\mathrm{log}^nn}$的敛散性.
+        \pause
+        \\\textbf{证明:}设通项为$\{x_n\},\sqrt[n]{x_n}=\dfrac{n^{\frac{\mathrm{log}n}{n}}}{\mathrm{log}n}=\dfrac{e^{\frac{(\mathrm{log}n)^2}{n}}}{\mathrm{log}n}\longrightarrow 0<1,\quad n\longrightarrow \infty$.
+        \\则原级数收敛.
+    \end{frame}
+    \begin{frame}
+        3.$\mathrm{d'Alermbert}$判别法.(当级数相邻两个通项能互相消去时).
+        \\例:判断级数$\sum\limits_{n=1}^{\infty}\dfrac{n!}{n^{n-1}}$敛散性.
+        \pause
+        \\\textbf{证明:}记级数通项为$x_n$,则当$n\geqslant 2$时,
+        \\$\dfrac{x_n}{x_{n-1}}=\dfrac{(n-1)^{n-2}}{n^{n-2}}=\dfrac{n}{n-1}\cdot \dfrac{1}{\left(1+\frac{1}{n-1}\right)^{n-1}}\longrightarrow \dfrac{1}{e},\quad n\longrightarrow \infty$.
+        \\则原级数收敛.
+        \pause
+        \\\textbf{注:}用$\mathrm{d'Alermbert}$判别法无法判断敛散性的级数也无法用$\mathrm{Cauchy}$判别法判断敛散性.
+        $\left(\varliminf\limits_{n\to\infty}\dfrac{u_{n+1}}{u_n}\leqslant \varliminf\limits_{n\to\infty}\sqrt[n]{u_n}\leqslant\varlimsup\limits_{n\to\infty}\sqrt[n]{u_n}\leqslant\varlimsup\limits_{n\to\infty}\dfrac{u_{n+1}}{u_n}\right).$
+    \end{frame}
+    \begin{frame}
+        4.$\mathrm{Raabe}$判别法.
+        \\例:判断$\sum\limits_{n=1}^{\infty}{\dfrac{(2n)!}{2^{2n}(n!)^2(2n+1)}x^{2n}}$的敛散性.
+        \pause
+        \\\textbf{解:}记通项为$u_n$,则$\dfrac{u_n}{u_{n-1}}=\dfrac{(2n-1)^2x^2}{2n(2n+1)}$.
+        \\当$|x|>1$时发散,当$|x|<1$时收敛.
+        \\当$|x|=1$时,$n\left(\dfrac{u_{n-1}}{u_n}-1\right)=\dfrac{n(6n-1)}{(2n-1)^2}\longrightarrow \dfrac{3}{2}>1$.
+        \\则$|x|\leqslant 1$时收敛,$|x|>1$时发散.
+        \\5.$\mathrm{Gauss}$判别法.
+    \end{frame}
+    \begin{frame}{二.任意项级数敛散性的判断和证明}
+        1.$\mathrm{Abel}$判别法和$\mathrm{Drichlet}$判别法.
+        \\2.$\mathrm{Abel}$求和公式.设$(a_n)_{n\in\mathbb{Z}}$和$(b_n)_{n\in\mathbb{Z}}$是复数集的两个元素族,则对任意的$M\in\mathrm{Z}$以及$N\in\mathrm{Z}_{>0}$,有
+        $$\sum_{M<n\leqslant M+N}a_nb_n=a_{M+N}B_{M+N}+\sum_{M<n\leqslant M+N-1}(a_n-a_{n+1})B_n,$$
+        其中$B_n=\sum\limits_{M<k\leqslant n}b_k$.
+        \\例:$\mathrm{Dedekind}$判别法.设级数$\sum\limits_{n=2}^{\infty}(a_n-a_{n-1})$绝对收敛,$\lim\limits_{n\to\infty}a_n=0,$级数$\sum\limits_{n=1}^{\infty}b_n$的部分和数列有界,证明:$\sum\limits_{n=1}^{\infty}a_nb_n$收敛.
+    \end{frame}
+    \begin{frame}
+        \textbf{证明:}对任意的$\epsilon>0$，存在$N_0\in\mathbb{Z}_{>1}$,对任意的$n>N_0$,有$|a_n|<\epsilon$,且对任意的$M>N>N_0$，$\sum\limits_{n=N}^{M}|a_n-a_{n-1}|<\epsilon$.又$\sum\limits_{n=1}^{\infty}b_n$部分和有界,则存在$M_0\geqslant 0$,对任意的$m>0,\left|\sum\limits_{n=1}^{m}b_n\right|\leqslant M_0$.记$\sum\limits_{n=1}^{m}b_n=B_m$.
+        $$
+        \begin{aligned}
+            \left|\sum_{n=N}^{M}a_nb_n\right|&=\left|a_MB_M+\sum_{n=N}^{M-1}(a_n-a_{n+1})B_n\right|\\
+            &\leqslant|a_MB_M|+\left|\sum_{n=N}^{M-1}(a_n-a_{n+1})B_n\right|\\
+            &<M_0\epsilon+\sum_{n=N}^{M-1}|a_n-a_{n+1}|M_0<2M_0\epsilon.
+        \end{aligned}
+        $$
+        由$\mathrm{Cauchy}$收敛准则可以得到级数收敛.
+        \pause
+        \\类似:$\mathrm{Du\;Bois-Reymond}$判别法.
+    \end{frame}
+    \begin{frame}{三.绝对收敛与条件收敛,级数乘法和三角函数}
+        1.绝对收敛和条件收敛.
+        \\\hspace*{20pt}(1)$(\mathrm{Dirichlet})$设$\sum\limits_{n=1}^{\infty}u_n$绝对收敛,$\sum\limits_{n=1}^{\infty}u_n'$是将原级数的项重排后所得的级数,
+        则$\sum\limits_{n=1}^{\infty}u_n'$也绝对收敛,且它的和与原级数的和相同.
+        \\\hspace*{20pt}(2)$\mathrm{Riemann}$重排定理.
+        \\2.级数乘法.
+        \\\hspace*{20pt}(1)$\mathrm{Cauchy}$乘积:$\sum\limits_{n=0}^{\infty}a_n,\sum\limits_{n=0}^{\infty}b_n$是两个级数,$\sum\limits_{n=0}^{\infty}c_n$是$\mathrm{Cauchy}$乘积,若$c_n=\sum\limits_{k+l=n}a_kb_l.$
+        \\\hspace*{20pt}(2)$\mathrm{Dirichlet}$乘积:$\sum\limits_{n=1}^{\infty}a_n,\sum\limits_{n=1}^{\infty}b_n$是两个级数,$\sum\limits_{n=1}^{\infty}c_n$是$\mathrm{Dirichlet}$乘积,若$c_n=\sum\limits_{kl=n}a_kb_l$.
+    \end{frame}
+    \begin{frame}
+        \hspace*{20pt}(3)$(\mathrm{Cauchy})$若$\sum\limits_{n=0}^{\infty}a_n$与$\sum\limits_{n=0}^{\infty}b_n$绝对收敛,且它们的和分别是$A$与$B$,则将$a_ib_j(i,j\geqslant 0)$按任意方式排列所得级数都绝对收敛,且和为$AB$.
+        \\\hspace*{20pt}(4)$\mathrm{Mertens}$
+        \\\hspace*{20pt}(5)两级数发散,柯西乘积未必发散.两级数收敛,柯西乘积未必发散,比如,$a_n=b_n=\dfrac{(-1)^n}{\sqrt{n}}$,但$\sum a_n,\sum b_n$的柯西乘积发散.另外,两级数收敛,$\mathrm{Dirichlet}$乘积未必收敛.
+    \\3.三角函数.
+    \\\hspace*{20pt}$\mathrm{sin}x=\sum\limits_{n=0}^{\infty}\dfrac{(-1)^n}{(2n+1)!}x^{2n+1},\mathrm{cos}x=\sum\limits_{n=0}^{\infty}\dfrac{(-1)^n}{(2n)!}x^{2n}\;(x\in\mathbb{R})$.
+    \end{frame}
+    \begin{frame}
+        \begin{block}{}
+           \begin{center}
+               \Huge{$^\ast$一些拓展}
+           \end{center}
+        \end{block}
+    \end{frame}
+    \begin{frame}{无穷大量和无穷小量的阶}
+        数列$\{a_n\},\{b_n\}$.如果$b_n\neq 0(\forall n\geqslant 1)$且数列$\left\{\dfrac{a_n}{b_n}\right\}$是无穷小量,则记
+        $$
+        a_n=o(b_n),\qquad n\to\infty.
+        $$
+        特别地,用$o(1)$表示无穷小量.
+    \end{frame}
+    \begin{frame}{用阶刻画通项的渐进性态}
+        例:证明$\sum\limits_{n=1}^{\infty}\dfrac{(-1)^{[\sqrt{n}]}}{n}$的收敛.
+        \pause
+        \\\textbf{证明:}将级数中相邻的同号项合并,组成交错级数$\sum\limits_{n=1}^{\infty}(-1)^na_n$,其中,
+        $$\begin{aligned}
+            a_n=&\frac{1}{n^2}+\frac{1}{n^2+1}+\cdots+\frac{1}{(n+1)^2-1}\\
+            &=\frac{1}{n^2}\sum\limits_{k=0}^{2n}\frac{1}{1+\frac{k}{n^2}}=\frac{1}{n^2}\sum\limits_{k=0}^{2n}\left[1-\frac{k}{n^2}+o\left(\frac{k}{n^2}\right)\right]\\
+            &=\frac{1}{n^2}\left[(2n+1)-\frac{2n+1}{n}+o(1)\right]=\frac{2}{n}-\frac{1}{n^2}+o\left(\frac{1}{n^2}\right).
+        \end{aligned}$$
+        因此,原级数收敛.
+    \end{frame}
+    \begin{frame}
+        \begin{exampleblock}{练习}
+            判断$\sum\limits_{n=2}^{\infty}\dfrac{(-1)^n}{(n+(-1)^n)^p}(p\in\mathbb{Q})$的敛散性.
+        \end{exampleblock}
+        \pause
+        \textbf{解:}记通项为$u_n$,则
+        \pause
+        $$
+        \begin{aligned}
+            u_n&=\frac{(-1)^n}{n^p}\cdot\frac{1}{\left(1+\frac{(-1)^n}{n}\right)^p}=\frac{(-1)^n}{n^p}\left(1+\frac{(-1)^np}{n}+o\left(\frac{1}{n}\right)\right)\\
+            &=\frac{(-1)^n}{n^p}+\frac{p}{n^{p+1}}+o\left(\frac{1}{n^{p+1}}\right).
+        \end{aligned}
+        $$
+        \pause
+        当$p> 0$时收敛,当$p\leqslant 0$时发散.
+    \end{frame}
+    \begin{frame}{一些练习}
+        \begin{exampleblock}{练习1}
+            求$\lim\limits_{n\to\infty}\left(1+\dfrac{1}{n}+\dfrac{1}{n^2}\right)^n.$
+        \end{exampleblock}
+        \pause
+        \textbf{解:}记数列为$x_n$.一方面,$\left(1+\dfrac{1}{n}\right)^n<x_n.$
+        \pause
+        \\另一方面,$x_n=\left(1+\dfrac{n+1}{n^2}\right)^n<\left(1+\dfrac{n+1}{n^2-1}\right)^n=\left(1+\dfrac{1}{n-1}\right)^n.$
+        \pause
+        \\则由夹逼定理,原数列极限为$e$.
+    \end{frame}
+    \begin{frame}
+        \begin{exampleblock}{练习2}
+            判断$\sum\limits_{n=1}^{\infty}\dfrac{\mathrm{exp}{\left(-1-\frac{1}{2}-\cdots-\frac{1}{n}\right)}}{n^p}$敛散性.$^\ast$
+        \end{exampleblock}
+        \pause
+        \textbf{解:}$\gamma$为$\mathrm{Euler}$常数.
+        $$
+        \begin{aligned}
+            \mathrm{exp}\left(-\left(1+\dfrac{1}{2}+\cdots+\dfrac{1}{n}\right)\right)&=\dfrac{1}{n}\cdot\mathrm{exp}\left(-\left(1+\cdots+\dfrac{1}{n}-\mathrm{log}n\right)\right)
+        \end{aligned}
+        $$
+        \pause
+        则
+        $$
+        \begin{aligned}
+            &\lim_{n\to\infty}\frac{n^{p+1}}{e^{-\gamma}}\cdot\dfrac{\mathrm{exp}{\left(-1-\dfrac{1}{2}-\cdots-\dfrac{1}{n}\right)}}{n^p}\\
+            &=\lim_{n\to\infty}\mathrm{exp}\left(-\left(1+\frac{1}{2}+\cdots+\frac{1}{n}-\mathrm{log}n\right)+\gamma\right)=1. 
+        \end{aligned}
+        $$
+        \pause
+        \\则$p>0$时收敛,$p\leqslant 0$时发散.
+    \end{frame}
+    \begin{frame}
+        \begin{exampleblock}{练习3}
+            设级数$\sum\limits_{n=1}^{\infty}a_n$收敛,$\{b_n\}$为严格单调递增的正数列且$\lim\limits_{n\to\infty}b_n=+\infty$.证明当$n\to\infty$时均有
+            $$\sum_{k=1}^{n}a_kb_k=o(b_n).$$
+        \end{exampleblock}
+        \pause
+        记级数$\sum\limits_{n=1}^{\infty}a_n$的部分和为$A_n$,由$\mathrm{Abel}$求和公式和$\mathrm{Stolz}$定理可得,
+        $$
+        \begin{aligned}
+            \lim_{n\to\infty}\frac{\sum\limits_{k=1}^{n}a_kb_k}{b_n}&=\lim_{n\to\infty}A_n+\lim_{n\to\infty}\frac{\sum\limits_{k=1}^{n-1}(b_k-b_{k+1})A_k}{b_n}\\
+            &=\sum\limits_{n=1}^{\infty}a_n+\lim\limits_{n\to\infty}\frac{(b_{n-1}-b_n)A_{n-1}}{b_n-b_{n-1}}=0.
+        \end{aligned}
+        $$
+        \pause
+        则$\sum\limits_{k=1}^{n}a_kb_k=o(b_n)\quad (n\to\infty).$
+    \end{frame}
+    \section{平时学习及应试方面}
+    \subsection{平时学习方面}
+    \begin{frame}{平时学习方面}
+        \pause
+        课堂:
+        \begin{itemize}
+            \item 课前预习(有重点地听讲)
+            \item 课后复习(重点定义,定理)
+        \end{itemize}
+        \pause
+        课下:
+        \begin{itemize}
+            \item 习题集:吉米多维奇,《数学分析习题课讲义》《数学分析中的典型问题与方法》$\cdots$
+            \item 国外教材:Rudin $Principle\;of\;Mathematical\;Analysis$,菲赫金哥尔茨《微积分学教程》$\cdots$
+        \end{itemize}
+    \end{frame}
+    \subsection{应试方面}
+    \begin{frame}{应试方面}
+        \begin{itemize}
+            \item 定义,定理默写
+            \item 判断题
+            \item 大题
+        \end{itemize}
+    \end{frame}
+    \begin{frame}
+        \begin{center}
+            \textbf{\Huge{谢谢大家}}
+        \end{center}
+    \end{frame}
+\end{document}

@@ -1,0 +1,966 @@
+\documentclass[oneside,a4paper,12pt]{ctexbook}
+\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,titlesec,xcolor,tcolorbox,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,fourier-orns}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[thmmarks]{ntheorem}
+\usepackage{amsmath}
+
+\setlength{\headheight}{25pt}
+\tcbuselibrary{theorems,skins,breakable}
+\allowdisplaybreaks[4]
+\linespread{1.5}
+\geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\titleformat{\chapter}[display]%chapter格式
+{\bfseries\LARGE}
+{\filleft\MakeUppercase{chapter}\quad\Huge\thechapter}
+{4ex}
+{\titlerule[1pt]\vspace*{1pt}\titlerule
+\vspace{2ex}%
+\filright}
+[\vspace{2ex}%
+\titlerule]
+
+\titleformat{\section}[frame]%section格式
+{\normalfont}
+{\filright
+\footnotesize
+\enspace SECTION \thesection\enspace}
+{8pt}
+{\Large\bfseries\filcenter\color{blue!60!black}}
+
+\pagestyle{fancy}%页面风格
+\fancyhead[L]{\sffamily 考试题整理}
+\fancyhead[C]{\sffamily \leftmark}
+\fancyhead[R]{\sffamily\thepage}
+\fancyfoot[C]{ }
+\renewcommand{\headrule}{\hrulefill
+\raisebox{-2.1pt}{\quad\decofourleft\decotwo\decofourright\quad
+}\hrulefill}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\ensuremath{\blacksquare}}
+    \newtheorem{inproof}{证明.}
+}
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\bfseries 解毕.}
+    \newtheorem{insolution}{解.}
+}
+%注意
+\newtcolorbox{marker}[1][]{enhanced,
+before skip=2mm,after skip=3mm,
+boxrule=0.4pt,left=5mm,right=2mm,top=1mm,bottom=1mm,
+colback=yellow!50,
+colframe=yellow!20!black,
+sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+underlay={%
+    \path[fill=tcbcolback!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[draw=tcbcolframe,shorten <=-0.05mm,shorten >=-0.05mm] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[fill=yellow!50!black,draw=none] (interior.south west) rectangle node[white]{\Huge\bfseries !} ([xshift=4mm]interior.north west);
+    },
+drop fuzzy shadow,#1}
+  %注释
+\newtcolorbox{remark}{enhanced,
+before skip=2mm,after skip=2mm,
+colback=black!5,colframe=black!50,boxrule=0.2mm,
+attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight},
+varwidth boxed title*=-3cm,
+boxed title style={frame code={
+    \path[fill=tcbcolback!30!black]
+    ([yshift=-1mm,xshift=-1mm]frame.north west)
+    arc[start angle=0,end angle=180,radius=1mm]
+    ([yshift=-1mm,xshift=1mm]frame.north east)
+    arc[start angle=180,end angle=0,radius=1mm];
+    \path[left color=tcbcolback!60!black,right color=tcbcolback!60!black,
+    middle color=tcbcolback!60!black]
+    ([xshift=-2mm]frame.north west) -- ([xshift=2mm]frame.north east)
+    [rounded corners=1mm]-- ([xshift=1mm,yshift=-1mm]frame.north east)
+    -- (frame.south east) -- (frame.south west)
+    -- ([xshift=-1mm,yshift=-1mm]frame.north west)
+    [sharp corners]-- cycle;
+    },interior engine=empty,
+},
+fonttitle=\bfseries,
+title={注释},colbacktitle=yellow!90!red}
+
+\newtcbtheorem{thinking}{思路}{enhanced,sharp corners,drop fuzzy shadow,fonttitle=\large\bfseries,colback=white,colframe=black,fontupper=\sffamily,coltitle=black,colbacktitle=white,titlerule=1mm,titlerule style={white,line width=0.5mm},separator sign dash,breakable}{}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\ttfamily}
+    \newtheorem{algorithm}{算法.}
+}
+\newcounter{task}
+\newenvironment{task}[1]{
+    \begin{tcolorbox}[enhanced,colback=blue!5!white,colframe=blue!60!black,colbacktitle=blue!40!gray,fonttitle=\bfseries,fontupper=\kaishu,fontlower=\kaishu,
+        theorem={题}{task}{}{#1},attach boxed title to top left={xshift=2mm,yshift=-0.5mm},boxed title size=copy]
+}{
+    \end{tcolorbox}
+}
+\newenvironment{proof}{
+    \begin{tcolorbox}[enhanced,colback=cyan!5!white,colframe=cyan!75!black,drop fuzzy shadow,breakable,arc=0mm]
+        \begin{inproof}
+}{
+        \end{inproof}
+    \end{tcolorbox}
+}
+\newenvironment{solution}{
+    \begin{tcolorbox}[enhanced,colback=cyan!5!white,colframe=cyan!75!black,drop fuzzy shadow,breakable,arc=0mm]
+        \begin{insolution}
+}{
+        \end{insolution}
+    \end{tcolorbox}
+}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\diag}{\mathrm{diag}}
+
+\begin{document}
+    \begin{titlepage}
+        \vspace*{1cm}
+        \begin{tcolorbox}[boxsep=5mm,notitle,halign=flush right,arc=0mm,colback=blue!15!white,boxrule=1mm,colframe=blue!50!black]
+            \zihao{0}\sffamily\color{blue!60!black}
+            矩阵分析\\
+            \& 最优化方法\\
+            考题整理
+        \end{tcolorbox}
+    \end{titlepage}
+    
+    \tableofcontents
+
+    \thispagestyle{empty}
+
+    \chapter{矩阵分析}
+
+    \thispagestyle{empty}
+
+    \newpage
+
+    \section{今年题}
+
+    考试分为填空和大题.
+
+    \subsection{填空题}
+    
+    填空主要是矩阵的极限、级数、微分相关的题型.不管是矩阵的级数还是极限,一个明显的套路就是将矩阵对角化或者化成
+    Jordan标准型,再进行求解.
+
+    \begin{task}{矩阵分析今年填空题1}
+        设矩阵$A=\begin{bmatrix}
+            0&a&a\\
+            a&0&a\\
+            a&a&0
+        \end{bmatrix}$,试求$\lim_{m\to\infty}A^m=O$时$a$的取值范围为\underline{\hspace*{2cm}}.
+    \end{task}
+
+    \begin{solution}
+        $A$有特征值$\lambda_1=2a$(1重),$\lambda_2=-a$(2重),且$A$可对角化,存在可逆矩阵$P$,使得$P^{-1}AP=D=\diag\{2a,-a,-a\}$,
+        如果$\lim_{m\to\infty}A^m=O$,那么$|2a|<1$且$|a|<1$,$a$取值范围$\left(-\frac{1}{2},\frac{1}{2}\right)$.
+    \end{solution}
+    
+    \begin{task}{矩阵分析今年填空题2}
+        矩阵$A$满足$\norm{A}<1$,则$\lim_{m\to\infty}A^m=\underline{\hspace*{2cm}}$.
+    \end{task}
+
+    \begin{solution}
+        因为$\norm{A^m}\leqslant\norm{A}^m\longrightarrow 0$当$m\to\infty$,则所求极限为$O$.
+    \end{solution}
+
+    \subsection{大题}
+
+    大题的第一题是关于盖氏圆盘定理的应用和推论.这个题大致是先用Ger$\hat{\mathrm{s}}$gorin圆盘定理判断特征值分布在哪些圆盘中,这就需要用到
+    定理的推论.
+
+    \setcounter{task}{1}
+
+    \begin{task}{矩阵分析今年大题2}
+        矩阵$A\in\C^{m\times n}$,证明:
+        \begin{equation*}
+            \max_{i,j}\abs{a_{ij}}\leqslant\norm{A}_2\leqslant\sqrt{mn}\max_{i,j}\abs{a_{ij}}.
+        \end{equation*}
+    \end{task}
+
+    \begin{proof}
+        首先证明第一个不等式.因为矩阵的2-范数与向量的2-范数是相容的,取$\epsilon_j=(0,\cdots,1,\cdots,0)^T$为单位阵$I$的第$j$列.
+        又
+        \begin{equation*}
+            \norm{A}_2=\norm{A}_2\norm{\epsilon_j}_2\geqslant\norm{A\epsilon_j}_2,
+        \end{equation*}
+        $A\epsilon_j=(a_{1j},a_{2j},\cdots,a_{mj})^T$.则
+        \begin{equation*}
+            \norm{A}_2\geqslant \sqrt{\sum_{i=1}^ma_{ij}^2}\geqslant \max_i\abs{a_{ij}}.
+        \end{equation*}
+        由$j$的任意性,
+        \begin{equation*}
+            \norm{A}_2\geqslant \max_{i,j}\abs{a_{ij}}.
+        \end{equation*}
+
+        第二个不等式.记$I_{ij}^{(k)}$为除了$(i,j)$元为1之外,其余元素均为$0$的$k$阶方阵,则
+        \begin{equation*}
+            A=\sum_{i,j}I_{ii}^{(m)}AI_{jj}^{(n)},
+        \end{equation*}
+        其中$I_{ii}^{(m)}AI_{jj}^{(n)}$是除了$(i,j)$元为$a_{ij}$之外其余元素为$0$的$m\times n$矩阵,则
+        \begin{align*}
+            \norm{A}_2&\leqslant\sum_{i,j}\norm{I_{ii}^{(m)}AI_{jj}^{(n)}}_2\\
+            &\leqslant\sum_{k=1}^{\min(n,m)}\abs{a_{ij}}\\
+            &\leqslant\min(m,n)\max_{i,j}\abs{a_{ij}}\\
+            &\leqslant\sqrt{mn}\max_{i,j}\abs{a_{ij}}.
+        \end{align*}
+        
+        证毕.
+    \end{proof}
+
+    大题的第三个题是关于满秩分解的,纯粹是硬算.
+
+    \setcounter{task}{3}
+
+    \begin{task}{矩阵分析今年大题4}
+        矩阵$X,A\in\C^{n\times n}$,证明
+        \begin{equation*}
+            \frac{\dif}{\dif X}\tr(X^TAX)=(A+A^T)X.
+        \end{equation*}
+    \end{task}
+
+    \begin{proof}
+        设$X=[x_{1},x_{2},\cdots,x_n]=(x_{ij})_{n\times n},A=(a_{ij})_{n\times n}$,那么$\tr(X^TAX)=\sum_{k=1}^nx_k^TAx_k$.
+        又$\frac{\dif }{\dif X}x_k^TAx_k=\left(\frac{\dif }{\dif x_{ij}}x_k^TAx_k\right)_{n\times n}$,当$j\neq k$,$\frac{\dif}{\dif x_{ij}}x_k^TAx_k=0$,
+        当$j=k$时,$\frac{\dif}{\dif x_{ik}}x_k^TAx_k=\epsilon_i^T(A+A^T)x_k$,则
+        \begin{align*}
+            \frac{\dif}{\dif X}x_k^TAx_k&=\begin{bmatrix}
+                0&\cdots&\epsilon_1^T(A+A^T)x_k&\cdots&0\\
+                \vdots&&\vdots&&\vdots\\
+                0&\cdots&\epsilon_n^T(A+A^T)x_k&\cdots&0
+            \end{bmatrix}.
+        \end{align*}
+        得到
+        \begin{align*}
+            \frac{\dif}{\dif X}X^TAX&=(\epsilon_i^T(A+A^T)x_j)_{n\times n}\\
+            &=I(A+A^T)X=(A+A^T)X.
+        \end{align*}
+        也就是要证的等式.
+    \end{proof}
+
+    \begin{task}{矩阵分析今年大题5}
+        矩阵$A,B\in\C^{m\times n}$且$AB^H=B^HA=O$,证明
+        \begin{equation*}
+            (A+B)^+=A^++B^+.
+        \end{equation*}
+    \end{task}
+
+    \begin{proof}
+        首先证明$(A+B)(A^++B^+)(A+B)=A+B$.
+        \begin{align*}
+            (A+B)(A^++B^+)(A+B)&=AA^+A+AA^+B+AB^+A+AB^+B\\
+            &\quad+BA^+A+BA^+B+BB^+A+BB^+B\\
+            &=A+B+\left(AA^+B+AB^+A+AB^+B\right.\\
+            &\quad\left.+BA^+A+BA^+B+BB^+A\right).
+        \end{align*}
+        又因为
+        \begin{gather*}
+            AA^+B=(AA^+)^HB=(A^+)^HA^HB=O,\\
+            AB^+A=AB^+BB^+A=AB^H(B^+)^HB^+A=O,
+        \end{gather*}
+        同理得到$AB^+B=BA^+A=BA^+B=BB^+A=O$,那么
+        \begin{equation*}
+            (A+B)(A^++B^+)(A+B)=A+B.
+        \end{equation*}
+
+        同理,可得$(A^++B^+)(A+B)(A^++B^+)=A^++B^+$.
+
+        下面证明$[(A+B)(A^++B^+)]^H=(A+B)(A^++B^+)$.因为
+        \begin{align*}
+            [(A+B)(A^++B^+)]^H&=(AA^++AB^++BA^++BB^+)^H\\
+            &=AA^++BB^++(AB^++BA^+)^H.
+        \end{align*}
+        又$AB^+=AB^+BB^+=AB^H(B^+)^HB^H=O$,同理$BA^+=O$,那么$(A+B)(A^++B^+)=AA^++BB^+$,则
+        \begin{equation*}
+            [(A+B)(A^++B^+)]^H=AA^++BB^+=(A+B)(A^++B^+).
+        \end{equation*}
+
+        同理,$[(A^++B^+)(A+B)]^H=(A^++B^+)(A+B)$.
+
+        则$(A+B)^+=A^++B^+$.
+    \end{proof}
+
+    大题第6题大致是:对于线性方程组$Ax=b$,需要
+    \begin{enumerate}
+        \item 求解$A^+$.
+        \item 计算$\beta=Ay_0$,其中$y_0$是最小二乘解(其实$y_0$就是$A^+b$).
+    \end{enumerate}
+    也是硬算题.
+
+    \section{往年题}
+
+    \setcounter{task}{0}
+
+    \begin{task}{矩阵分析往年1}
+        求矩阵$A=\begin{bmatrix}
+            2&-1&-1\\
+            2&-1&-2\\
+            -1&-1&2
+        \end{bmatrix}$的行列式因子、不变因子和初等因子.
+    \end{task}
+
+    \begin{solution}
+        矩阵$\lambda I-A$的Smith标准型为
+        \begin{equation*}
+            \begin{bmatrix}
+                1 & 0 & 0\\
+                0 & 1 & 0\\
+                0 & 0 & (\lambda-1)(\lambda+1)(\lambda-3)
+            \end{bmatrix}
+        \end{equation*}
+        
+        行列式因子:$D_1=1,D_2=1,D_3=(\lambda-1)(\lambda+1)(\lambda-3)$.
+
+        不变因子:$d_1=1,d_2=1,d_3=(\lambda-1)(\lambda+1)(\lambda-3)$.
+
+        初等因子:$\lambda-1,\lambda+1,\lambda+3$.
+    \end{solution}
+
+    \begin{task}{矩阵分析往年2}
+        设$A$是$n$阶常数对称矩阵.向量函数$y=(y_1(t),t_2(t),\cdots,y_n(t))^T$,二次型$f(y)=y^TAy$,证明:$\frac{\dif f}{\dif t}=2y^TA\frac{\dif y}{\dif t}$.
+    \end{task}
+
+    \begin{proof}
+        注意到$A$对称,
+        \begin{align*}
+            \frac{\dif f}{\dif t}&=\frac{\dif y^T}{\dif t}Ay+y^TA\frac{\dif y}{\dif t}\\
+            &=2y^TA\frac{\dif y}{\dif t}.
+        \end{align*}
+        即证.
+    \end{proof}
+
+    \begin{task}{矩阵分析往年3}
+        求$A=\begin{bmatrix}
+            -1&0&2\\
+            0&1&0
+        \end{bmatrix}$的奇异值分解.
+    \end{task}
+
+    \begin{solution}
+        \begin{description}
+            \item[求$A^TA$.] $A^TA=\begin{bmatrix}
+                1 & 0 & -2\\
+                0 & 1 & 0\\
+                -2 & 0 & 4
+            \end{bmatrix}$.
+            \item[求$A^TA$的特征值和特征向量.] $A^TA$的特征值为$\lambda_1=5,\lambda_2=1,\lambda_3=0$,对应的特征向量按照矩阵写出是$V=\begin{bmatrix}
+                -\frac{1}{\sqrt{5}} & 0 & \frac{2}{\sqrt{5}} \\
+                0 & 1 & 0 \\
+                \frac{2}{\sqrt{5}} & 0 & \frac{1}{\sqrt{5}}
+            \end{bmatrix}$.
+            \item[利用$A=U\begin{bmatrix}
+                S & O\\
+                O & O
+            \end{bmatrix}V^H$求解$U$(或$V$).] 已知$S=\diag\{\sqrt{5},1\}$,求解得$U=I$.
+        \end{description}
+
+    \end{solution}
+
+    \begin{task}{矩阵分析往年4}
+        设$m\times n$阶矩阵$A$,$\rank(A)=r$,证明:$A=CD$存在,其中$C$是$m\times r$阶列满秩阵,$D$是$r\times n$阶行满秩阵.
+    \end{task}
+
+    \begin{proof}
+        存在可逆矩阵$P,Q$,使得$PAQ=B=\begin{bmatrix}
+            I_r & O\\
+            O & O
+        \end{bmatrix}$,则
+        \begin{align*}
+            A&=P^{-1}BQ^{-1}\\
+            &=P^{-1}\begin{bmatrix}
+                I_r\\
+                O
+            \end{bmatrix}\begin{bmatrix}
+                I_r & O
+            \end{bmatrix}Q^{-1},
+        \end{align*}
+        令$C=P^{-1}\begin{bmatrix}
+            I_r\\
+            O
+        \end{bmatrix},D=\begin{bmatrix}
+            I_r & O
+        \end{bmatrix}Q^{-1}$,它们分别是列满秩和行满秩矩阵.
+    \end{proof}
+
+    \begin{task}{矩阵分析往年5}
+        设矩阵$A=\begin{bmatrix}
+            1&1&1\\
+            0&1&1\\
+            0&0&1
+        \end{bmatrix}$,求$e^{tA}$.
+    \end{task}
+
+    \begin{solution}
+        令$P=\begin{bmatrix}
+            1 & 0 & 0\\
+            0 & 1 & -1\\
+            0 & 0 & 1
+        \end{bmatrix},J=\begin{bmatrix}
+            1 & 1 & 0\\
+            0 & 1 & 1\\
+            0 & 0 & 1
+        \end{bmatrix}$,则
+        \begin{equation*}
+            P^{-1}AP=J.
+        \end{equation*}
+        计算$e^{tA}$:
+        \begin{align*}
+            e^{tA}&=e^{tPJP^{-1}}=Pe^{tJ}P^{-1}\\
+            &=P\exp(tI+tB)P^{-1}\\
+            &=P\exp(tI)\exp(tB)P^{-1}\\
+            &=e^tP\exp(tB)P^{-1}\\
+            &=e^tP\left(I+tB+\frac{t^2B^2}{2}\right)P^{-1}\\
+            &=e^t\begin{bmatrix}
+                1 & t & t^2/2+t\\
+                0 & 1 & t\\
+                0 & 0 & 1
+            \end{bmatrix}.
+        \end{align*}
+        \ 
+    \end{solution}
+
+    \begin{task}{矩阵分析往年6}
+        设矩阵$H\in\C^{n\times n}$,证明其广义逆$H^+=H$当且仅当$H^2$是幂等Hermite矩阵且$\rank(H^2)=\rank(H)$.
+    \end{task}
+
+    \begin{proof}
+        ``$\Rightarrow$''.这时$H^+=H$,$H^2=H^+H=(H^+H)^H=(H^2)^H$,则$H^2$是Hermite阵;$(H^2)^2=(H^+H)^2=H^HH^+H=H^+H=H^2$,则
+        $H^2$幂等;$H=HH^+H=H^3$,$\rank(H)\leqslant\rank(H^2)$,则$\rank(H)=\rank(H^2)$.
+
+        ``$\Leftarrow$''.因为$H^2$是Hermite阵,那么$(HH)^H=HH$.又$\rank(H^2)=\rank(H)$,则$R(H^2)=R(H)$,即存在$A$,使得$H^2A=H$,
+        \begin{equation*}
+            HHH=HHA=H.
+        \end{equation*}
+        则$H=H^+$.
+    \end{proof}
+
+    \begin{task}
+        设矩阵$A\in\C^{m\times n}$,若存在$G\in\C^{n\times m},S\in\C^{m\times m}$和$T\in\C^{n\times n}$满足
+        \begin{gather}
+            AGA=A,\label{eq:矩阵分析往年7.1}\\
+            G=A^HS,\label{eq:矩阵分析往年7.2}\\
+            G=TA^H,\label{eq:矩阵分析往年7.3}
+        \end{gather}
+        则$G$唯一确定且$G=A^+$.根据式(\ref{eq:矩阵分析往年7.2})和(\ref{eq:矩阵分析往年7.3}),
+    \end{task}
+
+    \begin{proof}
+        \begin{equation*}
+            A^HG^HG=A^HAT^HA^HS=(ATH^HA)^HS=(AGA)^HS=A^HS=G.
+        \end{equation*}
+        类似,$GG^HA^H=G$,也就是如果有(\ref{eq:矩阵分析往年7.1})、(\ref{eq:矩阵分析往年7.2})和(\ref{eq:矩阵分析往年7.3})成立,
+        一定就有$A^HG^HG=G,GG^HA^H=G$成立.不妨令$S=G^HG,T=GG^H$,则$S^H=S,T^H=T$,
+        \begin{gather*}
+            (GA)^H=(A^HSA)^H=A^HS^HA=A^HSA=GA,\\
+            (AG)^H=(ATA^H)^H=AT^HA^H=ATA^H=AG,\\
+            GAG=(GA)^HG=A^HG^HG=A^HS=G.
+        \end{gather*}
+        则$G=A^+$.从上面求解$G$的过程来看,$G$唯一确定.
+    \end{proof}
+
+    \begin{task}{矩阵分析往年题8}
+        设$A=\begin{bmatrix}
+            1&2&2&1\\
+            1&1&1&1\\
+            2&1&1&2
+        \end{bmatrix},b=\begin{bmatrix}
+            1\\1\\1
+        \end{bmatrix}$.
+        \tcblower
+        求:\begin{enumerate}
+            \item $A^+$;
+            \item 用广义逆矩阵性质判别$Ax=b$是否相容;
+            \item 若相容,求出最小范数解;若不相容,求出最小范数二乘解.
+        \end{enumerate}
+    \end{task}
+
+    \begin{solution}
+        \textbf{1. }将$A$奇异值分解,设$A=U\begin{bmatrix}
+            S & O_1\\
+            O_2 & O_3
+        \end{bmatrix}V^H$.在形式上,
+        \begin{align*}
+            A^+&=V\begin{bmatrix}
+               S^{-1} & O_2^T\\
+               O_1^T & O_3^T 
+            \end{bmatrix}U^H\\
+            &=\begin{bmatrix}
+                -0.1818 & 0.0455 & 0.3182\\
+                0.3182 & 0.0455 & -0.1818\\
+                0.3182 & 0.0455 & -0.1818\\
+                -0.1818 & 0.0455 & 0.3182
+            \end{bmatrix}.
+        \end{align*}
+        (或者用满秩分解$A=FG$,$A^+=G^H(F^HFGG^H)^{-1}F^H$.)
+
+        \textbf{2. }$A^+$当然是$A^{(1)}$,计算$AA^+b$,得到
+        \begin{equation*}
+            AA^+b=\begin{bmatrix}
+                1.0909\\
+                0.7273\\
+                1.0909
+            \end{bmatrix}\neq b.
+        \end{equation*}
+        方程组不相容.(或者说明$\rank([A\ b])\neq\rank(A)$.)
+
+        \textbf{3. }最小范数二乘解为
+        \begin{equation*}
+            x_0=A^+b=\begin{bmatrix}
+                0.1818\\
+                0.1818\\
+                0.1818\\
+                0.1818
+            \end{bmatrix}.
+        \end{equation*}
+        \ 
+    \end{solution}
+
+    \newpage
+
+    \chapter{最优化方法}
+
+    \thispagestyle{empty}
+
+    \newpage
+
+    \setcounter{task}{0}
+
+    \section{今年题}
+
+    分为两部分:陈述题和解答题(解答题最后两道二选一).
+
+    \subsection{陈述题}
+
+    陈述题既包括定义比如\textbf{凸集}和\textbf{可行域}的概念,也包括其他的一些基本的东西,比如说是\textbf{信赖域方法简述和信赖域半径确定},\textbf{最速下降法
+    算法步骤},\textbf{带不等式约束的外罚函数}等.
+
+    \subsection{大题}
+
+    大题差不多就是老师强调的重点.
+
+    \begin{task}{最优化今年大题1}
+        定义在$\R^3$上的函数$f(x)=\frac{1}{3}x_1^3+\frac{1}{3}x_2^3-2x_2-x_1$,求$f$的平稳点,在平稳点中哪些是最优解?
+    \end{task}
+
+    \begin{thinking*}{}
+        若$x$是$f$的平稳点,那么有$\nabla f(x)=0$,这样求解可以得到平稳点.
+        
+        要想找到最优解,首先需要利用最优性条件的二阶必要条件判断那些是局部最小点,然后在这些局部最小点中寻找.
+
+        对于本题来说,因为是无约束优化问题,而且$f$是三次的,所以没有最小点.
+    \end{thinking*}
+
+    \begin{task}{最优化今年大题2}
+        考虑以下优化问题:
+        \begin{equation*}
+            \begin{array}{rl}
+                \min&(x_1-3)^2+(x_2-1)^2\\
+                \mathrm{s.t.}&\begin{cases}
+                    -x_1^2+x_2\geqslant 0,\\
+                    2x_1+x_2-3\geqslant 0.
+                \end{cases}
+            \end{array}
+        \end{equation*}
+        求出KKT点.
+    \end{task}
+
+    \begin{thinking*}{}
+        首先写出这个问题的KKT条件,然后分类讨论,排除到最后只有一种情况,是一个不好求解的三次方程.
+    \end{thinking*}
+
+    \begin{task}{最优化今年大题3}
+        考虑无约束优化问题:
+        \begin{equation*}
+            \min\quad f(x)=(-x_1+x_2+x_3)^2+(x-1-x_2+x_3)^2+(x_1+x_2-x_3)^2.
+        \end{equation*}
+        初始点$x_0=\left(\frac{1}{2},1,\frac{1}{2}\right)^T$,用共轭梯度法(HS/CW/FR/PRP/Dixon/DY)进行两步迭代.
+    \end{task}
+
+    \begin{thinking*}{以FR为例}
+        算法不唯一,其中一个是:
+        \begin{algorithm}
+            令$f(x)=\frac{1}{2}x^TGx-bx$,其中$G=\nabla^2f(x)$.
+            \begin{enumerate}[{步}1.]
+                \item 初始步:给出$x_0$,计算$r_0=g_0=\nabla f(x_0)$,令$d_0=-r_0,k:=0$.
+                \item 如果$k>2$,停止.
+                \item 依次计算\begin{gather*}
+                    \alpha_k=\frac{r_k^Tr_k}{d_k^TGd_k},\\
+                    x_{k+1}=x_k+\alpha_kd+k,\\
+                    r_{k+1}=r_k+\alpha_kGd_k,\\
+                    \beta_k=\frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k},\\
+                    d_{k+1}=-r_{k+1}+\beta_kd_k.
+                \end{gather*}
+                \item 令$k:=k+1$,转步2.
+            \end{enumerate}
+        \end{algorithm}
+        没记错的话答案是$(0,0,0)^T$.
+    \end{thinking*}
+
+    \begin{task}{最优化今年大题4}
+        有两个优化问题:
+        \begin{equation*}
+            \begin{array}{crll}
+                \normalfont{\textbf{(I)}}&\min&f(x)&\\
+                &\mathrm{s.t.}&a_i^Tx-b_i\geqslant 0&i\in \cI,\\
+                &&a_i^Tx-b_i=0&i\in\cE.
+            \end{array}
+            \qquad
+            \begin{array}{crll}
+                \normalfont{\textbf{(II)}}&\min&\nabla f(x)^Td\\
+                &\mathrm{s.t.}&a_i^Td\geqslant 0&i\in\cI,\\
+                & & a_id=0&i\in\cE.
+            \end{array}
+        \end{equation*}
+        设$d$是(II)的解,证明对(I)的任意可行点$x$,$d$是$x$的可行方向.
+    \end{task}
+
+    \begin{proof}
+        对任意的$t>0,x$是(I)可行域的点,$d$是(II)的解,有
+        \begin{gather*}
+            a_i^T(x+td)-b_i\geqslant a_i^Tx-b_i+ta_i^Td\geqslant 0,\quad i\in\cI,\\
+            a_i^T(x+td)-b_i=a_i^Tx-b_i+ta_i^Td=0,\quad i\in\cE.
+        \end{gather*}
+        则$x+td$是可行域中的点.
+        \begin{marker}
+            其实要是说明$d$是可行方向,还需要说明$d\neq 0$,但我不知道是题目不严谨还是确实有解$d\neq 0$恒成立,可以再验证一下.
+        \end{marker}
+        \ 
+    \end{proof}
+    
+
+    \begin{task}{最优化今年大题5}
+        $d$是$f(x)$的一个下降方向,令
+        \begin{equation*}
+            H=I-\frac{dd^T}{d^T\nabla f(x)}-\frac{\nabla f(x)\nabla f(x)^T}{\nabla f(x)^T\nabla f(x)}.
+        \end{equation*}
+        再令$p=-Hf(x)$,证明$p$是$f$在$x$处的一个下降方向.
+    \end{task}
+
+    \begin{proof}
+        定义验证.$d$是$f$的一个下降方向,则$\nabla f(x)^Td<0$.
+        \begin{align*}
+            \nabla f(x)^Tp&=-\nabla f(x)^TH\nabla f(x)\\
+            &=-\left(\nabla f(x)^T\nabla f(x)-\frac{\nabla f(x)^Tdd^T\nabla f(x)}{d^T\nabla f(x)}\right.\\
+            &\quad-\left.\frac{\nabla f(x)^T\nabla f(x)\nabla f(x)^T\nabla f(x)}{\nabla f(x)^T\nabla f(x)}\right)\\
+            &=-(\nabla f(x)^T\nabla f(x)-d^T\nabla f(x)-\nabla f(x)^T\nabla f(x))\\
+            &=d^T\nabla f(x)<0.
+        \end{align*}
+        即$p$是一个下降方向.
+    \end{proof}
+
+    \begin{task}{最优化今年大题6}
+        二选一:
+
+        (1) $G$是$n$阶正定矩阵,$\R^n$上的函数$f(x)=\frac{1}{2}x^TGx+b^Tx$,用共轭方向法求最小值,证明精确线性搜索在第$n$步得到准确值.({\normalfont 题目大致是这样})
+
+        (2)\begin{equation*}
+            \begin{array}{rl}
+                \min&\frac{1}{2}\left[(x_1-1)^2+x_2^2\right]\\
+                \mathrm{s.t.}&x_1=\beta x_2^2.
+            \end{array}
+        \end{equation*}
+        $\beta$取何值时,$(0,0)^T$是局部极小点.
+    \end{task}
+
+    \begin{proof}
+        (1)问.参考课本P148定理4.3.3的证明.因为$G$正定,且共轭方向$d_0,d_1,\cdots$线性无关,故只需要证明对所有的$i\leqslant n-1$,有
+        \begin{equation}
+            g_{i+1}^Td_j=0,\quad j=0,\cdots,i,
+            \label{eq:最优化今年6要证的结果}
+        \end{equation}
+        就可得出定理的结论.因为当$i=n-1$时,$g_n^Td_j=0(j=0,\cdots,n-1)$,于是$g_n=0$,从而$x_n$是极小点.
+        
+        现在证明\eqref{eq:最优化今年6要证的结果}.由$g_k=Gx_k+b$,
+        \begin{equation*}
+            g_{k+1}-g_k=G(x_{k+1}-x_k)=\alpha Gd_k,
+        \end{equation*}
+        又,在精确线性搜索下,$g_{k+1}^Td_k=0$,故当$j<i$时,
+        \begin{align*}
+            g_{i+1}^Td_j&=g_{j+1}^Td_j+\sum_{k=j+1}^i(g_{k+1}-g_k)^Td_j\\
+            &=g_{j+1}^Td_j+\sum_{k=j+1}^i\alpha_kd_k^TGd_j\\
+            =0.
+        \end{align*}
+        当$j=i$时,直接由精确线性搜索可知
+        \begin{equation*}
+            g_{i+1}^Td_i=0.
+        \end{equation*}
+        从而\eqref{eq:最优化今年6要证的结果}成立.
+    \end{proof}
+
+    \begin{thinking*}{(2)问}
+        将$x_1=\beta x_2^2$代入目标函数,化成单变量的无约束优化,且$(0,0)^T$是局部极小当且仅当$x_2=0$是局部极小,
+        此时$f'(0)=0,f''(0)\geqslant 0$,然后解出$\beta$的范围.
+    \end{thinking*}
+
+    \section{往年题(2011)}
+
+    只写出我们学过的知识点的题.
+
+    \subsection{简答题}
+
+    \setcounter{task}{0}
+
+    \begin{task}{最优化往年简答1}
+        请给出凸函数的定义及$f$是凸集$D$上的凸函数的充要条件.
+    \end{task}
+    
+    \begin{solution}
+        \textbf{定义.}对任意的$x,y\in\R^n$及任意的$0\leqslant \lambda\leqslant 1$,有
+        \begin{equation*}
+            f(\lambda x+(1-\lambda)y)\leqslant \lambda f(x)+(1-\lambda)f(y).
+        \end{equation*}
+
+        \textbf{充要条件.}(定义不就是吗,不知道为什么这么问)对任意的$x,y\in D$及任意的$0\leqslant \lambda\leqslant 1$,有
+        \begin{equation*}
+            f(\lambda x+(1-\lambda)y)\leqslant \lambda f(x)+(1-\lambda)f(y).
+        \end{equation*}
+    \end{solution}
+
+    \begin{task}{最优化往年简答2}
+        请给出求解无约束优化问题$\min\ f(x)$的一般算法步骤.
+    \end{task}
+
+    \begin{solution}
+        参考算法:
+        \begin{algorithm}
+            \begin{enumerate}[{step} 1.]
+                \item 给定初始点$x_0$,令$k:=0$.
+                \item 确定搜索方向$d_k$.
+                \item 确定搜索步长$\alpha_k$,满足\begin{equation*}
+                    f(x_k+\alpha_k d_k)=\min_{\alpha\geqslant 0}f(x_k+\alpha d_k).
+                \end{equation*}
+                \item 判断终止条件,满足则终止;否则,$k:=k+1$,转step 2.
+            \end{enumerate}
+        \end{algorithm}
+    \end{solution}
+
+    \begin{task}{最优化往年简答3}
+        对于无约束优化问题,构造搜索方向$d^{(k)}$有那些方法?请给出$d^{(k)}$的四种表达式.
+    \end{task}
+
+    \begin{solution}
+        \begin{description}
+            \item[最速下降法.] $d_k=-g_k$.
+            \item[牛顿法.] $d_k=-G_k^{-1}g_k$.
+            \item[共轭梯度法.] 以FR为例,$r_{k+1}=r_k+\alpha_kGd_k,\beta_k=\frac{r_{k+1}^Tr_{k+1}}{r_k^Tr_k},d_{k+1}=-r_{k+1}+\beta_kd_k$.
+            \item[拟牛顿法.] $d_k=-B_k^{-1}g_k$. 
+        \end{description}
+    \end{solution}
+
+    \begin{task}{最优化往年简答4}
+        请给出在$x$处下降方向$d$所满足的条件.
+    \end{task}
+    
+    \begin{solution}
+        \begin{equation*}
+            \nabla f(x)^Td<0.
+        \end{equation*}
+    \end{solution}
+
+    \begin{task}{最优化往年简答5}
+        请给出内点惩罚函数法中的惩罚函数/障碍函数的表达式.
+    \end{task}
+
+    \begin{solution}
+        对数障碍函数
+        \begin{equation*}
+            P(x;\mu)=f(x)-\mu\sum_{i\in\cI}\log c_i(x).
+        \end{equation*}
+        分数障碍函数
+        \begin{equation*}
+            P(x;\mu)=f(x)-\mu\sum_{i\in\cI}\frac{1}{c_i(x)}.
+        \end{equation*}
+    \end{solution}
+
+    \begin{task}{最优化往年简答6}
+        请给出关于对称正定矩阵$A$共轭的含义,并给出矩阵$A=\begin{bmatrix}
+            4&2\\
+            2&4
+        \end{bmatrix}$的一组共轭方向.
+    \end{task}
+
+    \begin{thinking*}{}
+        向量$d_1,d_2$满足$d_1^TAd_2=0$,$d_1,d_2$是共轭的.
+
+        矩阵$A$只有两个共轭方向,令$d_1=(1,0)^T$,代入上式解$d_2$.
+    \end{thinking*}
+
+    \subsection{大题}
+
+    \setcounter{task}{0}
+
+    \begin{task}{最优化往年大题1}
+        对于无约束优化问题$\min\ f(x)$:
+        \tcblower
+        \begin{enumerate}
+            \item 请给出求解无约束问题一阶必要性条件;
+            \item 请给出无约束问题最优解的二阶必要条件;
+            \item 请给出无约束问题最优解的二阶充分条件;
+        \end{enumerate}
+    \end{task}
+
+    \begin{solution}
+        \begin{description}
+            \item[一阶必要条件.] 设$f:D\subseteq\R^n\to\R$在开集上连续可微,若$x^\ast\in D$是局部极小点,则\begin{equation*}
+                g(x^\ast)=0.
+            \end{equation*}
+            \item[二阶必要条件.] 设$f:D\subseteq\R^n\to\R$在开集$D$上二阶连续可微,若$x^\ast\in D$是局部极小点,则\begin{equation*}
+                g(x^\ast)=0,\quad G(x^\ast)\geqslant 0.
+            \end{equation*}
+            \item[二阶充分条件.] 设$f:D\subseteq\R^n\to\R$在开集$D$上二阶连续可微,则$x^\ast\in D$是$f$的严格局部极小点的充分条件是\begin{equation*}
+                g(x^\ast)=0\mbox{和$G(x^\ast)$是正定矩阵.}
+            \end{equation*}
+        \end{description}
+    \end{solution}
+    
+    \begin{task}{最优化往年大题2}
+        设有非线性方程组:
+        \begin{equation*}
+            \begin{cases}
+                f_1(x)=x_1^3-2x_2^2-1=0,\\
+                f_2(x)=2x_1+x_2-2=0.            
+            \end{cases}
+        \end{equation*}
+        \tcblower
+        \begin{enumerate}
+            \item 列出求解这个方程组的非线性最小二乘问题的数学模型;
+            \item 写出求解该问题的Gauss-Newton法的具体形式;
+            \item 取初始可行点$x_0=(2,2)^T$,迭代一次.
+        \end{enumerate}
+    \end{task}
+
+    \begin{solution}
+        1. $\min\ \frac{1}{2}(f_1^2(x)+f_2^2(x))$.
+
+        2. Jacobian矩阵为$A$,$f_k=f(x_{k})$,格式
+        \begin{equation}
+            \label{eq:Gauss-Newton}
+            x_{k+1}=x_{k}+\delta_{k}=x_{k}-(A_k^TA_k)^{-1}A_k^Tf_k.
+        \end{equation}
+
+        3. \begin{algorithm}
+            \begin{enumerate}[{步} 1.]
+                \item 给定初始点$x_0$,置$k=0$.
+                \item 将$x_k$代入\eqref{eq:Gauss-Newton}得$x_{k+1}$.
+            \end{enumerate}
+        \end{algorithm}
+    \end{solution}
+
+    \begin{task}{最优化往年大题3}
+        证明:$B_k$对称正定,$B_{k+1}$由BFGS校正公式
+        \begin{equation*}
+            B_{k+1}=B_k-\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}+\frac{y_ky_k^T}{y_k^Ts_k}
+        \end{equation*}
+        确定,那么$B_{k+1}$对称正定的充要条件是$y_k^Ts_k>0$.
+    \end{task}
+
+    \begin{proof}
+        可以借鉴课本P163定理4.4.2的证明.
+        
+        ``$\Rightarrow$''.考虑用归纳法证明
+        \begin{equation}
+            \label{eq:最优化往年大题3 result}
+            z^TB_{k+1}z>0,\quad z\neq 0.
+        \end{equation}
+        根据初始的选择,$B_0$正定.假设对某个$k$结论成立,记$B_k=LL^T$为$B_k$的Cholesky分解.设
+        \begin{equation}
+            \label{eq:最优化往年大题3 简化}
+            a=L^Tz,\ b=L^Ts_k.
+        \end{equation}
+        则
+        \begin{align}
+            z^TB_{k+1}z&=z^T\left(B_k-\frac{B_ks_ks_k^TB_k}{s_k^TB_ks_k}\right)z+z^T\frac{y_ky_k^T}{s_k^Ty_k}z\notag\\
+            &=a^Ta-\frac{(a^Tb)^2}{b^Tb}+\frac{(z^Ty_k)^2}{s_k^Ty_k}\label{eq:最优化往年大题3.过程}
+        \end{align}
+        根据Cauchy不等式,
+        \begin{equation}
+            a^Ta-\frac{(a^Tb)^2}{b^Tb}\geqslant 0,
+        \end{equation}
+        又因为$y_k^Ts_k>0$,则
+        \begin{equation*}
+            z^TH_{k+1}z\geqslant 0.
+        \end{equation*}
+        下面证明,\eqref{eq:最优化往年大题3.过程}右边两项至少一项严格大于0.若第一项等于0,由Cauchy不等式,$a$与$b$平行,则$z$与$s_k$平行.
+        设$z=\beta s_k,\beta\neq 0$,这时,
+        \begin{equation*}
+            \frac{(z^Ty_k)^2}{s_k^Ty_k}=\beta^2 y_k^Ts_k>0,
+        \end{equation*}
+        则第一项严格大于0时,第二项也严格大于0.
+        
+        若第二项为0,则$z^Ty_k=0$,$z$与$s_k$不平行,从而第一项大于0,否则,$z=\beta s_k,\beta\neq 0$,又$s_k^Ty_k>0$,则$z^Ty_k=\beta s_k^Ty_k\neq 0$,矛盾.
+        充分性得证.
+
+        ``$\Leftarrow$''.必要性可类似证明.
+    \end{proof}
+
+    \begin{marker}
+        对于上一页的题,其实在课本P163定理4.4.2中已经说明$s_k^Ty_k>0$当且仅当$H_{k+1}$正定,又因为$H_{k+1}=B_{k+1}^{-1}$,则$H_{k+1}$正定当且仅当$B_{k+1}$正定,这样也证明了
+        结论.
+    \end{marker}
+
+    \begin{task}{最优化往年大题4}
+        对于下列约束优化最问题
+        \begin{equation*}
+            \begin{array}{rl}
+                \min&f(x)=(x_1-3)^2+(x_2-2)^2\\
+                \mathrm{s.t.}&x_1+2x_2=4,\\
+                &x_1^2+x_2^2\leqslant 5,\\
+                &x_1,x_2\geqslant 0.
+            \end{array}
+        \end{equation*}
+        \tcblower
+        \begin{enumerate}
+            \item 请给出求解一般约束优化问题的KKT一阶必要条件;
+            \item 验证$\bar{x}=(2,1)^T$是否为改约束最优化问题的KKT点.
+        \end{enumerate}
+    \end{task}
+
+    \begin{thinking*}{}
+        直接用KKT条件.
+    \end{thinking*}
+
+    \begin{task}{最优化往年大题5}
+        问题:
+        \begin{equation*}
+            \begin{array}{rl}
+                \min&f(x)=x_1^2-x_1x_2+2x_2^2-x_1-10x_2\\
+                \mathrm{s.t.}&-3x_1-2x_2\geqslant -6\\
+                &x_1\geqslant 0,x_2\geqslant 0.
+            \end{array}
+        \end{equation*}
+        证明:该问题是凸二次规划问题.
+    \end{task}
+
+    \begin{proof}
+        一方面,可行域$D$是凸集.
+
+        另一方面,$\nabla^2 f(x)=\begin{bmatrix}
+            2 & -1\\
+            -1 & 4
+        \end{bmatrix}$是正定矩阵,$f$是凸函数.
+    \end{proof}
+
+\end{document}

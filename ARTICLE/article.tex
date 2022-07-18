@@ -1,0 +1,398 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{caption,graphicx}
+\usepackage{amsmath,amsthm}
+\usepackage[centering]{geometry}
+\usepackage{amsfonts,amssymb}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{pifont}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor, color}
+\usepackage{colortbl,booktabs}
+\usepackage{array,blkarray}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.15}
+\everymath{\displaystyle}
+\setlength{\headheight}{15pt}
+\begin{document}
+具体来说的话,之前的规划就已经包含下面的讨论.
+
+首先因为之前的模型是线性的,所以每一天交易之后,投资组合$[C,G,B]$中有且仅有一个不等于0.
+
+\begin{enumerate}
+    \item 在开市日内.只以黄金为例,对于比特币来说完全相同.\begin{enumerate}
+            \item 黄金预测涨$V_g'(k+1)>V_g(k)$.如果在这时卖出黄金,为了使每天利益最大化,只可能在这时比特币上涨,而且卖出黄金,买入比特币带来的收益更多,也就是属于比特币上涨,买入比特币的情况.所以,这时不妨设考虑买入黄金.假设买入黄金花费$\Delta C_g$,这个时候交易成本为
+            $$\Delta C_g\alpha_{\mathrm{gold}},$$
+            得到额外黄金预测价值
+            $$\frac{\Delta C_g(1-\alpha_{\mathrm{gold}})}{V_g(k)}V_g'(k+1).$$
+            那么买入赚钱与否,与$\frac{1-\alpha_{\mathrm{gold}}}{V_g(k)}V_g'(k+1)$和$\alpha_{\mathrm{gold}}$大小有关.
+            \begin{enumerate}
+                \item 当$\frac{1-\alpha_{\mathrm{gold}}}{V_g(k)}V_g'(k+1)>\alpha_{\mathrm{gold}}$时,说明购买的那部分黄金可以赚钱,应该买入.
+                \item 当$\frac{1-\alpha_{\mathrm{gold}}}{V_g(k)}V_g'(k+1)\leqslant\alpha_{\mathrm{gold}}$时,赚不到钱,严格小于的时候还会亏本,不应该买入.
+            \end{enumerate}
+            \item 黄金预测跌$V_g'(k+1)<V_g(k)$.类似,在这时,无论比特币上涨还是下跌,都不应该再买入黄金,所以考虑卖出黄金.假设卖$\Delta G$金衡盎司黄金,会因为交易成本损失\begin{equation*}
+                \Delta GV_g(k)\alpha_{\mathrm{gold}}.
+            \end{equation*}
+            同时,如果这部分不卖出的话,会亏损
+            \begin{equation*}
+                \Delta G(V_g(k)-V_g'(k+1)).
+            \end{equation*}
+            那么卖出能否更多地止损,与$\frac{V_g(k)-V_g'(k+1)}{V_g(k)}$和$\alpha_{\mathrm{gold}}$的大小有关.
+            \begin{enumerate}
+                \item $\frac{V_g(k)-V_g'(k+1)}{V_g(k)}>\alpha_{\mathrm{gold}}$时,这个时候不卖损失更大,应该卖掉.
+                \item $\frac{V_g(k)-V_g'(k+1)}{V_g(k)}\leqslant\alpha_{\mathrm{gold}}$时,取等时损失相同,严格小于时,不卖损失更小.
+            \end{enumerate}
+            \item 黄金预测持平$V_g'(k+1)=V_g(k)$.这个时候不管是买入还是卖出,都只有交易成本造成的损失,应该持平.
+        \end{enumerate}
+    \item 在非开市日内,唯一的不同是黄金不能交易,只有比特币可以交易.
+\end{enumerate}
+
+\textbf{第三问交易成本改变对策略的影响.}也只对黄金分析,对比特币完全相同.
+
+如果交易成本上升,当黄金预测价值涨价的时候,$\frac{1-\alpha_{\mathrm{gold}}}{V_g(k)}V_g'(k+1)$就会下降,而$\alpha_{\mathrm{gold}}$会上升,交易员更倾向于不买黄金.
+
+同时,当黄金预测价下跌的时候,$\frac{1}{V_g(k)}\left(V_g(k)-V_g'(k+1)\right)$持平,这个时候更倾向于不卖黄金.
+
+总体来说,当交易成本上升时,策略不进行投资的可能性会变大,也就是会变得更保守.
+\end{document}
+======================================================
+    假设:
+    \begin{enumerate}
+        \item 首先,假设一金衡盎司的美元收盘价就是当日黄金交易价.
+        \item 在同一天内,黄金,比特币在持有,买入,卖出中只能成立一种情况.
+        \item 交易是瞬间完成的.
+    \end{enumerate}
+    
+    因为黄金,比特币的价格在一定时间内波动不规律,所以当观察时间太短的时候,预测的价格变化完全没有意义,所以时间在一定时间段内,先不进行投资.
+
+    接下来,假设在第$m$天开始预测.
+    \begin{description}
+        \item[$C(n)$.] 表示第$n$天时的现金(美元).
+        \item[$G(n)$.] 表示第$n$天时的黄金(金衡盎司).
+        \item[$B(n)$.] 表示第$n$天时的比特币数量.
+        \item[$V_g(n)$.] 表示第$n$天时的一金衡盎司的美元收盘价.
+        \item[$V_b(n)$.] 表示第$n$天时的一比特币的美元价格.
+        \item[$V_g(n)'$.] 表示第$n$天预测的一金衡盎司的美元收盘价.
+        \item[$V_b(n)'$.] 表示第$n$天时预测的一比特币的美元价格.
+    \end{description}
+    $C(k)=1000,G(k)=0,B(k)=0,k=1,2,\cdots,m$.
+    1.在开市日内.有四种情况.
+    \begin{enumerate}
+        \item 黄金预测涨价$V_g(m+1)'>V_g(m)$.为了能够得到更多的钱,这个时候不应考虑卖出黄金,假设买入黄金花费$\Delta C_g$,这个时候交易成本为$$\Delta C_g\alpha_{\mathrm{gold}},$$得到额外黄金预测价值$$\frac{\Delta C_g(1-\alpha_{\mathrm{gold}})}{V_g(m)}V_g(m+1)'.$$那么赚钱与否,与$\frac{1-\alpha_{\mathrm{gold}}}{V_g(m)}V_g(m+1)$和$\alpha_{\mathrm{gold}}'$有关.\begin{enumerate}
+            \item 当$\frac{1-\alpha_{\mathrm{gold}}}{V_g(m)}V_g(m+1)>\alpha_{\mathrm{gold}}$时,说明购买的那部分黄金
+        \end{enumerate}
+    \end{enumerate}
+===================================================
+
+====================================================
+\subsubsection{经验法}
+    金价受国际上各种政治、经济因素、以及突发事件的影响,经常处于剧烈的波动之中,同时比特币在短期内的价格波动仍然非常大,黄金相较于比特币来说可能要更稳定一点.
+
+    又因为(1)当时间序列呈现较稳定的水平趋势时,平滑参数可在$0.05\sim0.20$之间取值;(2)当时间序列有波动,但长期趋势变化并不大时,平滑参数可在$0.1\sim 0.4$之间取值;(3)当时间序列波动很大,长期趋势变化幅度较大,呈现出上升或下降趋势时,平滑参数可在$0.6\sim 0.8$之间取值;(4)当时间序列呈明显上升或下降趋势时,平滑参数可在$0.6\sim 1$之间取值.
+    取$\beta_{\mathrm{gold}}=0.7,\beta_{\mathrm{bitcoin}}=0.8$.(暂定)
+    
+    (接下来这一部分参考《二次指数平滑法中确定初始值的简便方法》)用$S$表示指数平滑值,第$t$天一次指数平滑值记为$S_t^{(1)}$,二次指数平滑值记为$S_t^{(2)}$.递推关系:
+    \begin{equation*}
+        \begin{array}{c}
+            S_{t}^{(1)}=\beta x_t+(1-\beta)S_{t-1}^{(1)},\\
+            S_t^{(2)}=\beta S_t^{(1)}+(1-\beta)S_{t-1}^{(2)},
+        \end{array}
+    \end{equation*}
+    令$S_1^{(1)}=S_1^{(2)}=x_1$,那么可以算出来一次,二次指数平滑值.参数
+    \begin{equation*}
+        \begin{array}{c}
+            a=2S_t^{(1)}-S_t^{(2)},\\
+            b=\frac{\beta}{1-\beta}(S_t^{(1)}-S_t^{(2)}).
+        \end{array}
+    \end{equation*}
+    那么第$t+T$天指标预测值为
+    \begin{equation*}
+        \hat{x}_{2,t+T}=a+bT.
+    \end{equation*}
+    令$T=1$,就可以预测第$t+1$天的.
+=====================================================
+优点:
+\begin{enumerate}
+    \item 运用最优化相关的数学工具,在基于准确预测黄金和比特币的走向的基础上做出的决策能确保每日获得的利益最大化.
+    \item 我们的决策模型能够准确分析单一的交易成本变动对交易策略带来的影响.
+\end{enumerate}
+
+缺点:
+\begin{enumerate}
+    \item 将每天黄金收盘价作为一整天内的黄金交易价,但事实上在一天之内,黄金的交易价格也在不断变动.
+    \item 我们假设交易瞬间完成,但在现实情况中,交易是不可能在瞬间完成的,这时可以在同一时间段进行黄金和比特币的交易,但是策略中并没有考虑到这点.
+\end{enumerate}
+===========================================
+假设:
+\begin{enumerate}
+    \item 首先,假设一金衡盎司的美元收盘价就是当日黄金交易价.
+    \item 在同一天内,黄金,比特币在持有,买入,卖出中只能成立一种情况.
+    \item 交易是瞬间完成的.
+\end{enumerate}
+因为黄金,比特币的价格在一定时间内波动不规律,所以当观察时间太短的时候,预测的价格变化完全没有意义,所以时间在一定时间段内,先不进行投资.
+
+接下来,假设在第$m$天开始预测.
+\begin{description}
+    \item[$C(n)$.] 表示第$n$天时的现金(美元).
+    \item[$G(n)$.] 表示第$n$天时的黄金(金衡盎司).
+    \item[$B(n)$.] 表示第$n$天时的比特币数量.
+    \item[$V_g(n)$.] 表示第$n$天时的一金衡盎司的美元收盘价.
+    \item[$V_b(n)$.] 表示第$n$天时的一比特币的美元价格.
+    \item[$V_g(n)'$.] 表示第$n$天预测的一金衡盎司的美元收盘价.
+    \item[$V_b(n)'$.] 表示第$n$天时预测的一比特币的美元价格.
+    \item[$\Delta C$.] $\Delta C=C(n+1)-C(n).$
+    \item[$\Delta G$.] $\Delta G=G(n+1)-G(n).$
+    \item[$\Delta B$.] $\Delta B=B(n+1)-B(n).$ 
+    \item[$\Delta C_g$.] $\Delta C$与黄金交易相关的部分.
+    \item[$\Delta C_b$.] $\Delta C$与比特币交易相关的部分.
+\end{description}
+$C(k)=1000,G(k)=0,B(k)=0,k=1,2,\cdots,m$.
+
+现在考虑天数为$m$时,此时$V_g(m),V_b(m)$已知,$V_g(m+1)',V_b(m+1)'$已经预测出来了.另外,黄金不能直接与比特币相互兑换,所以每次投资只有两种情况:1.现金与黄金的交易,
+2.现金与比特币的交易.那么接下来分为是开市日和非开市日两种情况.
+\begin{enumerate}
+    \item 在开市日内,交易有四种情况.$\Delta G_i,\Delta B_j$表示在不同情况下的$\Delta G,\Delta B.$\begin{enumerate}
+        \item 买入黄金.$$\Delta G_1=\frac{-\Delta C_g(1-\alpha_{\mathrm{gold}})}{V_g(m)}.$$
+        \item 卖出黄金.$$-\Delta G_2V_g(m)(1-\alpha_{\mathrm{gold}})=\Delta C_g.$$
+        \item 买入比特币.$$\Delta B_1=\frac{-\Delta C_b(1-\alpha_{\mathrm{bitcoin}})}{V_b(m)}.$$
+        \item 卖出比特币.$$-\Delta B_2V_b(m)(1-\alpha_{\mathrm{bitcoin}})=\Delta C_b.$$
+    \end{enumerate}
+    在同一天内,黄金,比特币或在买入,卖出中最多只能成立一种情况.
+    令\begin{equation*}
+        \begin{array}{c}
+            \Delta G=\frac{-\Delta C_g(1-\alpha_{\mathrm{gold}})}{V_g(m)}k_1+\frac{-\Delta C_g}{V_g(m)(1-\alpha_{\mathrm{gold}})}k_2,\\
+            \Delta B=\frac{-\Delta C_b(1-\alpha_{\mathrm{bitcoin}})}{V_b(m)}k_3+\frac{-\Delta C_b}{V_b(m)(1-\alpha_{\mathrm{bitcoin}})}k_4,\\
+            \Delta C=\Delta C_g+\Delta C_b,\\
+            C(m+1)=C(m)+\Delta C,\\
+            G(m+1)=G(m)+\Delta G,\\
+            B(m+1)=B(m)+\Delta B,\\
+        \end{array}
+    \end{equation*}
+    此时买入或卖出黄金或比特币又可以分为4中情况,综合可以得到0-1规划,这里$\Delta C_g,\Delta C_b,k_i$是自变量.
+    \begin{equation*}
+        \begin{aligned}
+            &\max S'=C(m+1)+V_g'(m+1)G(m+1)+V_b'(m+1)B(m+1)\\
+            &\mathrm{s.t.}\left\{\begin{array}{l}
+                C(m+1)\geqslant 0\\
+                G(m+1)\geqslant 0\\
+                B(m+1)\geqslant 0\\
+                k_i\in \{0,1\},i=1,2,3,4\\
+                k_1k_2=0\\
+                k_3k_4=0\\
+                k_1\neq k_2\mbox{时,}(k_1-k_2)\Delta C_g\leqslant 0\\
+                k_1=k_2\mbox{时,}\Delta C_g=0\\
+                k_3\neq k_4\mbox{时,}(k_3-k_4)\Delta C_b\leqslant 0\\
+                k_3=k_4\mbox{时,}\Delta C_b=0
+            \end{array}\right.
+        \end{aligned}
+    \end{equation*}
+    $S'$按照策略下一天的总价值,表示这时再将解出来的$\Delta C_g,\Delta C_b,k_i$代入$S=C(m+1)+V_g(m+1)G(m+1)+V_b(m+1)B(m+1)$,得到按照策略下一天的总价值.
+    \item 在非开市日内,黄金不能交易,但是比特币可以交易,此时情况类似,只不过$k_1=k_2=0.$,这里$\Delta C_g,\Delta C_b,k_i$是自变量.
+        \begin{equation*}
+            \begin{aligned}
+                &\max S'=C(m+1)+V_g'(m+1)G(m+1)+V_b'(m+1)B(m+1)\\
+                &\mathrm{s.t.}\left\{\begin{array}{l}
+                    C(m+1)\geqslant 0\\
+                    G(m+1)\geqslant 0\\
+                    B(m+1)\geqslant 0\\
+                    k_i\in \{0,1\},i=1,2,3,4\\
+                    k_1=k_2=0\\
+                    k_3k_4=0\\
+                    k_1\neq k_2\mbox{时,}(k_1-k_2)\Delta C_g\leqslant 0\\
+                    k_1=k_2\mbox{时,}\Delta C_g=0\\
+                    k_3\neq k_4\mbox{时,}(k_3-k_4)\Delta C_b\leqslant 0\\
+                    k_3=k_4\mbox{时,}\Delta C_b=0
+                \end{array}\right.
+            \end{aligned}
+        \end{equation*}
+\end{enumerate}
+这时再将解出来的$\Delta C_g,\Delta C_b,k_i$代入$S=C(m+1)+V_g(m+1)G(m+1)+V_b(m+1)B(m+1)$,得到按照策略下一天的总价值.
+
+其实对$m$的分析对其余情况也适用,只需要递推就行.
+
+对黄金和比特币价值的预测就是之前的改进的神经网络模型.
+    
+  ==============================================================
+  \section{另外一种预测}
+    设当天为第$t$天,$\{x_i\}$为一金衡盎司黄金价值或一比特币价值的时间序列.
+    \subsection{二次移动法预测模型——参考《二次移动平均预测模型的建立方法》}
+    模型为
+    \begin{equation*}
+        \hat{x}_{1,t+T}=a_t+Tb_t.
+    \end{equation*}
+    $T$是当天到预测天的间隔天数,$a_t,b_t$为参数.
+    一次移动平均数:
+    \begin{equation*}
+        M_t'=\frac{x_t+x_{t-1}+\cdots+x_{t-n+1}}{n}.
+    \end{equation*}
+    二次移动平均数:
+    \begin{equation*}
+        M_t''=\frac{M_t'+\cdots+M_{t-n+1}'}{n}.
+    \end{equation*}
+    为了保持预测的准确性和与神经网络模型预测起点保持一致,令$n=5$.根据上面的式子,$x_t=2M_t'-M_t''$.
+
+    令$a_t=x_t,$那么$a_t=2M_t'-M_t'',b_t=\frac{2}{n-1}(M_t'-M_t'')$,令$T=1$,那么就可以预测第$t+1$天的一单位黄金或比特币的价值记为$\hat{x}_{1,t+1}.$
+    \subsection{二次指数平滑预测——参考《回归法设定指数平滑模型的最优预测参数》}
+    首先要先确定平滑参数的取值$\beta$($0<\beta<1$).
+    \subsubsection{回归法}
+    1.首先建立二次指数预测模型.
+    \begin{equation}
+        \begin{array}{rl}
+            \left\{\begin{array}{l}
+            \hat{x}_{2,t+T}=a_t+b_tT\\
+            a_t=2S_t^{(1)}-S_t^{(2)}\\
+            b_t=\frac{\beta}{1-\beta}(S_t^{(1)}-S_t^{(2)})\\
+            S_t^{(1)}=\beta x_t+(1-\beta)S_{t-1}^{(1)}\\
+            S_t^{(2)}=\beta S_t^{(1)}+(1-\beta)S_{t-1}^{(2)}\\
+            S_1^{(1)}=S_1^{(2)}=x_1
+            \end{array}\right.,
+            &
+            t=2,3,\cdots
+        \end{array}
+        \label{eq:预测}
+    \end{equation}
+    这里的$\beta$需要预先设定.
+
+    回归法设定二次指数平滑模型最优预测参数的逻辑过程分为三步:(1)根据二次指数平滑预测模型构造二次指数平滑随机过程;
+    (2)根据二次指数平滑随机过程建立二次指数平滑回归模型;(3)估计二次指数平滑回归模型的回归系数,获得最优的预测参数.
+
+    2.二次指数平滑随机过程.
+    为了使\ref{eq:预测})式模型预测值$\hat{x}_{2,t+T}$,与条件期望\\$E(x_{t+1}|x_t,\cdots,x_1;\beta)$建立等价关系$E(x_{t+1}|x_t,\cdots,x_1;\beta)=\hat{x}_{2,t+1}$,建立二次指数随机平滑过程:
+    \begin{equation}
+        \begin{array}{rl}
+            \left\{\begin{array}{l}
+                x_{t+T}=(1,T)\begin{bmatrix}
+                    2&-1\\
+                    \frac{\beta}{1-\beta}&-\frac{\beta}{1-\beta}
+                \end{bmatrix}\begin{bmatrix}
+                    S_t^{(1)}\\
+                    S_t^{(2)}
+                \end{bmatrix}+\epsilon_{t+T}\\
+                \begin{bmatrix}
+                    S_t^{(1)}\\
+                    S_t^{(2)}
+                \end{bmatrix}
+            =\begin{bmatrix}
+                \beta\\
+                \beta^2
+            \end{bmatrix}x_t+\begin{bmatrix}
+                1-\beta&0\\
+                \beta(1-\beta)&1-\beta
+            \end{bmatrix}\begin{bmatrix}
+                S_{t_1}^{(1)}\\
+                S_{t-1}^{(2)}
+            \end{bmatrix}\\
+            S_1^{(2)}=S_1^{(1)}=x_1
+        \end{array}\right.,
+        &
+        t=2,3,\cdots
+        \end{array}
+        \label{eq:随机}
+    \end{equation}
+
+    3.二次指数平滑回归模型.
+
+    针对(\ref{eq:随机})式随机过程生成的时间序列$\{x_1,\cdots,x_n\}$,可建立回归模型估计未知参数$\beta$:
+    \begin{equation}
+        \begin{array}{rl}
+            \left\{\begin{array}{l}
+                x_{t+1}=\frac{2-\beta}{1-\beta}S_t^{(1)}-\frac{1}{1-\beta}S_t^{(2)}+\epsilon_{t+1}\\
+                \begin{bmatrix}
+                    S_t^{(1)}\\
+                    S_t^{(2)}
+                \end{bmatrix}=\begin{bmatrix}
+                    \beta\\
+                    \beta^2
+                \end{bmatrix}x_t+\begin{bmatrix}
+                    1-\beta&0\\
+                    \beta(1-\beta)&1-\beta
+                \end{bmatrix}
+                \begin{bmatrix}
+                    S_{t-1}^{(1)}\\
+                    S_{t-1}^{(2)}
+                \end{bmatrix}\\
+                S_1^{(2)}=S_1^{(1)}=x_1,\epsilon_{t+1}\sim N(0,\sigma^2)
+            \end{array}\right.,
+            &
+            t=2,\cdots,n-1
+        \end{array}
+        \label{eq:回归}
+    \end{equation}
+    模型中,直接决定可观测时间序列$\{x_1,\cdots,x_n\}$的基本走势平滑因子\\$\{(S_1^{(1)},S_1^{(2)}),\cdots,(S_n^{(1)},S_n^{(2)})\}$是不可观测的时间序列.
+
+    4.二次指数平滑参数估计.
+    对时间序列$\{x_1,\cdots,x_n\}$采用最小二乘法估计,最优预测参数$\hat{\beta}$为:
+    \begin{equation*}
+        \hat{\beta}=\arg\min_{\beta}\sum_{t=2}^{n-1}\left(x_{t+1}-E(x_{t+1}|x_t,\cdots,x_1;\beta)\right)^2.
+    \end{equation*}
+    以往$n-2$天的均方误差$MSE$是随机扰动项$\epsilon_{t+1}\sim N(0,\sigma^2)$方差$\sigma^2$的估计值,即
+    \begin{equation*}
+        \hat{\sigma}_\epsilon^2=MSE=\frac{1}{n-3}\sum_{t=2}^{n-1}e_{t+1}^2.
+    \end{equation*}
+    其中残差平方和$\sum_{t=2}^{n-1}e_{t+1}^2$是以往$n-2$天预测的偏差平方和,残差$e_{t+1}(t=2,\cdots,n-1)$是以往事后第$t+1$天发现当初在事前的第$t$天对第$t+1$天进行预测的偏差.
+
+    以$\hat{\beta}$估计参数$\beta$的标准误差$\hat{\sigma}_\beta$:
+    \begin{equation*}
+        \hat{\sigma}_\beta=\frac{1}{J'J}MSE.
+    \end{equation*}
+    其中$n-2$维雅各比向量$J=(J_3,\cdots,J_n)^T$的分量$J_{t+1}$:
+    \begin{equation*}
+        J_{t+1}=\frac{\mathrm{d}\hat{x}_{2,t+1}}{\mathrm{d}\beta}=\frac{\mathrm{d}E(x_{t+1}|x_t,\cdots,x_1;\beta)}{\mathrm{d}\beta},t=2,\cdots,n-1.
+    \end{equation*}
+
+    对回归模型(\ref{eq:回归})进行最小二乘估计,算法在迭代过程中的雅各比向量各分量之间的递推关系:
+    \begin{equation}
+        \left\{\begin{array}{l}
+            J_{t+1}=\frac{1}{(1-\beta)^2}S_t^{(1)}-\frac{1}{(1-\beta)^2}S_t^{(2)}+\frac{2-\beta}{1-\beta}\frac{\mathrm{d}S_t^{(1)}}{\mathrm{d}\beta}-\frac{1}{1-\beta}\frac{\mathrm{d}S_t^{(2)}}{\mathrm{d}\beta}\\
+            \begin{bmatrix}
+                S_t^{(1)}\\
+                S_t^{(2)}\\
+                \frac{\mathrm{d}S_t^{(1)}}{\mathrm{d}\beta}\\
+                \frac{\mathrm{d}S_t^{(2)}}{\mathrm{d}\beta}
+            \end{bmatrix}=\begin{bmatrix}
+                \beta\\
+                \beta^2\\
+                1\\
+                2\beta
+            \end{bmatrix}x_t+\begin{bmatrix}
+                1-\beta&0&0&0\\
+                \beta(1-\beta)&1-\beta&0&0\\
+                -1&0&1-\beta&0\\
+                1-2\beta&-1&\beta(1-\beta)&1-\beta
+            \end{bmatrix}\begin{bmatrix}
+                S_{t-1}^{(1)}\\
+                S_{t-1}^{(2)}\\
+                \frac{\mathrm{d}S_{t-1}^{(1)}}{\mathrm{d}\beta}\\
+                \frac{\mathrm{d}S_{t-1}^{(2)}}{\mathrm{d}\beta}
+            \end{bmatrix}
+        \end{array}\right.
+    \end{equation}
+
+    记得到第$t+1$天结果为$\hat{x}_{2,t+1}$.
+    \subsection{灰色预测GM(1,1)模型——参考《基于二次平滑-灰色预测的在线投资组合选择》}
+    设原始数据序列$S_{(0)}=\{X_{(0)}(i):i=1,\cdots,t\}$,其中$X_{(0)}(i)=x_i$.首先累加处理.得到
+    \begin{equation*}
+        X_{(1)}(k)=\sum_{i=1}^kX_{(0)}(i)=X_{(1)}(k-1)+X_{(0)}(k)
+    \end{equation*}
+    对新数列$X_{(1)}$建立微分方程.
+    \begin{equation*}
+        \frac{\mathrm{d}X_{(1)}}{\mathrm{d}t}+hX_{(1)}=u.
+    \end{equation*}
+    $h$是发展灰度,$u$是控制灰度,初始条件当$t=1$时,$X_{(1)}=X_{(1)}(1).$解为
+    \begin{equation*}
+        X_{(1)}(k+1)=(X_{(0)}(1)-\frac{u}{h})e^{-hk}+\frac{u}{h}.
+    \end{equation*}
+    之后用模型对截至当日的黄金或比特币价值序列拟合,并预测第$t+1$天的值记为$\hat{x}_{3,t+1}$.
+    \subsection{集成}
+    将三个模型得到的结果集成,预测公式是
+    \begin{equation*}
+        \hat{x}_{t+1}=\frac{\hat{x}_{1,t+1}+\hat{x}_{2,t+1}+\hat{x}_{3,t+1}}{3}.
+    \end{equation*}
+    

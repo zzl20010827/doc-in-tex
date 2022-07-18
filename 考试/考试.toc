@@ -1,0 +1,12 @@
+\contentsline {chapter}{\numberline {第一章\hspace {.3em}}矩阵分析}{2}{chapter.1}%
+\contentsline {section}{\numberline {I.1}今年题}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {I.1.1}填空题}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {I.1.2}大题}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {I.2}往年题}{6}{section.1.2}%
+\contentsline {chapter}{\numberline {第二章\hspace {.3em}}最优化方法}{12}{chapter.2}%
+\contentsline {section}{\numberline {II.1}今年题}{13}{section.2.1}%
+\contentsline {subsection}{\numberline {II.1.1}陈述题}{13}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {II.1.2}大题}{13}{subsection.2.1.2}%
+\contentsline {section}{\numberline {II.2}往年题(2011)}{17}{section.2.2}%
+\contentsline {subsection}{\numberline {II.2.1}简答题}{17}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {II.2.2}大题}{19}{subsection.2.2.2}%

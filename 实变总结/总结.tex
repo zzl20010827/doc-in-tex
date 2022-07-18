@@ -1,0 +1,497 @@
+\documentclass[12pt,a4paper,oneside]{ctexart}
+\usepackage{caption,graphicx}
+\usepackage{amsmath}
+\usepackage[thmmarks]{ntheorem}
+\usepackage[centering]{geometry}
+\usepackage{amsfonts,amssymb}
+\usepackage{mathrsfs,extarrows}
+\usepackage{bm}
+\usepackage{pifont}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{textcomp}
+%\usepackage{background}
+\usepackage{xcolor, color}
+\usepackage{colortbl,booktabs}
+\usepackage{array,blkarray}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{enumerate}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\allowdisplaybreaks[4]
+\linespread{1.5}
+\geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\usetikzlibrary{arrows}
+\pgfplotsset{compat=1.15}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\allowdisplaybreaks[4]
+
+\iffalse%注释掉
+\backgroundsetup
+{
+    contents=\includegraphics{校徽.png},
+    scale=0.5,
+    placement=bottom,
+    position=current page.center,
+    vshift=-5cm,
+    opacity=0.1
+}
+\fi%结束
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\ensuremath{\blacksquare}}
+    \newtheorem{proof}{证明.}
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{theorem}{定理}[section]
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{lemma}[theorem]{引理}
+}
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\ttfamily}
+    \newtheorem{remark}{注.}
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \newtheorem{example}{例}[section]
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{definition}[theorem]{定义}
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{proposition}[theorem]{命题}
+}
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{corollary}[theorem]{推论}
+}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\res}{\mathrm{Res}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\supp}{\mathrm{supp}}
+\renewcommand{\ae}{\mbox{a.e.}}
+
+\begin{document}
+
+    \begin{titlepage}
+        
+        \iffalse%注释掉
+        \BgThispage
+        \vspace*{0.3cm}
+        \begin{center}
+            \includegraphics[scale=0.6]{校名.png}
+        \end{center}
+        \fi%结束
+        \vspace*{3.5cm}
+        \begin{center}
+            \textbf{\Huge 实变函数}
+
+            \vspace*{0.5cm}
+
+            \textbf{\zihao{-0}第三章简单总结}
+        \end{center}
+    \end{titlepage}
+
+    \newpage
+
+    第三章主要分为两部分:可测函数和积分.其中可测函数部分主要是可测函数本身的性质和与可测函数列相关的两种收敛,也就是
+    几乎处处收敛和依测度收敛.在积分部分讲的主要是积分的定义过程和积分的极限理论.
+
+    \section{可测函数}
+
+    可测空间均记为$(X,\cR,\mu)$.
+
+    \subsection{可测函数性质}
+
+    需要注意课本除了3.1节出现的可测函数都是每一点取值是有限的可测函数.如果值域包含$\pm \infty$,那么叫做广义实值可测函数(同时也简称可测函数),两种函数性质
+    有一定的不同之处.
+
+    首先是有限的可测函数和广义实值可测函数的相同性质.
+    \begin{proposition}
+        无论$f,g$是定义在$E$上的有限的还是可以取无限值的实函数,都有:
+        \begin{enumerate}
+            \item 若$f$可测,$E$本身可测.
+            \item 若$f$可测,$f$在$E$的任意可测子集上的限制也是可测函数.
+            \item 设$E_1\cap E_2=\varnothing,E=E_1\cup E_2$, $E_1,E_2$是可测集,那么$f$可测当且仅当$f$是$E_j(j=1,2)$上的可测函数.
+            \item 若$f,g$是可测函数,那么$\max(f,g),\min(f,g)$均可测.
+            \item 若$f$可测,那么$|f|$也可测.
+            \item 设$E\in\cR$,若$\{f_n\}$为可测函数列,那么$\{f_n\}$的,上确界函数,下确界函数,上极限函数,下极限函数,极限函数(如果存在的话)均是可测函数.
+        \end{enumerate}
+    \end{proposition}
+    \begin{proposition}
+        $E\in\cR$,$f_k(k=1\cdots,n)$是可测函数,$\phi:\R^n\longrightarrow \R$是连续函数,那么\\$\phi(f_1(x),\cdots,f_n(x))$仍是可测函数.
+    \end{proposition}
+    接下来单独列出来关于可测函数的一个性质,因为太重要了.
+    \begin{theorem}
+        $E\in\cR$,设$f$是$E$上的有限的可测函数(或者是广义实值可测函数),那么存在一列$\{f_n\}$,$f_n$是可测集的特征函数的线性组合,使得在$E$上$f_n\to f$.
+    \end{theorem}
+    \begin{remark}
+        这个定理事实上说明,对于任意可测函数,都能用可测函数的线性组合逼近可测函数,这个性质不管是对于解题还是后面积分的定义都是十分重要的,只不过还需要再做一些改变.
+    \end{remark}
+    接下来是关于有界可测函数的一个有用的推论.
+    \begin{corollary}
+        $f$是$E$上的有界可测函数,那么存在可测集上的特征函数的线性组合$f_n$,在$E$上一致收敛到$f$.
+    \end{corollary}
+
+    接下来是不同之处,在这里同时列出来好做对比.
+    \begin{theorem}[有限可测函数的等价定义]
+        $E\subset X$,$f$是$E$上的可测函数,当且仅当对任意的$c\in \R$:
+        \begin{enumerate}
+            \item $E(f>c)$可测.
+            \item $E(f\geqslant c)$可测.
+            \item $E(f<c)$可测.
+            \item $E(f\leqslant c)$可测.
+        \end{enumerate}
+        \begin{remark}
+            这时候条件可以推广到$f$包含于任意的开集、闭集以及Borel集.
+        \end{remark}
+    \end{theorem}
+    对于某些判断具体函数是否可测,用这个定理可能就会比较轻松.
+    \begin{theorem}
+        $f$是$E$上的广义实值可测函数,当且仅当(这里的``实数''是指扩充之后的实数):
+        \begin{enumerate}
+            \item $E(f=\infty)\in\cR$,且对任何实数$c,d,E(c\leqslant f<d)\in\cR$.
+            \item $E(f=-\infty)\in\cR$,且对任意的实数$c$,$E(c<f)\in\cR$.
+            \item $E(f=\infty)\in\cR$,对任意实数$c$,$E(f<c)\in\cR$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{remark}
+        事实上,以上三条可以分别用下面两条概括:
+        \begin{enumerate}
+            \item 对任何实数$c$,$E(f\geqslant c)$可测.
+            \item 对任何实数$c$,$E(f\leqslant c)$可测.
+        \end{enumerate}
+    \end{remark}
+    接下来是关于可测函数的运算.
+    \begin{proposition}
+        $E\subset X$,$f,g$是$E$上的有限的可测函数.
+        \begin{enumerate}
+            \item 对任意的$\alpha\in\R$,$\alpha f$是可测函数.
+            \item $f+g$是可测函数.
+            \item $fg$和$f/g$($g$在$E$上非零)是可测函数.
+        \end{enumerate}
+        而对于广义实值可测函数,只需要使相应的$\alpha f,f+g,fg,f/g$在$x$处不发生$0\cdot \infty,\infty+(-\infty),0/0,\infty/\infty$等不定情况就成立.
+    \end{proposition}
+
+    接下来是关于可测函数性质的一些具体情况,也就是Borel可测函数和Lebesgue可测函数,因为我们知道Borel集$\cB$包含于Lebesgue可测集$\cL$,那么\underline{Borel可测函数也就是}\\\underline{Lebesgue可测函数}.
+    而且,
+    \begin{theorem}
+        $E$是直线上的点集,$f$是有限Lebesgue可测函数,那么存在$\R$上的Borel可测函数$h$,使得$m(E(f\neq h))=0$.
+    \end{theorem}
+
+    \subsection{可测函数逼近}
+
+    这一部分主要讲的是两种收敛:几乎处处收敛和依测度收敛,以及两个定理:Egorov定理和Lausin定理.
+
+    首先是几乎处处收敛和处处收敛的区别.它们之间的区别在于极限函数的情况,也就是可测函数列$\{f_n\}$几乎处处收敛到$f$,$f$在一般测度下不一定是可测函数,但如果处处收敛的话,它就是可测的,虽然如此,还是可以找到可测函数$h$,使得
+    $\{f_n\}$几乎处处收敛到$h$,这时候$f$和$h$是几乎处处相等的.但如果加上$\mu$是完备测度的话,$f$必然是可测的.
+
+    接下来是关于依测度收敛的基本事实:
+    \begin{enumerate}
+        \item $\{f_n\}$依测度收敛等价于$\{f_n\}$是依测度基本列.
+        \item $\{f_n\}$依测度收敛于$f$当且仅当存在子列$\{f_{n_k}\}$依测度收敛于$f$.
+    \end{enumerate}
+
+    依测度收敛和几乎处处收敛无必然关系,但是它们之间仍然是有一些联系的.
+    \begin{theorem}[F.Riesz]
+        $E$上的可测函数列$\{f_n\}$依测度收敛于$f$,那么存在子列$\{f_{n_k}\}$几乎处处收敛于$f$.
+    \end{theorem}
+
+    \begin{theorem}
+        $\mu(E)<\infty$,若$\{f_n\}$几乎处处收敛到$f$,那么$\{f_n\}$依测度收敛到$f$.
+    \end{theorem}
+
+    至于Egorov定理和Lausin定理,需要注意的是,\underline{Egorov定理对任意的测度$\mu$都成}\\\underline{立,但是Lausin定理仅仅对Lebesgue测度成立.}而且,Lausin定理可以推广,只需要注\\意到以下引理:
+
+    \begin{lemma}
+        \label{lem:一维连续延拓}
+        $F$是直线上的闭集,$f$在$F$上连续,那么有直线上的连续函数$h$,使得$x\in F$时,$f=h$.
+    \end{lemma}
+    Lausin定理的推论为
+    \begin{corollary}
+        设$E$是直线上的Lebesgue可测集,$f$是$E$上的Lebesgue可测函数.那么对任意的$\delta>0$,必有直线上的连续函数$h$,使得 
+        \begin{equation*}
+            m(E(f\neq h))<\delta.
+        \end{equation*}
+    \end{corollary}
+
+    而且,引理(\ref{lem:一维连续延拓})可以推广到任意维:
+    \begin{theorem}[连续延拓定理]
+        $F$是$\R^n$上的闭集,$f$将$F$映射到$\R$上的连续函数,若$|f(x)|\leqslant M$,对任意的$x\in F$.那么就有$\R^n$上的有界连续延拓$\phi$,即
+        \begin{center}
+            $\phi(x)=f(x),\forall\ x\in F$,且$|\phi(x)|\leqslant M,\forall\ x\in \R^n$.
+        \end{center}
+    \end{theorem}
+    这个定理的证明在课件上并没有,具体可以参考\href{https://zhuanlan.zhihu.com/p/468193827}{实变函数——集合与点集(3)——连续延拓定理}.
+
+    \section{积分}
+
+    可测空间仍然是$(X,\cR,\mu)$,广义实值可测函数默认定义在$E\in\cR$.
+
+    \subsection{积分的定义}
+
+    老师课件上给出的是从非负简单函数开始定义积分.简单函数具体定义是
+    \begin{definition}
+        $\{E_k\}_{k=1}^n$是可测集,且$\mu(E_k)<\infty$,$a_k\in\R$,定义
+        \begin{equation*}
+            \phi(x)=\sum_{k=1}^na_k\chi_{E_k}(x) 
+        \end{equation*}
+        是简单函数.
+    \end{definition}
+
+    下面列出来一些关于简单函数的关键性质,在定义积分和解题都有非常重要的作用(参考Stein的Real Analysis):
+    \begin{theorem}
+        \label{thm:非负可测函数的简单函数逼近}
+        对$X$上的任意非负可测函数$f$,存在非负简单函数列$\{\phi_n\}$,使得对任意的$x$,$\phi_n(x)\leqslant \phi_{n+1}(x)$,且$\phi\to f$,$\forall\ x\in X$.
+    \end{theorem}
+
+    \begin{theorem}
+        \label{thm:可测函数的简单函数逼近}
+        对$X$上的任意可测函数$f$,存在简单函数列$\{\phi_n\}$,使得对任意的$x\in X$,有$|\phi_n(x)|\leqslant |\phi_{n+1}(x)|$,且$\phi_n\to f$对任意的$x$.
+    \end{theorem}
+
+    接下来回顾一下积分的定义过程(一部分会与讲义有出入,本质上相同).
+
+    \subsubsection{非负简单函数的积分}
+
+    \begin{definition}
+        \label{def:非负简单函数积分}
+        $\{E_k\}$是可测集且互不相交,$\phi(x)=\sum_{k=1}^ma_k\chi_{E_k}(x)$是简单函数,其中$a_k> 0$.那么定义
+        \begin{equation*}
+            \int\phi\dif\mu=\sum_{k=1}^ma_k\mu(E_k).
+        \end{equation*}
+    \end{definition}
+    \begin{remark}
+        虽然定理要求$E_k$两两不相交,但即使它们相交,仍然可以将它们合理划分,使得得到的新的简单函数恒等于原先的简单函数,且满足条件,也就是说,互不相交这个条件可以去掉.
+    \end{remark}
+
+    \subsubsection{非负可测函数积分}
+    需要注意的是,这里的可测函数可以取值为$\infty$.
+    \begin{definition}
+        \label{def:非负可测函数的积分}
+        $f$是非负(广义实值)可测函数,定义
+        \begin{equation*}
+            \int f\dif \mu=\sup\int g\dif \mu,
+        \end{equation*}
+        这里上确界是对所有满足$0\leqslant g\leqslant f$,且$g$为简单函数选取的.
+    \end{definition}
+
+    \subsubsection{一般可测函数的积分}
+    \begin{definition}
+        \label{def:一般可测函数的积分}
+        $f$是(广义实值)可测函数,$f^+=(|f|+f)/2,f^-=(|f|-f)/2$,定义 
+        \begin{equation*}
+            \int f\dif\mu=\int f^+\dif\mu-\int f^-\dif\mu.
+        \end{equation*}
+    \end{definition}
+    \begin{remark}
+        上面定义中只需要$f=f_1-f_2$,其中$f_1,f_2$均是非负可测函数即可.
+    \end{remark}
+
+    另外,需要注意的是,对任意的可测函数$f$,$f$可积定义为$\int |f|\dif\mu<\infty$.具体来说,如果取$\mu$是Lebesgue测度,根据定义可以得到,
+    $f$广义Riemann可积不一定有Lebesgue可积,但广义Riemann绝对可积就有Lebesgue可积.(课本习题3.3第5题)
+
+    接下来,就可以复习积分的性质和积分的极限定理了.
+
+    \subsection{积分的性质和极限定理}
+
+    根据定义过程,可以看出Lebesgue积分仍然满足
+    \begin{enumerate}
+        \item 单调性.
+        \item 线性性.
+        \item 区域的可数可加性.
+        \item 三角不等式.
+    \end{enumerate}
+
+    还有其他的一些重要性质.
+    \begin{proposition}
+        $f$是非负可积函数,那么 
+        \begin{equation*}
+            \int f\dif\mu=0\Longleftrightarrow f=0 \quad\ae.
+        \end{equation*}
+    \end{proposition}
+    \begin{proposition}
+        $f$是可积函数, $f=0\ \ae$,则
+        \begin{equation*}
+            \int f\dif\mu=0.
+        \end{equation*}
+    \end{proposition}
+    \begin{proposition}
+        $f$是可积函数,$f\geqslant 0\ \ae$,则
+        \begin{equation*}
+            \int f\dif\mu\geqslant 0.
+        \end{equation*}
+    \end{proposition}
+    \begin{remark}
+        上面两个命题可以推广.
+    \end{remark}
+    \begin{proposition}
+        $f$可积那么$|f|<\infty\ \ae$.
+    \end{proposition}
+    \begin{proposition}
+        $f$是$E$上的可积函数,且$\mu(E)>0,f>0\ \ae$,那么$\int_Ef\dif\mu>0$.
+    \end{proposition}
+    \begin{theorem}[全连续性]
+        测度空间$(X,\cR,\mu)$是$\sigma$-有限的,$f$是$E\in\cR$上的可积函数,对任意的$\epsilon>0$,存在$\delta>0$,$e$是满足$\mu(e)<\delta$的所有$E$的可测子集,则 
+        \begin{equation*}
+            \abs{\int_ef\dif\mu}<\epsilon.
+        \end{equation*}
+    \end{theorem}
+
+    积分的变数变换.
+
+    \begin{definition}
+        设$(X_i,\cR_i)(i=1,2)$是两个可测空间,$\phi:X_1\longrightarrow X_2$的一个映照,如果对每个$E\in\cR_2,\phi^{-1}(E)=\{x\mid x\in X_1,\phi(x)\in E\}$属于$\cR_1$,那么称 
+        $\phi$是$(X_1,\cR_1)$到$(X_2,\cR_2)$的可测映照,或简称做可测映照,并记$\phi^{-1}(\cR_2)=\{\phi^{-1}(E)\mid E\in\cR_2\}$.
+
+        若$\phi$是双射,称$\phi$是可测同构映照.
+    \end{definition}
+
+    \begin{theorem}
+        $(X_i,\cR_i)$是可测空间,$\phi$是从$(X_1,\cR_1)$到$(X_2,\cR_2)$的可测同构映照,$\mu$是$(X_2,\cR_2)$的一个测度,$E\in\cR_2$.那么$E$上的函数$f$关于$\mu$可积的充要条件是
+        $\phi^{-1}(E)$上的函数$f(\phi(x_1))$关于测度$\nu(\cdot)\equiv\mu(\phi(\cdot))$可积,而且当$f$关于$\mu$可积时,
+        \begin{equation*}
+            \int_E f(x_2)\dif\mu(x_2)=\int_{\phi^{-1}(E)}f(\phi(x_1))\dif\mu(\phi(x_1)).
+        \end{equation*}
+    \end{theorem}
+
+    \begin{definition}
+        设$(X_i,\cR_i,\mu_i)(i=1,2)$是两个测度空间,$\phi$是$X_1\longrightarrow X_2$的映照,如果对任何的$E_i\in\cR_i$,$\phi(E_1)\in\cR_2,\phi^{-1}(E_2)\in\cR_1$,并且$\mu_2(\phi(E_1))=\mu(E_1),\mu_1(\phi^{-1}(E_2))=\mu_2(E_2)$.那么 
+        称$\phi$是$(X_1,\cR_1,\mu_1)$到$(X_2,\cR_2,\mu_2)$的保测变换.
+    \end{definition}
+
+    \begin{theorem}
+        设$(X_1\cR_i,\mu_i)$是测度空间,$\phi$是$(X_1,\cR_1,\mu_1)$到$(X_2,\cR_2,\mu_2)$的保测变换,$E\subseteq X_2$.那么$E$上的函数$f$关于$\mu_2$可积的充要条件是$f\circ \phi$是$\phi^{-1}(E)$上关于$\mu_1$
+        可积的.当可积时,
+        \begin{equation*}
+            \int_Ef(x_2)\dif\mu_2(x_2)=\int_{\phi^{-1}(E)}f(\phi(x_1))\dif\mu_1(x_1).
+        \end{equation*}
+    \end{theorem}
+
+    \subsection{积分的极限定理}
+
+    这一部分的积分极限定理主要是对两种函数讨论的,注意适用条件.
+
+    \subsubsection{Levi定理}
+
+    \begin{theorem}
+        $\{f_n\}$是非负广义实值可测函数列,若$f_1\leqslant f_2\leqslant\cdots,\lim_{n\to\infty}f_n(x)=f(x)$,那么  
+        \begin{equation*}
+            \lim_{n\to\infty}\int f_n\dif\mu=\int f\dif\mu.
+        \end{equation*}
+    \end{theorem}
+    \begin{theorem}
+        $\{f_k\}$是$E$上的广义实值可积函数列,满足:
+        \begin{enumerate}
+            \item 对任意的$k$,$f_k\leqslant k_{k+1}\ \ae$,
+            \item $\sup_\N\left\{\int f_n\dif\mu\right\}<\infty$,
+        \end{enumerate}
+        则存在广义实值可积函数$f$,$\lim_{n\to\infty}f_n(x)=f(x)\ \ae$,使 
+        \begin{equation*}
+            \lim_{n\to\infty}\int_E f_n\dif \mu=\int_E f\dif\mu.
+        \end{equation*}
+    \end{theorem}
+    除此之外,还有级数形式的Levi定理:
+    \begin{theorem}
+        $\{u_k\}$是$E$上的非负简单函数列(或非负可积函数列),则
+        \begin{equation*}
+            \int\left(\sum_{n=1}^\infty u_n\right)\dif\mu=\sum_{n=1}^\infty \int u_n\dif\mu.
+        \end{equation*}
+    \end{theorem}
+
+    逐项积分:
+    
+    \begin{theorem}
+        $\{u_k\}$是可积函数列,若$\sum_{k=0}^\infty\int_E |u_k|\dif\mu<\infty$,那么存在广义实值可积函数$f$,$f=\sum_{k=0}^\infty u_k\ \ae$,且
+        \begin{equation*}
+            \int_E\left(\sum_{k=0}^\infty u_k\right)\dif\mu=\sum_{k=0}^\infty\int_E u_k\dif\mu.
+        \end{equation*}
+    \end{theorem}
+
+    \subsubsection{Fatou引理}
+    
+    \begin{theorem}
+        $\{f_k\}$是非负广义实值可测函数列,则
+        \begin{equation*}
+            \int_E\varliminf_{n\to\infty}f_n\dif\mu\leqslant\varliminf\int_E f_n\dif\mu.
+        \end{equation*}
+    \end{theorem}
+
+    \begin{theorem}
+        $\{f_k\}$是可积函数列,$h$是$E$上的可积函数,如果,
+        \begin{enumerate}
+            \item 对任意的$k\in\N$,$f_k(x)\geqslant h(x)\ \ae$, 且
+            \item $\varliminf\int_E f_k\dif\mu<\infty$,
+        \end{enumerate}
+        则$\varliminf_{k\to\infty} f_k$是可积函数,且 
+        \begin{equation*}
+            \int_E\varliminf_{k\to\infty}f_k\dif\mu\leqslant\varliminf_{k\to\infty}\int_Ef_k\dif\mu.
+        \end{equation*}
+    \end{theorem}
+
+    \subsubsection{Lebesgue控制收敛定理}
+
+    \begin{theorem}
+        $\{f_k\}$是广义实值可测函数列,$f$是广义实值可测函数,$g$是$E$上的可积函数,如果 
+        \begin{enumerate}
+            \item $\{f_k\}$在$E$上依测度或几乎处处收敛于$f$,且
+            \item 对任意的$k\in\N$,有$|f_k(x)|\leqslant |g(x)|\ \ae$,
+        \end{enumerate}
+        则$f$在$E$上可积,且
+        \begin{equation*}
+            \lim_{k\to\infty}\int_E f_k\dif\mu=\int_E f\dif\mu.
+        \end{equation*}
+    \end{theorem}
+
+    \subsubsection{Lebesgue有界收敛定理}
+
+    \begin{theorem}
+        $\{f_k\}$是广义实值可测函数列,$f$是广义实值可测函数,$\mu(E)<\infty$,如果 
+        \begin{enumerate}
+            \item $f_k$在$E$上依测度或几乎处处收敛于$f$,
+            \item 存在$M$对任意的$k$,$|f_k(x)|\leqslant M\ \ae$,
+        \end{enumerate}
+        则$f$在$E$上可积,且
+        \begin{equation*}
+            \lim_{k\to\infty}\int_E f_k\dif\mu=\int_E f\dif\mu.
+        \end{equation*}
+    \end{theorem}
+\end{document}

@@ -1,0 +1,41 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
+  \urlstyle{same}\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
+
+\bibitem[RN2()]{RN2}
+西安二手房房源\_ 西安二手房出售 | 买卖 | 交易信息
+  (西安链家)\allowbreak[EB/OL].
+\newblock \url{https://xa.lianjia.com/ershoufang/rs/}.
+
+\bibitem[侯月月(2021)]{RN3}
+侯月月.
+\newblock 限购、人才落户政策对房价的影响研究\allowbreak[D/OL].
+\newblock 2021.
+\newblock DOI: \doi{10.27263/d.cnki.gqudc.2021.000086}.
+
+\bibitem[肖启荣(2019)]{RN4}
+肖启荣.
+\newblock
+  流通性减弱环境下房地产经济发展趋势分析\allowbreak[J].
+\newblock 商业经济研究, 2019\allowbreak (07): 177-179.
+
+\bibitem[RN5()]{RN5}
+西安房价网， 2022
+  西安房价走势图，西安二手房价格­安居客\allowbreak[EB/OL].
+\newblock \url{https://xa.anjuke.com/market/}.
+
+\bibitem[韩婷(2015)]{RN6}
+韩婷.
+\newblock 住宅价格与成交量关系的协整研究\allowbreak[J].
+\newblock 东方企业文化, 2015\allowbreak (19): 277.
+
+\end{thebibliography}
