@@ -14,11 +14,29 @@ fancyhdr}
 \newfontfamily\consolas{Consolas}
 \definecolor{lightgray}{gray}{0.5}
 \setlength{\parindent}{0pt}
+\linespread{1.5}
 
-\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
 \newcommand{\Z}{\mathbb{Z}}
-\renewcommand{\r}{\mathrm{rank}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 
 \begin{document}
-  测试github用.
+  \textbf{问题:}是否存在$\R$上的开集$A$,使得$m(\ptl A)>0$?
+
+  感觉有问题的一个例子:首先先取开区间$(0,1)$,类似于构造类Cantor集,以中点$\frac{1}{2}$半径$\frac{1}{4}$去掉一个闭区间,得到两个开区间;
+  然后再在剩余两个开区间的中点以$\frac{1}{16}$为半径去掉两个闭区间,以此类推.最后得到的集合记为$A$,$A$无内点,那么$A\subseteq \ptl A$,
+  而且
+  \begin{equation*}
+    m(A^c)=\frac{1}{4}\times 1+\frac{1}{16}\times 2+\frac{1}{64}\times 4+\cdots=\frac{1}{2}.
+  \end{equation*}
+  那么$m(\ptl A)>\frac{1}{2}>0$.
 \end{document}
