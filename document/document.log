@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  16 AUG 2022 14:04
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  23 AUG 2022 17:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -703,7 +703,8 @@ Package fontspec Info: Font family 'Consolas(0)' created for font 'Consolas'
 (fontspec)             <->"Consolas/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
- (./document.aux)
+
+No file document.aux.
 \openout1 = `document.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -782,7 +783,6 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -836,11 +836,31 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ]
 File: 资源 1.pdf Graphic file (type pdf)
 <use 资源 1.pdf>
- [2] [3] [4] (./document.aux) ) 
+ [2]
+
+LaTeX Warning: Reference `eq:换电池x_j' on page 3 undefined on input line 114.
+
+
+LaTeX Warning: Reference `eq:换电池y_j+1' on page 3 undefined on input line 114.
+
+
+LaTeX Warning: Reference `eq:换电池x_j' on page 3 undefined on input line 116.
+
+
+LaTeX Warning: Reference `eq:换电池y_j+1' on page 3 undefined on input line 116.
+
+[3] [4] (./document.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 24695 strings out of 476179
- 557542 string characters out of 5813072
- 849188 words of memory out of 5000000
+ 24693 strings out of 476179
+ 557516 string characters out of 5813072
+ 849179 words of memory out of 5000000
  44968 multiletter control sequences out of 15000+600000
  484916 words of font info for 115 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
