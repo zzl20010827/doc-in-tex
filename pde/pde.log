@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  7 SEP 2022 21:36
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  7 SEP 2022 22:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -679,22 +679,23 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package hyperref Info: bookmark level for unknown exercise defaults to 0 on input line 61.
+ [1
+
+]
 \tf@thm=\write4
 \openout4 = `pde.thm'.
 
- [1
-
-] (./pde.aux)
+ [2] (./pde.aux)
 Package rerunfilecheck Info: File `pde.out' has not changed.
 (rerunfilecheck)             Checksum: 8A0753594DF1FEEFBBEDF870D63939A5;67.
  ) 
 Here is how much of TeX's memory you used:
- 16946 strings out of 476179
- 353977 string characters out of 5813072
- 687308 words of memory out of 5000000
- 37428 multiletter control sequences out of 15000+600000
+ 16960 strings out of 476179
+ 354656 string characters out of 5813072
+ 695407 words of memory out of 5000000
+ 37442 multiletter control sequences out of 15000+600000
  479356 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,11n,97p,1261b,339s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,11n,97p,1261b,632s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on pde.pdf (1 page).
+Output written on pde.pdf (2 pages).
