@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  23 AUG 2022 17:20
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  5 SEP 2022 11:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -703,86 +703,86 @@ Package fontspec Info: Font family 'Consolas(0)' created for font 'Consolas'
 (fontspec)             <->"Consolas/BI/OT:script=latn;language=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
-
-No file document.aux.
+ (./document.aux)
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup10
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 34.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 34.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 34.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 34.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 34.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 34.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 34.
-LaTeX Font Info:    Redeclaring math accent \check on input line 34.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 34.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 34.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 34.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 34.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 34.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 32.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 32.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 32.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 32.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 32.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 32.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 32.
+LaTeX Font Info:    Redeclaring math accent \check on input line 32.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 32.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 32.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 32.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 32.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 32.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 34.
+(Font)              `operators' in the math version `normal' on input line 32.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 34.
+(Font)                  OT1/cmr/m/n --> TU/lmr/m/n on input line 32.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 34.
+(Font)              `operators' in the math version `bold' on input line 32.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 34.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/m/n on input line 32.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 34.
+(Font)                  TU/lmr/m/n --> TU/lmr/m/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 34.
+(Font)                  OT1/cmr/m/it --> TU/lmr/m/it on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 34.
+(Font)                  OT1/cmr/bx/n --> TU/lmr/b/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 34.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 34.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 32.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 34.
+(Font)                  TU/lmr/m/n --> TU/lmr/b/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 34.
+(Font)                  OT1/cmr/bx/it --> TU/lmr/b/it on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 34.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 32.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 34.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 32.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -820,50 +820,16 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count349
-LaTeX Font Info:    Trying to load font information for U+msa on input line 36.
-(e:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 36.
- (e:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 36.
- (e:/texlive/2022/texmf-dist/tex/latex/jknapltx/ursfs.fd
-File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) [1
+[1
 
-]
-File: 资源 1.pdf Graphic file (type pdf)
-<use 资源 1.pdf>
- [2]
-
-LaTeX Warning: Reference `eq:换电池x_j' on page 3 undefined on input line 114.
-
-
-LaTeX Warning: Reference `eq:换电池y_j+1' on page 3 undefined on input line 114.
-
-
-LaTeX Warning: Reference `eq:换电池x_j' on page 3 undefined on input line 116.
-
-
-LaTeX Warning: Reference `eq:换电池y_j+1' on page 3 undefined on input line 116.
-
-[3] [4] (./document.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 24693 strings out of 476179
- 557516 string characters out of 5813072
- 849179 words of memory out of 5000000
- 44968 multiletter control sequences out of 15000+600000
- 484916 words of font info for 115 fonts, out of 8000000 for 9000
+ 24559 strings out of 476179
+ 554739 string characters out of 5813072
+ 835196 words of memory out of 5000000
+ 44879 multiletter control sequences out of 15000+600000
+ 471109 words of font info for 56 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,8n,97p,1205b,356s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,5n,97p,1205b,386s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on document.pdf (4 pages).
+Output written on document.pdf (1 page).
