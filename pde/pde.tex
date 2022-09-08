@@ -62,7 +62,7 @@
         利用Gauss-Green公式证明
         \begin{enumerate}
             \item 若$u,v\in C^1(\Omega)\cap C(\bar{\Omega})$,则\begin{equation*}
-                \int_\Omega u_{x_i}v\dif x=-\int_\Omega uv_{x_i}\dif x+\int_\Omega uvn_i\dif s.
+                \int_\Omega u_{x_i}v\dif x=-\int_\Omega uv_{x_i}\dif x+\int_{\ptl\Omega} uvn_i\dif s.
             \end{equation*}
             \item 若$u\in C^2(\Omega)\cap C^1(\bar{\Omega})$,则\begin{equation*}
                 \int_\Omega \Delta u\dif x=\int_{\ptl\Omega}\frac{\ptl u}{\ptl n}\dif s.
@@ -72,6 +72,26 @@
             \end{equation*}
         \end{enumerate}
     \end{exercise}
+
+    \begin{proof}
+        1. 令$F=(0,0,\cdots,uv,\cdots,0)^T$,根据Gauss-Green公式, 
+        \begin{align*}
+            \int_\Omega u_{x_i}v\dif x=\int_\Omega \nabla\cdot F\dif x=\int_{\ptl\Omega}F\cdot n\dif s=\int_{\ptl\Omega}uvn_i\dif s.
+        \end{align*}
+
+        2.注意到$\Delta u=\nabla\cdot \nabla u$,那么
+        \begin{equation*}
+            \int_\Omega \Delta u\dif x=\int_\Omega \nabla\cdot\nabla u\dif x=\int_{\ptl\Omega} \nabla u\cdot n\dif s=\int_{\ptl\Omega}\frac{\ptl u}{\ptl n}\dif s.
+        \end{equation*}
+
+        3.根据第1问的结论,
+        \begin{align*}
+            \int_\Omega u\Delta v-v\Delta u\dif x&=\int_\Omega \sum_{i=1}^n\left(uv_{x_ix_i}-vu_{x_ix_i}\right)\dif x\\
+            &=-\int_\Omega\sum_{i=1}^n(u_{x_i}v_{x_i}-u_{x_i}v_{x_i})\dif x+\int_{\ptl\Omega}\sum_{i=1}^n(uv_{x_i}n_i-vu_{x_i}n_i)\dif s\\
+            &=\int_{\ptl\Omega}(u\nabla v\cdot n-v\nabla u\cdot n)\dif s=\int_{\ptl \Omega}u\frac{\ptl v}{\ptl n}-v\frac{\ptl u}{\ptl n}\dif s.
+        \end{align*}
+        \ 
+    \end{proof}
 
     \begin{exercise}
         \label{ex:1.2}
