@@ -207,12 +207,15 @@
 
 \begin{exercise}
     \label{ex:6}
-    $(X,\rho)$是度量空间,设$E\subset X$,则$E$是疏集$\leftrightarrow$ 对任意的$\overline{B(x,r)}$,必存在开球$B(x',r')\subset B(x,r)$,
+    $(X,\rho)$是度量空间,设$E\subset X$,则$E$是疏集$\Leftrightarrow$ 对任意的$\overline{B(x,r)}$,必存在开球$B(x',r')\subset B(x,r)$,
     使得$\overline{B(x',r')}\cap E=\emptyset$.
 \end{exercise}
 
 \begin{proof}
-    
+    ``$\Rightarrow$''.若存在$B(x,r)$,使得对任意的$B(x',r')\subset B(x,r)$,$\overline{B(x',r')}\cap E\neq \emptyset$,那么$E$在$B(x,r)$
+    稠密,矛盾.
+
+    ``$\Leftarrow$''.对任意的$B(x,r)$,都存在$B(x',r')\subset B(x,r)$,使$\overline{B(x',r')}\cap E=\emptyset$,那么$E$无内点,$E$是疏集.
 \end{proof}
 
 \end{document}
