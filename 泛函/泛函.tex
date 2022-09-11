@@ -44,8 +44,14 @@
 \newcommand{\Z}{\mathbb{Z}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\renewcommand{\liminf}{\varliminf}
+\renewcommand{\limsup}{\varlimsup}
+\renewcommand{\ae}{\ \mathrm{a.e.}\ }
+\newcommand{\diam}{\mathrm{diam\ }}
+\newcommand{\toinmeasure}[1]{\underset{#1}{\Rightarrow}}
 
 
 
@@ -136,6 +142,73 @@
 \begin{exercise}
     \label{ex:3}
     $S[a,b]$表示$[a,b]$上几乎处处有界的可测函数全体.$\rho(f,g)=\int_a^b\frac{\abs{f-g}}{1+\abs{f-g}}\dif \mu$,证明$(S[a,b],\rho)$是完备的度量空间.
+\end{exercise}
+
+\begin{proof}
+    1. $\rho(f,g)\geqslant 0$,$\rho(f,g)=0\Leftrightarrow \int_a^b\frac{\abs{f-g}}{1+\abs{f-g}}\dif \mu=0\Leftrightarrow f=g \ae x\in[a,b]$.
+
+    2.$\rho(f,g)=\rho(g,f)$
+
+    3.与题\eqref{ex:2}中证明三角不等式的过程类似,可以得到$\frac{\abs{f-g}}{1+\abs{f-g}}+\frac{\abs{g-h}}{1+\abs{g-h}}\geqslant\frac{\abs{f-h}}{1+\abs{f-h}}$.
+    那么$\rho(f,h)\leqslant\rho(f,g)+\rho(g,h)$.综上,$(S[a,b],\rho)$是度量空间.
+
+    下面证明$(S[a,b],\rho)$完备.
+
+    设$\{f_n\}\subseteq S[a,b]$是Cauchy列,即$\rho(f_m,f_n)\to 0,\quad m,n\to\infty$,则$\mu(\abs{f_m-f_n}>\delta)\to 0,\quad m,n\to\infty$,那么存在
+    $f$可测,$f_n\toinmeasure{\mu} f$.存在子列$\{f_{n_k}\}$,使得$\mu(\abs{f_{n_k}-f}>1)<\frac{1}{2^k}$,令$A_k=\{x:\abs{f_{n_k}(x)-f(x)}>1\}$,则
+    $\mu(A_{k})<\frac{1}{2^k}$,且$\mu(\limsup_{k\to\infty} A_k)=\mu(\bigcap_{m=1}^\infty\bigcup_{k=m}^\infty A_k)\leqslant \frac{1}{2^{m-1}},\ \forall m\geqslant 1$.
+    则$\mu(\limsup_{k\to\infty} A_k)=0$.而且存在$k_0$,使任意的$x\in[a,b]\differ\limsup_{k\to\infty} A_k$有$\abs{f_{n_{k_0}}(x)-f(x)}\leqslant 1$,又因为
+    $f_{n{k_0}}$几乎处处有界,那么$f\in S[a,b]$.
+
+    $\rho(f_n,f)\leqslant\int_a^b\abs{f_n-f}\dif \mu$,又$\mu([a,b])<\infty$,令$E_0(n)=\{\abs{f_n-f}\geqslant 1\},E_1(n)=\left\{\frac{1}{2}\leqslant\abs{f_n-f}<1\right\}$,
+    $E_2(n)=\{\frac{1}{2^2}\leqslant\abs{f_n-f}<\frac{1}{2}\},\cdots$,那么 
+    \begin{align*}
+        \int_a^b\abs{f_n-f}\dif \mu&=\sum_{k=0}^\infty \int_{E_k(n)}\abs{f_n-f}\dif \mu\\
+        &<\int_{E_0(n)}\abs{f_n-f}\dif \mu+\sum_{k=1}^\infty\frac{1}{2^{k-1}}\mu(E_k(n)).
+    \end{align*}
+一方面,$\int_{E_0(n)}\abs{f_n-f}\dif \mu\to 0\quad n\to\infty$,另一方面,因为$\mu(E_K(n))\leqslant\mu([a,b])<\infty$,那么级数$\sum_{k=1}^\infty \frac{1}{2^{k-1}}\mu(E_k(n))$
+一致收敛,$\lim_{n\to\infty}\sum_{k=1}^\infty \frac{1}{2^{k-1}}\mu(E_k(n))=0$.即\\$\lim_{n\to\infty}\int_a^b\abs{f_n-f}\dif\mu=0$.$(S[a,b],\rho)$
+完备.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:4}
+    $1\leqslant p\leqslant \infty$,令$\rho(f,g)=\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}$,证明$(L^p[a,b],\rho)$是度量空间,当$1\leqslant p<\infty$时
+    是完备的度量空间.
+\end{exercise}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{exercise}
+    \label{ex:5}
+    $(X,\rho)$是度量空间,$A\subset X$,证明$\diam A=\diam \overline{A}$.
+\end{exercise}
+
+\begin{proof}
+    一方面,$\diam A=\sup_{x,y\in A}\rho(x,y)\leqslant \sup_{x,y\in\overline{A}}\rho(x,y)=\diam \overline{A}$.
+
+    另一方面,对任意的$\epsilon>0$,存在$x_0,y_0\in\overline{A}$,使得
+    \begin{equation*}
+        \diam \overline{A}<\rho(x_0,y_0)+\epsilon.
+    \end{equation*}
+    又因为$x_0,y_0\in\overline{A}$,那么存在$x_1,y_1\in A$,使得$\rho(x_1,x_0),\rho(y_1,y_0)<\epsilon$,那么 
+    \begin{align*}
+        \rho(x_0,y_0)&\leqslant \rho(x_0,x_1)+\rho(x_1+y_1)+\rho(y_1,y_0)\\
+        &<\rho(x_1,y_1)+2\epsilon.
+    \end{align*}
+    则 
+    \begin{equation*}
+        \diam \overline{A}<\rho(x_1,y_1)+3\epsilon\leqslant \diam A+3\epsilon.
+    \end{equation*}
+    根据$\epsilon$的任意性,$\diam\overline{A}\leqslant\diam A$,综上,$\diam\overline{A}=\diam A$.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:6}
+    $(X,\rho)$是度量空间,设$E\subset X$,则$E$是疏集$\leftrightarrow$ 对任意的$\overline{B(x,r)}$,必存在开球$B(x',r')\subset B(x,r)$,
+    使得$\overline{B(x',r')}\cap E=\emptyset$.
 \end{exercise}
 
 \begin{proof}
