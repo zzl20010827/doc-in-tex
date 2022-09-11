@@ -56,4 +56,90 @@
     泛函分析作业
 \end{center}
 
+\begin{exercise}
+    \label{ex:1}
+    考虑空间$C[a,b]$,令$\rho_1(x,y)=\max_{t\in[a,b]}\abs{x(t)-y(t)},\rho_2=\int_a^b\abs{x(t)-y(t)}\dif t$.证明:$(C[a,b],\rho_1)$是完备的
+    度量空间,$(C[a,b],\rho_2)$不是完备的度量空间.
+\end{exercise}
+
+\begin{proof}
+    先证明$(C[a,b],\rho_1)$是完备的度量空间.
+
+    1. $\rho_1\geqslant 0$,且$\rho_1(x,y)=0\Leftrightarrow \abs{x(t)-y(t)}=0,\forall t\in[a,b]\Leftrightarrow x=y$.$\rho_1$满足正定性.
+
+    2. $\rho_1(x,y)=\rho_1(y,x)$,$\rho_1$满足对称性.
+
+    3. \begin{align*}
+        \rho_1(x,z)&=\max_{t\in[a,b]}\abs{x(t)-z(t)}\\
+        &\leqslant \max_{t\in[a,b]}(\abs{x(t)-y(t)}+\abs{y(t)-z(t)})\\
+        &\leqslant \max_{t\in[a,b]} \abs{x(t)-y(t)}+\max_{t\in[a,b]}\abs{y(t)-z(t)}\\
+        &=\rho_1(x,y)+\rho_1(y,z).
+    \end{align*}
+    $\rho_1$满足三角不等式.$(C[a,b],\rho_1)$是度量空间.
+
+    下面证明$(C[a,b],\rho_1)$完备.设\{$x_n(t)\}\subseteq C[a,b]$是Cauchy列,那么对任意的$\epsilon>0$,存在$N$,对任意的$m,n>N$,
+    $\rho_1(x_m,x_n)=\max_{t\in[a,b]}\abs{x_m(t)-x_n(t)}<\epsilon$,则$\{x_n(t)\}$一致收敛,令极限函数是$x(t)$,则$x(t)\in C[a,b]$,那么 
+    $\rho_1(x_n,x)=\max_{t\in[a,b]}\abs{x_n(t)-x_(t)}\to 0,\quad n\to\infty$.$(C[a,b],\rho_1)$完备.
+
+    再证明$(C[a,b],\rho_2)$不是完备的度量空间.
+
+    1. $\rho_2(x,y)\geqslant 0$,且因为$x(t),y(t)$连续,$\rho_2(x,y)=\int_a^b\abs{x(t)-y(t)}\dif t=0\Leftrightarrow \\\abs{x(t)-y(t)}
+    \equiv 0\Leftrightarrow x=y$.$\rho_2$满足正定性.
+
+    2. $\rho_2(x,y)=\rho_2(y,x)$,$\rho_2$满足对称性.
+
+    3. \begin{align*}
+        \rho_2(x,z)&=\int_a^b\abs{x(t)-z(t)}\dif t\\
+        &\leqslant \int_a^b(\abs{x(t)-y(t)}+\abs{y(t)-z(t)})\dif t\\
+        &=\rho_2(x,y)+\rho_2(y,z).
+    \end{align*}
+    $\rho_2$满足三角不等式.$(C[a,b],\rho_2)$是度量空间.
+
+    下面说明$(C[a,b],\rho_2)$不完备.反例:不妨令$a=0,b=1$,再令
+    $$x_n=\begin{cases}
+        -nx+1 & 0\leqslant x\leqslant 1/n\\
+        0 & 1/n<x\leqslant 1.
+    \end{cases}$$
+    那么$x_n\in C[0,1]$,且$\rho_2(x_m,x_n)\to 0,\quad m,n\to \infty$,但是令
+    $$x=\lim_{n\to\infty}x_n=\begin{cases}
+        1 & x=0\\
+        0 & 0<x\leqslant 1,
+    \end{cases}$$
+    $x\notin C[0,1]$,说明这个度量空间不完备.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:2}
+    令$\rho(x,y)=\frac{\abs{x-y}}{1+\abs{x-y}}$,证明$(\R,\rho)$是完备的度量空间.
+\end{exercise}
+
+\begin{proof}
+    1. $\rho(x,y)\geqslant 0$,且$\rho(x,y)=0\Leftrightarrow \abs{x-y}=0\Leftrightarrow x=y$.
+
+    2. $\rho(x,y)=\rho(y,x)$.
+
+    3. 注意到$\frac{x}{1+x}$当$x\geqslant 0$时是单调递增函数.\begin{align*}
+        \rho(x,y)+\rho(y,z)&=\frac{\abs{x-y}}{1+\abs{x-y}}+\frac{\abs{y-z}}{1+\abs{y-z}}\\
+        &=\frac{\abs{x-y}+\abs{y-z}+2\abs{x-y}\abs{y-z}}{1+\abs{x-y}\abs{y-z}+\abs{x-y}+\abs{y-z}}\\
+        &\geqslant \frac{\abs{x-y}+\abs{y-z}+\abs{x-y}\abs{y-z}}{1+\abs{x-y}\abs{y-z}+\abs{x-y}+\abs{y-z}}\\
+        &\geqslant \frac{\abs{x-y}+\abs{y-z}}{1+\abs{x-y}+\abs{y-z}}\\
+        &\geqslant\frac{\abs{x-z}}{1+\abs{x-z}}=\rho(x,z).\qquad (\abs{x-y}+\abs{y-z}\geqslant \abs{x-z})
+    \end{align*}
+    则$(\R,\rho)$是度量空间.
+
+    下面证明它完备.
+
+    设$\{x_n\}$是Cauchy列,那么对任意的$\epsilon$,其中$0<\epsilon<1/2$,存在$N$对任意的$m,n>N$,$\frac{\abs{x_n-x_n}}{1+\abs{x_m-x_n}}<\epsilon$,
+    那么$\abs{x_m-x_n}<\frac{\epsilon}{1-\epsilon}<2\epsilon$,则存在$x\in\R$,$\{x_n\}$收敛于$x$,$\rho(x_n,x)\leqslant \abs{x_n-x}\to 0,\quad n\to\infty$.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:3}
+    $S[a,b]$表示$[a,b]$上几乎处处有界的可测函数全体.$\rho(f,g)=\int_a^b\frac{\abs{f-g}}{1+\abs{f-g}}\dif \mu$,证明$(S[a,b],\rho)$是完备的度量空间.
+\end{exercise}
+
+\begin{proof}
+    
+\end{proof}
+
 \end{document}
