@@ -158,7 +158,7 @@
     $f$可测,$f_n\toinmeasure{\mu} f$.存在子列$\{f_{n_k}\}$,使得$\mu(\abs{f_{n_k}-f}>1)<\frac{1}{2^k}$,令$A_k=\{x:\abs{f_{n_k}(x)-f(x)}>1\}$,则
     $\mu(A_{k})<\frac{1}{2^k}$,且$\mu(\limsup_{k\to\infty} A_k)=\mu(\bigcap_{m=1}^\infty\bigcup_{k=m}^\infty A_k)\leqslant \frac{1}{2^{m-1}},\ \forall m\geqslant 1$.
     则$\mu(\limsup_{k\to\infty} A_k)=0$.而且存在$k_0$,使任意的$x\in[a,b]\differ\limsup_{k\to\infty} A_k$有$\abs{f_{n_{k_0}}(x)-f(x)}\leqslant 1$,又因为
-    $f_{n{k_0}}$几乎处处有界,那么$f\in S[a,b]$.
+    $f_{n_{k_0}}$几乎处处有界,那么$f\in S[a,b]$.
 
     $\rho(f_n,f)\leqslant\int_a^b\abs{f_n-f}\dif \mu$,又$\mu([a,b])<\infty$,令$E_0(n)=\{\abs{f_n-f}\geqslant 1\},E_1(n)=\left\{\frac{1}{2}\leqslant\abs{f_n-f}<1\right\}$,
     $E_2(n)=\{\frac{1}{2^2}\leqslant\abs{f_n-f}<\frac{1}{2}\},\cdots$,那么 
@@ -173,12 +173,57 @@
 
 \begin{exercise}
     \label{ex:4}
-    $1\leqslant p\leqslant \infty$,令$\rho(f,g)=\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}$,证明$(L^p[a,b],\rho)$是度量空间,当$1\leqslant p<\infty$时
-    是完备的度量空间.
+    $1\leqslant p< \infty$,令$\rho(f,g)=\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}$,证明$(L^p[a,b],\rho)$是完备的度量空间.
 \end{exercise}
 
 \begin{proof}
-    
+    1. $\rho(x,y)\geqslant 0$,当$1\leqslant p<\infty$时,$\rho(x,y)=0\Leftrightarrow \int_a^b\abs{f-g}^p\dif x=0\Leftrightarrow f=g\ae$.
+
+    2.对任意的$1\leqslant p< \infty$,$\rho(f,g)=\rho(g,f)$.
+
+    3.当$p=1$时显然成立.当$1<p<\infty$,令$\frac{1}{p}+\frac{1}{q}=1$即$p-1=\frac{p}{q}$,那么 
+    \begin{align*}
+        \abs{f-h}^p&=\abs{f-g+g-h}^p\\
+        &=\abs{f-g+g-h}\abs{f-h}^{p/q}\\
+        &\leqslant \abs{f-g}\abs{f-h}^{p/q}+\abs{g-h}\abs{f-h}^{p/q}.
+    \end{align*}
+    则 
+    \begin{align*}
+        \int_a^b\abs{f-h}^p\dif x&\leqslant \int_a^b\abs{f-g}\abs{f-g+g-h}^{p/q}\dif x+\int_a^b\abs{g-h}\abs{f-g+g-h}^{p/q}\dif x\\
+        &\leqslant \left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}\left(\int_a^b\abs{f-h}^p\right)^{1/q}\\
+        &\quad +\left(\int_a^b\abs{g-h}^p\dif x\right)^{1/p}\left(\int_a^b\abs{f-h}^p\right)^{1/q}\\
+        &=\left[\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{g-h}^p\dif x\right)^{1/p}\right]\left(\int_a^b\abs{f-h}^p\dif x\right)^{1/q}.
+    \end{align*}
+    整理可得$\rho(f-h)\leqslant\rho(f-g)+\rho(g-h)$.
+
+    下面证明它是完备的.
+
+    设$\{f_n\}\subseteq L^p[a,b]$是Cauchy列.存在子列$\{f_{n_k}\},\rho(f_{n_k},f_{n_{k-1}})<\frac{1}{2^k}$.因为$k_{n_k}=f_{n_1}+\sum_{j=2}^k(f_{n_j}-f_{n_{j-1}})$,
+    那么令
+    \begin{equation*}
+        \abs{f_{n_k}}\leqslant\abs{f_{n_k}}+\sum_{j=2}^k\abs{f_{n_k}-f_{n_{j-1}}}=g_k(x).
+    \end{equation*}
+
+    根据三角不等式,
+    \begin{align*}
+        \left(\int_a^b\abs{g_k(x)}^p\dif x\right)^{1/p}&=\left(\int_a^b\abs{\abs{f_{n_1}}+\sum_{j=2}^k\abs{f_{n_j}-f_{n_{j-1}}}}^p\dif x\right)^{1/p}\\
+        &\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{\sum_{j=2}^k\abs{f_{n_j}-f_{n_{j-1}}}}^p\dif x\right)^{1/p}\\
+        &\leqslant\cdots\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\sum_{j=2}^k\left(\int_a^b\abs{f_{n_j}-f_{n_{j-1}}}^p\dif x\right)^{1/p}\\
+        &\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\sum_{j=2}^k\frac{1}{2^j}\\
+        &<\left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\frac{1}{2}.
+    \end{align*}
+
+    令$g(x)=\abs{f_{n_1}}+\sum_{j=2}^\infty\abs{f_{n_j}-f_{n_{j-1}}},f(x)=f_{n_1}+\sum_{j=2}^\infty(f_{n_j}-f_{n_{j-1}})$,$\{g_k(x)\}$单调递增,则$g(x)\in L^p[a,b]$,
+    又因为$\abs{f}\leqslant g$,那么$f\in L^p[a,b]$.
+
+    又
+    \begin{align*}
+        \rho(f_n,f)&=\left(\int_a^b\abs{f_{n_k}-f}^p\dif x\right)^{1/p}\\
+        &\leqslant \left(\int_a^b\abs{f_{n_k}}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{f}^p\dif x\right)^{1/p}\\
+        &\leqslant 2\left(\int_a^b\abs{g(x)}^p\dif x\right)^{1/p}.
+    \end{align*}
+    那么$\lim_{k\to\infty}\rho(f_{n_k},f)=\left(\int_a^b \lim_{k\to\infty}\abs{f_{n_k}-f}^p\dif x\right)^{1/p}=0$.
+    则$\rho(f_n,f)\to 0\quad n\to\infty$.$(L^p[a,b],\rho)$是完备的.
 \end{proof}
 
 \begin{exercise}
