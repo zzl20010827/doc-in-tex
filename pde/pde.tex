@@ -3,6 +3,7 @@
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
+\usepackage{cleveref}
 
 \setlength{\headheight}{15pt}
 \allowdisplaybreaks[4]
@@ -17,7 +18,7 @@
     \theoremstyle{plain}
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\kaishu}
-    \newtheorem{exercise}{习题}[section]
+    \newtheorem{exercise}{习题}
 }
 
 {
@@ -35,6 +36,11 @@
     \newtheorem{proof}{证明.}
 }
 
+\crefname{exercise}{习题}{习题}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+
 \newcommand{\dif}{\mathrm{d}}
 \newcommand{\differ}{\backslash}
 \newcommand{\ptl}{\partial}
@@ -46,6 +52,7 @@
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\diag}{\mathrm{diag}}
 
 
 
@@ -102,6 +109,54 @@
         \end{enumerate}
     \end{exercise}
 
+    \begin{solution}
+        (1) 令矩阵 
+        \begin{equation*}
+            A=\begin{bmatrix}
+                1 & 1/2 & \cdots & 1/2\\
+                1/2 & 1 & \cdots & 1/2\\
+                \vdots & \vdots & \ddots & \vdots\\
+                1/2 & 1/2 & \cdots &1 \\
+            \end{bmatrix},\quad P=\begin{bmatrix}
+                -1/\sqrt{2} & \cdots & -1/\sqrt{2} & 1/\sqrt{n}\\
+                1/\sqrt{2} & \cdots & 0 & 1/\sqrt{n}\\
+                \vdots & \ddots & \vdots & \vdots \\
+                0 &\cdots &1/\sqrt{2} & 1/\sqrt{n}
+            \end{bmatrix},
+        \end{equation*}
+        那么$P^TAP=\diag\{1/2,\cdots,1/2,(n+1)/2\}$,令
+        \begin{align*}
+            &y_1=-\frac{1}{\sqrt{2}}x_1-\frac{1}{\sqrt{2}}x_2-\cdots-\frac{1}{\sqrt{2}}x_{n-1}+\frac{1}{\sqrt{n}}x_n,\\
+            &y_2=\frac{1}{\sqrt{2}}+\frac{1}{\sqrt{n}}x_n,\\
+            &\cdots\cdots\\
+            &y_n=\frac{1}{\sqrt{2}}x_{n-1}+\frac{1}{\sqrt{n}}x_n,
+        \end{align*}
+        那么标准型为
+        \begin{equation*}
+            \frac{1}{2}u_{y_1y_1}+\cdots+\frac{1}{2}u_{y_{n-1}y_{n-1}}+\frac{n+1}{2}u_{y_ny_n}=0.
+        \end{equation*}
+
+        (2) 令
+        \begin{equation*}
+            A=\begin{bmatrix}
+                1 & 1\\
+                1 & 2
+            \end{bmatrix},\quad P=\begin{bmatrix}
+                \frac{-1+\sqrt{5}}{\sqrt{10-2\sqrt{5}}} & \frac{-\sqrt{5}-1}{\sqrt{10+2\sqrt{5}}} \\
+                \frac{2}{\sqrt{10-2\sqrt{5}}} & \frac{2}{\sqrt{10+2\sqrt{5}}}
+            \end{bmatrix},
+        \end{equation*}
+        那么$P^TAP=\diag\left\{\frac{3+\sqrt{5}}{2},\frac{3-\sqrt{5}}{2}\right\}$,令
+        \begin{align*}
+            s=\frac{-1+\sqrt{5}}{\sqrt{10-2\sqrt{5}}}x+\frac{-\sqrt{5}-1}{\sqrt{10+2\sqrt{5}}}y,\\
+            t=\frac{2}{\sqrt{10-2\sqrt{5}}}x+\frac{2}{\sqrt{10+2\sqrt{5}}}y.
+        \end{align*}
+        得到标准型为
+        \begin{equation*}
+            \frac{3+\sqrt{5}}{2}u_{ss}+\frac{3-\sqrt{5}}{2}u_{tt}=0.
+        \end{equation*}
+    \end{solution}
+
     \begin{exercise}
         \label{ex:1.3}
         设
@@ -134,8 +189,68 @@
         \end{enumerate}
     \end{exercise}
 
+    \begin{proof}
+        (1) ``$\Rightarrow$''.令$j(\epsilon)=J(u+\epsilon v)$,则$j(\epsilon)\geqslant j(0)$,那么$j'(0)=0$.又
+        \begin{align*}
+            j(\epsilon)&=\frac{1}{2}\int_\Omega (\abs{\nabla(u+\epsilon )v}^2+(u+\epsilon v)^2)\dif x+\frac{1}{2}\int_{\ptl \Omega}\alpha(x)(u+\epsilon v)^2\dif s\\
+            &\quad -\int_\Omega f(x)(u+\epsilon v)\dif x-\int_{\ptl \Omega}g(x)(u+\epsilon v)\dif s\\
+            &=\frac{1}{2}\int_\Omega\left[\left(\frac{\ptl u}{\ptl x}+\epsilon\frac{\ptl v}{\ptl x}\right)^2+\left(\frac{\ptl u}{\ptl y}+\epsilon\frac{\ptl v}{\ptl y}\right)^2+(u+\epsilon v)^2\right]\dif x\\
+            &\quad +\frac{1}{2}\int_{\ptl \Omega}\alpha(x)(u+\epsilon v)^2\dif s-\int_\Omega f(x)(u+\epsilon v)\dif x-\int_{\ptl \Omega}g(x)(u+\epsilon v)\dif s.
+        \end{align*}
+        那么 
+        \begin{align*}
+            j'(\epsilon)&=\int_\Omega\left[\left(\frac{\ptl u}{\ptl x}+\epsilon\frac{\ptl v}{\ptl x}\right)\frac{\ptl v}{\ptl x}+\left(\frac{\ptl u}{\ptl y}+\epsilon\frac{\ptl v}{\ptl y}\right)\frac{\ptl v}{\ptl y}+(u+\epsilon v)v\right]\dif x\\
+            &\quad +\int_{\ptl \Omega}\alpha(x)(u+\epsilon v)v\dif s-\int_\Omega f(x)v\dif x-\int_{\ptl \Omega}g(v)v\dif s.
+        \end{align*}
+        则
+        \begin{align*}
+            j'(0)&=\int_\Omega\left(\frac{\ptl u}{\ptl x}\frac{\ptl v}{\ptl x}+\frac{\ptl u}{\ptl y}\frac{\ptl v}{\ptl y}+uv\right)\dif x+\int_{\ptl \Omega}\alpha(x) uv\dif s-\int_\Omega fv\dif x-\int_{\ptl \Omega}gv\dif s\\
+            &=0.
+        \end{align*}
+
+        ``$\Leftarrow$''.
+        \begin{align*}
+            J(v)-J(u)&=\frac{1}{2}\int_\Omega (\abs{\nabla v}^2+v^2-\abs{\nabla u}^2-u^2)\dif x+\frac{1}{2}\int_{\ptl \Omega}\alpha(x)(v^2-u^2)\dif s\\
+            &\quad -\int_\Omega f(v-u)\dif x-\int_{\ptl \Omega}g(v-u)\dif s\\
+            &=\frac{1}{2}\int_\Omega\left[\left(\frac{\ptl v}{\ptl x}\right)^2+\left(\frac{\ptl v}{\ptl y}\right)^2+v^2-\left(\frac{\ptl u}{\ptl x}\right)^2-\left(\frac{\ptl u}{\ptl x}\right)^2-u^2\right]\dif x\\
+            &\quad +\frac{1}{2}\int_{\ptl \Omega}\alpha(x)(v^2-u^2)\dif s-\int_\Omega f(v-u)\dif x-\int_{\ptl \Omega}g(v-u)\dif s.
+         \end{align*}
+         又已知
+         \begin{gather*}
+            \int_\Omega\left[\left(\frac{\ptl u}{\ptl x}\right)^2+\left(\frac{\ptl u}{\ptl y}\right)^2+u^2-fu\right]\dif x+\int_{\ptl\Omega}(\alpha(x)u^2-gu)\dif s=0,\\
+            \int_\Omega\left(\frac{\ptl u}{\ptl x}\frac{\ptl v}{\ptl x}+\frac{\ptl u}{\ptl y}\frac{\ptl v}{\ptl y}+uv-fv\right)\dif x+\int_{\ptl\Omega}(\alpha(x)uv-gv)\dif s=0,
+         \end{gather*}
+         联立以上两式,可得
+         \begin{equation*}
+            J(v)-J(u)=\frac{1}{2}\int_{\ptl\Omega}\alpha(x)(u-v)^2\dif s+\frac{1}{2}\int_\Omega(\abs{\nabla u-\nabla v}^2+(u-v)^2)\dif x\geqslant 0.
+         \end{equation*}
+
+        (2) II$\Rightarrow$III.根据\cref{ex:1.1}第一问,
+        \begin{equation*}
+            \int_\Omega (u\cdot v-fv-v\Delta u)\dif x\dif y+\int_{\ptl\Omega}(\alpha(x)uv+\frac{\ptl u}{\ptl n}v-gv)\dif s=0.
+        \end{equation*}
+        选取$v\in C_0^\infty(\Omega)$,那么 
+        \begin{equation*}
+            \int_\Omega(u\cdot v-fv-v\Delta u)\dif x\dif y=0.
+        \end{equation*}
+        又因为$u-f-\Delta u$连续,那么 
+        \begin{equation*}
+            u-\Delta u=f.
+        \end{equation*}
+        将上式代入,得到,
+        \begin{equation*}
+            \int_{\ptl\Omega}(\alpha(x)uv+\frac{\ptl u}{\ptl n}v-gv)\dif s=0,\quad v\in M.
+        \end{equation*}
+        那么 
+        \begin{equation*}
+            \alpha(x)u+\frac{\ptl u}{\ptl n}-g=0.
+        \end{equation*}
+        
+        III$\Rightarrow$II.将两式代入即证.
+    \end{proof}
+
     \begin{exercise}
-        \label{1.4}
+        \label{ex:1.4}
         若$u$是Laplace方程$\Delta u=0$的解,如果$u(x)$只是向jing向径$r=\abs{x}$的函数,即$u(x)=\tilde{u}(r)$,试写出$\tilde{u}(r)$适合的常微分
         方程.
     \end{exercise}
