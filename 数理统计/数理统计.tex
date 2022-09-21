@@ -1,0 +1,111 @@
+\documentclass[a4paper,oneside,12pt]{ctexart}
+\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[thmmarks,hyperref]{ntheorem}
+\usepackage{amsmath}
+\usepackage{cleveref}
+
+\setlength{\headheight}{15pt}
+\allowdisplaybreaks[4]
+\linespread{1.5}
+\geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\pagestyle{fancy}
+\fancyhead[L]{\kaishu 强基数学001}
+\fancyhead[C]{\kaishu 张卓立}
+\fancyhead[R]{\kaishu 2204110786}
+
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \newtheorem{exercise}{习题}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \newtheorem{solution}{解.}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\ensuremath{\blacksquare}}
+    \newtheorem{proof}{证明.}
+}
+
+\crefname{exercise}{习题}{习题}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\expect}{\mathbb{E}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\poi}{\mathrm{Poi}}
+
+\begin{document}
+    \begin{center}
+        \LARGE\bfseries
+        数理统计作业
+    \end{center}
+
+    \begin{exercise}
+        \label{ex:1}
+        如果$X_1,\cdots,X_n$是来自$N(\mu,\sigma^2)$的随机样本,求样本标准差 
+        \begin{equation*}
+            s=\sqrt{\frac{\sum_{i=1}^n(X_i-\tilde{X})}{n-1}}
+        \end{equation*}
+        的期望和方差.
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:2}
+        如果$X_1,\cdots,x_n$是来自均匀分布总体$U(0,1)$的随机样本,求 
+        \begin{equation*}
+            Y=\left(\prod_{i=1}^n X_i\right)^{-1/n}
+        \end{equation*}
+        的分布.
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:3}
+        设$X_1,X_2$是来自$N(0,1)$的随机样本,
+        \begin{enumerate}[(1)]
+            \item 求$(X_2-X_1)/\sqrt{2}$的分布.
+            \item 求$X_1^2+X_2^2$的分布.
+            \item 求$(X_1+X_2)^2/(X_2-X_1)^2$的分布.
+            \item 求$(X_2+X_1)/\sqrt{(X_1-X_2)^2}$的分布.
+            \item 求$X_1^2/X_2^2$的分布.
+        \end{enumerate}
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:4}
+        设$X_1,\cdots,X_n$是来自总体$X$的随机样本,$\expect(X)=\mu$,且$\var(X)=0.25$,假设至少以95\%的概率保证$\abs{\tilde{X}-\mu}<0.01$,
+        问样本量$n$至少应取多大?
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:5}
+        如果$X$服从自由度为$m$和$n$的$F$分布,
+        \begin{enumerate}[(1)]
+            \item 求$W=\frac{mX/n}{1+mX/n}$的分布.
+            \item 根据(1)的结果,计算$X$的期望和方差.
+        \end{enumerate}
+    \end{exercise}
+\end{document}
