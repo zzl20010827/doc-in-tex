@@ -251,13 +251,7 @@
 
     \begin{exercise}
         \label{ex:1.4}
-        若$u$是Laplace方程$\Delta u=0$的解,如果$u(x)$只是向jing向径$r=\abs{x}$的函数,即$u(x)=\tilde{u}(r)$,试写出$\tilde{u}(r)$适合的常微分
-        方程.
-    \end{exercise}
-
-    \begin{exercise}
-        \label{ex:1.5}
-        1. 证明在自变量代换
+        (1) 证明在自变量代换
         \begin{equation*}
             \begin{cases}
                 \xi=x-at,\\
@@ -266,7 +260,71 @@
         \end{equation*}
         下,波动方程$u_{tt}-a^2u_{xx}=0$具有形式
         \begin{equation*}
-            u_\tau=a^2u_{\xi\xi}.
+            u_{\xi\tau}=0.
+        \end{equation*}
+
+        (2) 证明在自变量代换
+        \begin{equation*}
+            \begin{cases}
+                \xi=x-\alpha t,\\
+                \tau=t
+            \end{cases}
+        \end{equation*}
+        下,方程$u_t+\alpha u_x=a^2u_{xx}$具有形式 
+        \begin{equation*}
+            u_\tau=a^2 u_{\xi\xi}.
         \end{equation*}
     \end{exercise}
+
+    \begin{solution}
+        (1) \begin{gather*}
+            u_t=u+\xi(-a)+u_\eta a,\\
+            u_x=u_\xi+u_\eta.
+        \end{gather*}
+        那么 
+        \begin{gather*}
+            u_{tt}=a^2(u_{\xi\xi}+u_{\eta\eta}-2u_{\eta\xi}),\\
+            u_{xx}=u_{\xi\xi}+u_{\eta\eta}+2u_{\eta\xi}.
+        \end{gather*}
+        代入原方程可得$u_{\eta\xi}=0$,方程的通解是 
+        \begin{equation*}
+            u(x,t)=f(x-at)+g(x+at).
+        \end{equation*}
+
+        (2) \begin{gather*}
+            u_t=u_\xi(-\alpha)+u_\tau,\\
+            u_x=u_\xi,
+        \end{gather*}
+        那么 
+        \begin{equation*}
+            u_{xx}=u_{\xi\xi}.
+        \end{equation*}
+        代入原方程可得$u_\tau=a^2 u_{\xi\xi}$.
+    \end{solution}
+
+    \begin{exercise}
+        \label{ex:1.5}
+        若$u$是Laplace方程$\Delta u=0$的解,如果$u(x)$只是向径$r=\abs{x}$的函数,即$u(x)=\tilde{u}(r)$,试写出$\tilde{u}(r)$适合的常微分
+        方程.
+    \end{exercise}
+
+    \begin{proof}
+        因为$r=\abs{x}=\sqrt{x_1^2+\cdots+x_n^2}$,那么, 
+        \begin{align*}
+            &u_{x_1}=u_r\frac{x_1}{r},\\
+            &u_{x_2}=u_r\frac{x_2}{r},\\
+            &\cdots\cdots\\
+            &u_{x_n}=u_r\frac{x_n}{r}.
+        \end{align*}
+
+        则
+        \begin{equation*}
+            u_{x_ix_i}=\frac{u_{rr}rx_i^2-u_rx_i^2+u_rr^2}{r^3}.
+        \end{equation*}
+
+        代入,可得 
+        \begin{equation*}
+            \tilde{u}_{rr}r+(n-1)\tilde{u}_r=0.
+        \end{equation*}
+    \end{proof}
 \end{document}
