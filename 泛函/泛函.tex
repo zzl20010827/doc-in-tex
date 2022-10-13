@@ -1,5 +1,5 @@
 \documentclass[a4paper,oneside,12pt]{ctexart}
-\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr}
+\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,BOONDOX-cal}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
@@ -42,6 +42,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\cl}{\mathcal{l}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\emptyset}{\varnothing}
@@ -57,221 +59,172 @@
 
 \begin{document}
     
-\begin{center}
-    \bfseries\LARGE
-    泛函分析作业
-\end{center}
+    \begin{center}
+        \bfseries\LARGE
+        泛函分析作业
+    \end{center}
 
-\begin{exercise}
-    \label{ex:1}
-    考虑空间$C[a,b]$,令$\rho_1(x,y)=\max_{t\in[a,b]}\abs{x(t)-y(t)},\rho_2=\int_a^b\abs{x(t)-y(t)}\dif t$.证明:$(C[a,b],\rho_1)$是完备的
-    度量空间,$(C[a,b],\rho_2)$不是完备的度量空间.
-\end{exercise}
+    \begin{exercise}
+        \label{ex:1}
+        考虑度量空间$\cl^2$,证明:$A:=\{\xi=\{x_n\}\in \cl^2:n\abs{x_n}\leqslant 1\}$是$\cl^2$中的紧集.
+    \end{exercise}
 
-\begin{proof}
-    先证明$(C[a,b],\rho_1)$是完备的度量空间.
+    \begin{proof}
+        设$\{\xi_k\}\subset A$,$\xi_k=\{x_n^{(k)}\}$,且有极限$\xi=\{x_n\}$,即$\sum_{n=1}^\infty \abs{x_n^{(k)}-x_n}\to 0,n\to \infty$,
+        那么$x_n^{(k)}\to x_n,n\to\infty$,即$n\abs{x_n}\leqslant 1$,$\xi\in A$,即$A$是闭集.
 
-    1. $\rho_1\geqslant 0$,且$\rho_1(x,y)=0\Leftrightarrow \abs{x(t)-y(t)}=0,\forall t\in[a,b]\Leftrightarrow x=y$.$\rho_1$满足正定性.
+        又对任意的$\epsilon>0$,存在$N$,使得$\sum_{n>N}\frac{1}{n^2}<\epsilon$.令$B=\{(x_1,x_2,\cdots,x_N,0,\cdots):\{x_n\}\in A\},B^\ast=\{
+        (x_1,\cdots,x_N):\{x_n\}\in A\}\subset \R^N$.又因为$\abs{x_k}\leqslant\frac{1}{k}$,那么$B^\ast$有界.存在$\eta_1,\cdots,\eta_{n_\epsilon}\in B$
+        对任意的$\xi\in B$,存在$j$,使得$\xi\in B(\eta_j,\epsilon)$,又因为$B$的定义可知,
+        \begin{equation*}
+            A\subset \bigcup_{\xi\in B}B(\xi,\epsilon),
+        \end{equation*}
+        即对任意的$x\in A$,存在$\xi\in B$,$\rho(x,\xi)<\epsilon$,又存在$\eta_j$,$\rho(\xi,\eta_j)<\epsilon$,则$\rho(x,\eta_j)<2\epsilon$,则
+        \begin{equation*}
+            A\subset \bigcup_{j=1}^{n_\epsilon}B(n_j,2\epsilon).
+        \end{equation*}
+        又$\cl^2$空间完备,在$\cl^2$中任意一个球中的点列总存在收敛子列,若有一个球$B(\xi_0,r_0)$,\\$B(\xi_0,r_0)\cap A\subset B(\xi_0,r_0)$不能被有限个以$A$中的点为球心,
+        $r_0$为半径的球覆盖,那么存在点列$\{y_n\}$其中任意点的距离大于$r_0$,则它没有收敛子列,矛盾.则$A$有有穷的$\epsilon$-网,即$A$完全有界,那么$A$
+        列紧,又$A$是闭集,则$A$自列紧,即$A$是紧集.
+    \end{proof}
 
-    2. $\rho_1(x,y)=\rho_1(y,x)$,$\rho_1$满足对称性.
+    \begin{exercise}
+        \label{ex:2}
+        用完备度量空间的充要条件证明Banach不动点定理.
+    \end{exercise}
 
-    3. \begin{align*}
-        \rho_1(x,z)&=\max_{t\in[a,b]}\abs{x(t)-z(t)}\\
-        &\leqslant \max_{t\in[a,b]}(\abs{x(t)-y(t)}+\abs{y(t)-z(t)})\\
-        &\leqslant \max_{t\in[a,b]} \abs{x(t)-y(t)}+\max_{t\in[a,b]}\abs{y(t)-z(t)}\\
-        &=\rho_1(x,y)+\rho_1(y,z).
-    \end{align*}
-    $\rho_1$满足三角不等式.$(C[a,b],\rho_1)$是度量空间.
+    \begin{proof}
+        令$A_n=\{x\in X:\rho(x,Tx)\leqslant\frac{1}{n}\}$,则$A_n$递降.
 
-    下面证明$(C[a,b],\rho_1)$完备.设\{$x_n(t)\}\subseteq C[a,b]$是Cauchy列,那么对任意的$\epsilon>0$,存在$N$,对任意的$m,n>N$,
-    $\rho_1(x_m,x_n)=\max_{t\in[a,b]}\abs{x_m(t)-x_n(t)}<\epsilon$,则$\{x_n(t)\}$一致收敛,令极限函数是$x(t)$,则$x(t)\in C[a,b]$,那么 
-    $\rho_1(x_n,x)=\max_{t\in[a,b]}\abs{x_n(t)-x_(t)}\to 0,\quad n\to\infty$.$(C[a,b],\rho_1)$完备.
+        设$\{x_k\}$是$A_n$中的收敛点列,设$x_k\to x$,那么$\rho(x_n,Tx_n)\to\rho(x,Tx)\leqslant\frac{1}{n}$,即$A_n$是闭集.
 
-    再证明$(C[a,b],\rho_2)$不是完备的度量空间.
+        若存在$n_0$,$A_{n_0}=\emptyset$,即对任意的$x\in X$,$\rho(x,Tx)>\frac{1}{n_0}$.又因为$T$是压缩映射,存在$0<\alpha<1$,使得$\rho(Tx,Ty)\leqslant\alpha\rho(x,y)$,
+        $\rho(T^kx,T^{k+1}x)\leqslant\alpha^k\rho(x,Tx)\to 0,k\to \infty$,则$A_{n_0}\neq\emptyset$,矛盾.则$\{A_n\}$均非空.
 
-    1. $\rho_2(x,y)\geqslant 0$,且因为$x(t),y(t)$连续,$\rho_2(x,y)=\int_a^b\abs{x(t)-y(t)}\dif t=0\Leftrightarrow \\\abs{x(t)-y(t)}
-    \equiv 0\Leftrightarrow x=y$.$\rho_2$满足正定性.
+        下证$\diam A_n\to 0,n\to\infty$.
+        \begin{align*}
+            \diam A_n=\sup_{x,y\in A_n}&<\rho(x_0,y_0)+\frac{1}{n}\\
+            &\leqslant \rho(x_0,Tx_0)+\rho(Tx_0,Ty_0)+\rho(Ty_0,y_0)+\frac{1}{n}\\
+            &\leqslant \frac{1}{n}+\alpha\rho(x_0,y_0)+\frac{1}{n}+\frac{1}{n}\\
+            &\leqslant \frac{3}{n}+\alpha\diam A_n.
+        \end{align*}
+        即$\diam A_n\leqslant\frac{3}{(1-\alpha)n}\to 0,n\to\infty$.
 
-    2. $\rho_2(x,y)=\rho_2(y,x)$,$\rho_2$满足对称性.
+        存在$x\in X$,$\bigcap_{n=1}^\infty A_n=\{x\}$,即存在唯一的$x$使得$Tx=x$.
+    \end{proof}
+    
+    \begin{exercise}
+        \label{ex:3}
+        设$K(\cdot,\cdot)\in L^2([a,b]\times [a,b])$,对于$f\in L^2[a,b]$,证明当$\lambda$充分小时,
+        \begin{equation*}
+            x(t)=f(t)+\lambda\int_a^bK(t,s)x(s)\dif s
+        \end{equation*}
+        在$L^2[a,b]$中存在唯一解.
+    \end{exercise}
 
-    3. \begin{align*}
-        \rho_2(x,z)&=\int_a^b\abs{x(t)-z(t)}\dif t\\
-        &\leqslant \int_a^b(\abs{x(t)-y(t)}+\abs{y(t)-z(t)})\dif t\\
-        &=\rho_2(x,y)+\rho_2(y,z).
-    \end{align*}
-    $\rho_2$满足三角不等式.$(C[a,b],\rho_2)$是度量空间.
+    \begin{proof}
+        令$Tx=f(t)+\lambda\int_a^bK(t,s)x(s)\dif s$,那么$T$是从$L^2[a,b]$到$L^2[a,b]$的映射.
 
-    下面说明$(C[a,b],\rho_2)$不完备.反例:不妨令$a=0,b=1$,再令
-    $$x_n=\begin{cases}
-        -nx+1 & 0\leqslant x\leqslant 1/n\\
-        0 & 1/n<x\leqslant 1.
-    \end{cases}$$
-    那么$x_n\in C[0,1]$,且$\rho_2(x_m,x_n)\to 0,\quad m,n\to \infty$,但是令
-    $$x=\lim_{n\to\infty}x_n=\begin{cases}
-        1 & x=0\\
-        0 & 0<x\leqslant 1,
-    \end{cases}$$
-    $x\notin C[0,1]$,说明这个度量空间不完备.
-\end{proof}
+        \begin{align*}
+            \rho(Tx,Ty)&=\left(\int_a^b\left(\lambda\int_a^bK(t,s)(x(s)-y(S))\dif s\right)^2\dif t\right)^{1/2}\\
+            &=\lambda\left(\int_a^b\left(\int_a^bK(t,s)(x(s)-y(s))\dif s\right)^2\dif t\right)^{1/2}\\
+            &=\rho(x,y)\lambda\left(\int_a^b \frac{\left(\int_a^b K(t,s)(x(s)-y(s))\dif s\right)^2}{\int_a^b(x(s)-y(s))^2\dif s}\dif t\right)^{1/2}\\
+            &\leqslant \rho(x,y)\lambda\left(\int_a^b\left(\int_a^bK^2(t,s)\dif s\right)\dif t\right)^{1/2}.
+        \end{align*}
+        令$\lambda<\frac{1}{\sqrt{\int_{[a,b]^2}K^2(t,s)\dif t\dif s}+1}$,则$\lambda\left(\int_{[a,b]^2}K^2(t,s)\dif t\dif s\right)^{1/2}<1$,即$T$是压缩映射,
+        又$L^2[a,b]$完备,那么存在唯一解.
+    \end{proof}
 
-\begin{exercise}
-    \label{ex:2}
-    令$\rho(x,y)=\frac{\abs{x-y}}{1+\abs{x-y}}$,证明$(\R,\rho)$是完备的度量空间.
-\end{exercise}
+    \begin{exercise}
+        \label{ex:4}
+        设$K(\cdot,\cdot)\in C([a,b]\times [a,b])$,$f\in C[a,b]$,证明:$\forall x\in \R$,
+        \begin{equation*}
+            x(t)=f(t)+\lambda\int_a^tK(t,s)x(s)\dif s
+        \end{equation*}
+        在$C[a,b]$中存在唯一解.
+    \end{exercise}
 
-\begin{proof}
-    1. $\rho(x,y)\geqslant 0$,且$\rho(x,y)=0\Leftrightarrow \abs{x-y}=0\Leftrightarrow x=y$.
+    \begin{proof}
+        令$Tx=f(t)+\lambda\int_a^tK(t,s)x(s)\dif s$,那么$T$是从$C[a,b]$到自身的映射.
 
-    2. $\rho(x,y)=\rho(y,x)$.
+        又因为
+        \begin{align*}
+            T^nx-T^ny&=\lambda\int_a^tK(t,s_1)(T^{n-1}x-T^{n-1}y)\dif s_1\\
+            &=\cdots\cdots\\
+            &=\lambda^n\int\limits_{\substack{
+                a\leqslant s_1\leqslant t\\
+                a\leqslant s_2\leqslant s_1\\
+                \cdots\\
+                a\leqslant s_n\leqslant s_{n-1}
+            }}K(t,s_1)K(s_1,s_2)\cdots,K(s_{n-1},s_n)(x(s_n)-y(s_n))\dif s_n\cdots\dif s_1.
+        \end{align*}
+        那么 
+        \begin{equation*}
+            \rho(T^nx,T^ny)\leqslant \lambda^n I\rho(x,y),
+        \end{equation*}
+        其中 
+        \begin{align*}
+            I&=\int\limits_{a\leqslant s_n\leqslant s_{n-1}\leqslant\cdots\leqslant s_1\leqslant t}\abs{K(t,s_1)K(s_1,s_2)\cdots K(s_{n-1},s_n)}\dif s_n\dif s_{n-1}\cdots\dif s_1\\
+            &\leqslant\frac{M}{n!}\int_{[a,t]^n}\abs{K(s_1,s_2)\cdots K(s_{n-1},s_n)}\dif s_n\cdots \dif s_1,\quad(\abs{K(t,s)}\leqslant M,(t,s)\in[a,b]^2)\\
+            &\leqslant \frac{M^n(b-a)^n}{n!}.
+        \end{align*}
 
-    3. 注意到$\frac{x}{1+x}$当$x\geqslant 0$时是单调递增函数.\begin{align*}
-        \rho(x,y)+\rho(y,z)&=\frac{\abs{x-y}}{1+\abs{x-y}}+\frac{\abs{y-z}}{1+\abs{y-z}}\\
-        &=\frac{\abs{x-y}+\abs{y-z}+2\abs{x-y}\abs{y-z}}{1+\abs{x-y}\abs{y-z}+\abs{x-y}+\abs{y-z}}\\
-        &\geqslant \frac{\abs{x-y}+\abs{y-z}+\abs{x-y}\abs{y-z}}{1+\abs{x-y}\abs{y-z}+\abs{x-y}+\abs{y-z}}\\
-        &\geqslant \frac{\abs{x-y}+\abs{y-z}}{1+\abs{x-y}+\abs{y-z}}\\
-        &\geqslant\frac{\abs{x-z}}{1+\abs{x-z}}=\rho(x,z).\qquad (\abs{x-y}+\abs{y-z}\geqslant \abs{x-z})
-    \end{align*}
-    则$(\R,\rho)$是度量空间.
+        即
+        \begin{equation*}
+            \rho(T^nx,T^ny)\leqslant \frac{\lambda^nM^n(b-a)^n}{n!}\rho(x,y),
+        \end{equation*}
+        当$n$充分大时,$\frac{\lambda^nM^n(b-a)^n}{n!}<1$,此时$T^n$是压缩映射,则存在唯一解.
+    \end{proof}
 
-    下面证明它完备.
+    \begin{exercise}
+        \label{ex:5}
+        $(X,\norm{\cdot})$,若$\dim X<\infty$,则$X$是$B$空间.
+    \end{exercise}
 
-    设$\{x_n\}$是Cauchy列,那么对任意的$\epsilon$,其中$0<\epsilon<1/2$,存在$N$对任意的$m,n>N$,$\frac{\abs{x_n-x_n}}{1+\abs{x_m-x_n}}<\epsilon$,
-    那么$\abs{x_m-x_n}<\frac{\epsilon}{1-\epsilon}<2\epsilon$,则存在$x\in\R$,$\{x_n\}$收敛于$x$,$\rho(x_n,x)\leqslant \abs{x_n-x}\to 0,\quad n\to\infty$.
-\end{proof}
+    \begin{proof}
+        设$\{x_n\}$是Cauchy列,即$\norm{x_m-x_n}\to 0,m,n\to\infty$,设$\dim X=l<\infty$,$e_1,\cdots,e_l$是它的基,令$x_n=\sum_{i=1}^lx_i^{(n)}e_i$.
+        那么存在$c>0$,使得 
+        \begin{equation*}
+            c\left(\sum_{i=1}^l\abs{x_i^{(m)}-x_i^{(n)}}^2\right)^{1/2}\leqslant \norm{\sum_{i=1}^l(x_i^{(m)}-x_i^{(n)})e_i}\to 0,
+        \end{equation*}
+        即$\sum_{i=1}^l\abs{x_i^{(m)}-x_i^{(n)}}^2\to 0$,那么$\{x_i^{(n)}\}$是Cauchy列,$\{x_i^{(n)}\}$收敛,即$\{x_n\}$收敛,$X$是$B$空间.
+    \end{proof}
 
-\begin{exercise}
-    \label{ex:3}
-    $S[a,b]$表示$[a,b]$上几乎处处有界的可测函数全体.$\rho(f,g)=\int_a^b\frac{\abs{f-g}}{1+\abs{f-g}}\dif \mu$,证明$(S[a,b],\rho)$是完备的度量空间.
-\end{exercise}
+    \begin{exercise}
+        \label{ex:6}
+        $(X,\norm{\cdot})$,$X$的任何有限维子空间是闭的.
+    \end{exercise}
 
-\begin{proof}
-    1. $\rho(f,g)\geqslant 0$,$\rho(f,g)=0\Leftrightarrow \int_a^b\frac{\abs{f-g}}{1+\abs{f-g}}\dif \mu=0\Leftrightarrow f=g \ae x\in[a,b]$.
+    \begin{proof}
+        设$(X_0,\norm{\cdot})$是$X$的有限维子空间,那么它也是线性赋范空间,又因为它是有限维的,则它是$B$空间,若它不是闭的,那么存在收敛列$\{x_n\}\subset X_0$,
+        极限为$x\notin X_0$,即$\{x_n\}$在$X_0$内不收敛,又因为它是$X_0$内的Cauchy列,与它是$B$空间矛盾.则$X_0$是闭的.
+    \end{proof}
 
-    2.$\rho(f,g)=\rho(g,f)$
+    \begin{exercise}
+        \label{ex:7}
+        $(X,\norm{\cdot})$.$\dim X<\infty$,$X$中的有界集是列紧集.
+    \end{exercise}
 
-    3.与题\eqref{ex:2}中证明三角不等式的过程类似,可以得到$\frac{\abs{f-g}}{1+\abs{f-g}}+\frac{\abs{g-h}}{1+\abs{g-h}}\geqslant\frac{\abs{f-h}}{1+\abs{f-h}}$.
-    那么$\rho(f,h)\leqslant\rho(f,g)+\rho(g,h)$.综上,$(S[a,b],\rho)$是度量空间.
+    \begin{proof}
+        设$\dim X=n<\infty$,$e_1,\cdots,e_n$是一组基,$A\subset X$有界.对任意的$x\in A$,$x=\sum_{i=1}^nx_ie_i$,那么存在$c>0,M>0$,使得 
+        \begin{equation*}
+            c\left(\sum_{i=1}^n\abs{x_i}^2\right)^{1/2}\leqslant\norm{x}\leqslant M.
+        \end{equation*}
+        即$(x_1,\cdots,x_n)$在$\R^n$中有界,那么若$\{x_n\}$是$A$中的点列,它们在基$e_1,\cdots,e_n$下的坐标在$\R^n$均位于球$B(0,M/c)$中,即存在
+        收敛子列,那么对应$\{x_n\}$也存在收敛子列,$A$列紧.
+    \end{proof}
 
-    下面证明$(S[a,b],\rho)$完备.
+    \begin{exercise}
+        \label{ex:8}
+        $X:=\{f\in C[0,1]:f(0)=0\}$,$\norm{f}=\max_{t\in[0,1]}\abs{f(t)}$,$X$是Banach空间.$X_0:=\{f\in X:\int_0^1 f(t)\dif t=0\}$,证明:$\dim X_0=\infty$.
+    \end{exercise}
 
-    设$\{f_n\}\subseteq S[a,b]$是Cauchy列,即$\rho(f_m,f_n)\to 0,\quad m,n\to\infty$,则$\mu(\abs{f_m-f_n}>\delta)\to 0,\quad m,n\to\infty$,那么存在
-    $f$可测,$f_n\toinmeasure{\mu} f$.存在子列$\{f_{n_k}\}$,使得$\mu(\abs{f_{n_k}-f}>1)<\frac{1}{2^k}$,令$A_k=\{x:\abs{f_{n_k}(x)-f(x)}>1\}$,则
-    $\mu(A_{k})<\frac{1}{2^k}$,且$\mu(\limsup_{k\to\infty} A_k)=\mu(\bigcap_{m=1}^\infty\bigcup_{k=m}^\infty A_k)\leqslant \frac{1}{2^{m-1}},\ \forall m\geqslant 1$.
-    则$\mu(\limsup_{k\to\infty} A_k)=0$.而且存在$k_0$,使任意的$x\in[a,b]\differ\limsup_{k\to\infty} A_k$有$\abs{f_{n_{k_0}}(x)-f(x)}\leqslant 1$,又因为
-    $f_{n_{k_0}}$几乎处处有界,那么$f\in S[a,b]$.
-
-    $\rho(f_n,f)\leqslant\int_a^b\abs{f_n-f}\dif \mu$,又$\mu([a,b])<\infty$,令$E_0(n)=\{\abs{f_n-f}\geqslant 1\},E_1(n)=\left\{\frac{1}{2}\leqslant\abs{f_n-f}<1\right\}$,
-    $E_2(n)=\{\frac{1}{2^2}\leqslant\abs{f_n-f}<\frac{1}{2}\},\cdots$,那么 
-    \begin{align*}
-        \int_a^b\abs{f_n-f}\dif \mu&=\sum_{k=0}^\infty \int_{E_k(n)}\abs{f_n-f}\dif \mu\\
-        &<\int_{E_0(n)}\abs{f_n-f}\dif \mu+\sum_{k=1}^\infty\frac{1}{2^{k-1}}\mu(E_k(n)).
-    \end{align*}
-一方面,$\int_{E_0(n)}\abs{f_n-f}\dif \mu\to 0\quad n\to\infty$,另一方面,因为$\mu(E_K(n))\leqslant\mu([a,b])<\infty$,那么级数$\sum_{k=1}^\infty \frac{1}{2^{k-1}}\mu(E_k(n))$
-一致收敛,$\lim_{n\to\infty}\sum_{k=1}^\infty \frac{1}{2^{k-1}}\mu(E_k(n))=0$.即\\$\lim_{n\to\infty}\int_a^b\abs{f_n-f}\dif\mu=0$.$(S[a,b],\rho)$
-完备.
-\end{proof}
-
-\begin{exercise}
-    \label{ex:4}
-    $1\leqslant p< \infty$,令$\rho(f,g)=\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}$,证明$(L^p[a,b],\rho)$是完备的度量空间.
-\end{exercise}
-
-\begin{proof}
-    1. $\rho(x,y)\geqslant 0$,当$1\leqslant p<\infty$时,$\rho(x,y)=0\Leftrightarrow \int_a^b\abs{f-g}^p\dif x=0\Leftrightarrow f=g\ae$.
-
-    2.对任意的$1\leqslant p< \infty$,$\rho(f,g)=\rho(g,f)$.
-
-    3.当$p=1$时显然成立.当$1<p<\infty$,令$\frac{1}{p}+\frac{1}{q}=1$即$p-1=\frac{p}{q}$,那么 
-    \begin{align*}
-        \abs{f-h}^p&=\abs{f-g+g-h}^p\\
-        &=\abs{f-g+g-h}\abs{f-h}^{p/q}\\
-        &\leqslant \abs{f-g}\abs{f-h}^{p/q}+\abs{g-h}\abs{f-h}^{p/q}.
-    \end{align*}
-    则 
-    \begin{align*}
-        \int_a^b\abs{f-h}^p\dif x&\leqslant \int_a^b\abs{f-g}\abs{f-g+g-h}^{p/q}\dif x+\int_a^b\abs{g-h}\abs{f-g+g-h}^{p/q}\dif x\\
-        &\leqslant \left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}\left(\int_a^b\abs{f-h}^p\right)^{1/q}\\
-        &\quad +\left(\int_a^b\abs{g-h}^p\dif x\right)^{1/p}\left(\int_a^b\abs{f-h}^p\right)^{1/q}\\
-        &=\left[\left(\int_a^b\abs{f-g}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{g-h}^p\dif x\right)^{1/p}\right]\left(\int_a^b\abs{f-h}^p\dif x\right)^{1/q}.
-    \end{align*}
-    整理可得$\rho(f-h)\leqslant\rho(f-g)+\rho(g-h)$.
-
-    下面证明它是完备的.
-
-    设$\{f_n\}\subseteq L^p[a,b]$是Cauchy列.存在子列$\{f_{n_k}\},\rho(f_{n_k},f_{n_{k-1}})<\frac{1}{2^k}$.因为$f_{n_k}=f_{n_1}+\sum_{j=2}^k(f_{n_j}-f_{n_{j-1}})$,
-    那么令
-    \begin{equation*}
-        \abs{f_{n_k}}\leqslant\abs{f_{n_k}}+\sum_{j=2}^k\abs{f_{n_k}-f_{n_{j-1}}}=g_k(x).
-    \end{equation*}
-
-    根据三角不等式,
-    \begin{align*}
-        \left(\int_a^b\abs{g_k(x)}^p\dif x\right)^{1/p}&=\left(\int_a^b\abs{\abs{f_{n_1}}+\sum_{j=2}^k\abs{f_{n_j}-f_{n_{j-1}}}}^p\dif x\right)^{1/p}\\
-        &\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{\sum_{j=2}^k\abs{f_{n_j}-f_{n_{j-1}}}}^p\dif x\right)^{1/p}\\
-        &\leqslant\cdots\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\sum_{j=2}^k\left(\int_a^b\abs{f_{n_j}-f_{n_{j-1}}}^p\dif x\right)^{1/p}\\
-        &\leqslant \left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\sum_{j=2}^k\frac{1}{2^j}\\
-        &<\left(\int_a^b\abs{f_{n_1}}^p\dif x\right)^{1/p}+\frac{1}{2}.
-    \end{align*}
-
-    令$g(x)=\abs{f_{n_1}}+\sum_{j=2}^\infty\abs{f_{n_j}-f_{n_{j-1}}},f(x)=f_{n_1}+\sum_{j=2}^\infty(f_{n_j}-f_{n_{j-1}})$,$\{g_k(x)\}$单调递增,则$g(x)\in L^p[a,b]$,
-    又因为$\abs{f}\leqslant g$,那么$f\in L^p[a,b]$.
-
-    又
-    \begin{align*}
-        \rho(f_n,f)&=\left(\int_a^b\abs{f_{n_k}-f}^p\dif x\right)^{1/p}\\
-        &\leqslant \left(\int_a^b\abs{f_{n_k}}^p\dif x\right)^{1/p}+\left(\int_a^b\abs{f}^p\dif x\right)^{1/p}\\
-        &\leqslant 2\left(\int_a^b\abs{g(x)}^p\dif x\right)^{1/p}.
-    \end{align*}
-    那么$\lim_{k\to\infty}\rho(f_{n_k},f)=\left(\int_a^b \lim_{k\to\infty}\abs{f_{n_k}-f}^p\dif x\right)^{1/p}=0$.
-    则$\rho(f_n,f)\to 0\quad n\to\infty$.$(L^p[a,b],\rho)$是完备的.
-\end{proof}
-
-\begin{exercise}
-    \label{ex:5}
-    $(X,\rho)$是度量空间,$\forall\{x_n\}\subset A$,那么由$x_n\to x$得到$x\in A$等价于$A$是$X$中的闭集.
-\end{exercise}
-
-\begin{proof}
-    ``$\Leftarrow$''.若$A$是$X$中的闭集,那么对$A$中的任意收敛列,它的极限一定在$A$中.
-
-    ``$\Rightarrow$''.若对$A$中任意的收敛列$\{x_n\}$,它的极限在$A$中,那么$A'\subset A$,即$\overline{A}=A$,$A$是闭集.
-\end{proof}
-
-\begin{exercise}
-    \label{ex:6}
-    $(X,\rho)$是度量空间,$A\subset X$,证明$\diam A=\diam \overline{A}$.
-\end{exercise}
-
-\begin{proof}
-    一方面,$\diam A=\sup_{x,y\in A}\rho(x,y)\leqslant \sup_{x,y\in\overline{A}}\rho(x,y)=\diam \overline{A}$.
-
-    另一方面,对任意的$\epsilon>0$,存在$x_0,y_0\in\overline{A}$,使得
-    \begin{equation*}
-        \diam \overline{A}<\rho(x_0,y_0)+\epsilon.
-    \end{equation*}
-    又因为$x_0,y_0\in\overline{A}$,那么存在$x_1,y_1\in A$,使得$\rho(x_1,x_0),\rho(y_1,y_0)<\epsilon$,那么 
-    \begin{align*}
-        \rho(x_0,y_0)&\leqslant \rho(x_0,x_1)+\rho(x_1+y_1)+\rho(y_1,y_0)\\
-        &<\rho(x_1,y_1)+2\epsilon.
-    \end{align*}
-    则 
-    \begin{equation*}
-        \diam \overline{A}<\rho(x_1,y_1)+3\epsilon\leqslant \diam A+3\epsilon.
-    \end{equation*}
-    根据$\epsilon$的任意性,$\diam\overline{A}\leqslant\diam A$,综上,$\diam\overline{A}=\diam A$.
-\end{proof}
-
-\begin{exercise}
-    \label{ex:7}
-    $(X,\rho)$是度量空间,设$E\subset X$,则$E$是疏集$\Leftrightarrow$ 对任意的$\overline{B(x,r)}$,必存在开球$B(x',r')\subset B(x,r)$,
-    使得$\overline{B(x',r')}\cap E=\emptyset$.
-\end{exercise}
-
-\begin{proof}
-    ``$\Rightarrow$''.若存在$B(x,r)$,使得对任意的$B(x',r')\subset B(x,r)$,$\overline{B(x',r')}\cap E\neq \emptyset$,那么$E$在$B(x,r)$
-    稠密,矛盾.
-
-    ``$\Leftarrow$''.对任意的$B(x,r)$,都存在$B(x',r')\subset B(x,r)$,使$\overline{B(x',r')}\cap E=\emptyset$,那么$E$无内点,$E$是疏集.
-\end{proof}
+    \begin{proof}
+        假设$\dim X_0=n<\infty$,考虑如下函数:
+        \begin{equation*}
+            \sin 2\pi x,\sin 4\pi x,\cdots,\sin 2\pi(n+1)x.
+        \end{equation*}
+        对任意的$k$,$\sin 2\pi kx\in X_0$,且$\{\sin 2\pi kx\}_{k=1}^{n+1}$线性无关,则$\dim X_0\geqslant n+1>n$,矛盾,则$\dim X_0=\infty$.
+    \end{proof}
 
 \end{document}

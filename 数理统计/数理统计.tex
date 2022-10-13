@@ -57,6 +57,7 @@
 \newcommand{\prob}{\mathbb{P}}
 \newcommand{\Exp}{\mathrm{Exp}}
 \newcommand{\poi}{\mathrm{Poi}}
+\newcommand{\Beta}{\mathrm{Beta}}
 
 \begin{document}
     \begin{center}
@@ -66,46 +67,204 @@
 
     \begin{exercise}
         \label{ex:1}
-        如果$X_1,\cdots,X_n$是来自$N(\mu,\sigma^2)$的随机样本,求样本标准差 
-        \begin{equation*}
-            s=\sqrt{\frac{\sum_{i=1}^n(X_i-\tilde{X})}{n-1}}
-        \end{equation*}
-        的期望和方差.
+        设$X_1,\cdots.X_n$是来自$N(0,1)$的随机样本,令 
+    \begin{equation*}
+        \bar{X}_k=\frac{1}{k}\sum_{i=1}^kX_i,\quad \bar{X}_{n-k}=\frac{1}{n-k}\sum_{i=k+1}^nX_i.
+    \end{equation*}
+    求(1)-(4)的分布.(1) $\frac{1}{2}(\bar{X}_k+\bar{X}_{n-k})$.(2) $k\bar{X}^2_k+(n-k)\bar{X}_{n-k}^2$.(3) $X_1^2/X_2^2$.(4) 
+    $X_1/X_n$.
     \end{exercise}
+
+    \begin{solution}
+        (1) 因为$X_i\sim N(0,1)$且相互独立,则$\bar{X}_k\sim N(0,1/k),\bar{X}_{n-k}\sim N(0,1/(n-k))$,那么$\frac{1}{2}(\bar{X}_k+\bar{X}_{n-k})\sim N\left(0,\frac{n}{4k(n-k)}\right)$.
+
+        (2) $(n-k)\bar{X}_{n-k}^2=\left(\sqrt{n-k}\bar{X}_{n-k}\right)^2$,因为$\sqrt{n-k}\bar{X}_{n-k}\sim N(0,1)$,那么
+        \begin{equation*}
+            \left(\sqrt{n-k}\bar{X}_{n-k}\right)^2\sim \chi^2(1).
+        \end{equation*}
+        同理,$k\bar{X}_k^2\sim \chi^2(1)$,那么$k\bar{X}_k^2+(n-k)\bar{X}_{n-k}^2\sim \chi^2(2)$.
+
+        (3) $X_1^2\sim\chi^2(1)$且$X_2^2\sim\chi^2(1)$,则
+        \begin{equation*}
+            \frac{X_1^2}{X_2^2}\sim F(1,1).
+        \end{equation*}
+
+        (4) 设$X_1/X_n$的分布函数为$F(x)$,$X_1,X_n$的联合概率密度函数为$p(x_1,x_n)$,那么
+        \begin{align*}
+            F(x)&=\prob\left(\frac{X_1}{X_n}<x\right)=\prob\left(\frac{X_1}{X_n}<x,X_n>0\right)+\prob\left(\frac{X_1}{X_n}<x,X_n<0\right)\\
+            &=\int_0^{+\infty}\dif x_n\int_{-\infty}^{xx_n}p(x_1,x_n)\dif x_1+\int_{-\infty}^0\dif x_n\int_{xx_n}^{+\infty}p(x_1,x_n)\dif x_1.
+        \end{align*}
+        $X_1,X_n$为独立的标准正态分布随机变量,那么$X_1/X_n$的概率密度函数为 
+        \begin{equation*}
+            f(x)=\frac{\dif F(x)}{\dif x}=\frac{1}{x^2}\sqrt{\frac{2}{\pi}}.
+        \end{equation*}
+    \end{solution}
 
     \begin{exercise}
         \label{ex:2}
-        如果$X_1,\cdots,x_n$是来自均匀分布总体$U(0,1)$的随机样本,求 
+        设$X_1,\cdots,X_n$是来自双参数指数分布 
         \begin{equation*}
-            Y=\left(\prod_{i=1}^n X_i\right)^{-1/n}
+            f(x,\mu,\sigma)=\frac{1}{\sigma}\exp\left\{-\frac{x-\mu}{\sigma}\right\},\quad x\geqslant \mu
         \end{equation*}
-        的分布.
+        的简单随机样本,其中$-\infty<\mu<\infty,\sigma>0$,求$\mu,\sigma$和$\prob(X_1\geqslant t)(t>\mu)$的矩估计和极大似然估计.
     \end{exercise}
+
+    \begin{solution}
+        令$r$是正整数,那么 
+        \begin{align*}
+            \expect(X^r)&=\int_\mu^{+\infty}x^r\frac{1}{\sigma}\exp\left\{-\frac{x-\mu}{\sigma}\right\}\\
+            &=\int_0^{+\infty}(x+\mu)^r\frac{1}{\sigma}\exp\left\{-\frac{x}{\sigma}\right\}\\
+            &=\sum_{k=0}^r\left(\begin{array}{c}
+                r\\
+                k
+            \end{array}\right)\mu^{r-k}\sigma^k\int_0^{+\infty}\left(\frac{x}{\sigma}\right)^k\exp\left(-\frac{x}{\sigma}\right)\dif \frac{x}{\sigma}\\
+            &=\sum_{k=0}^r\left(\begin{array}{c}
+                r\\
+                k
+            \end{array}\right)\mu^{r-k}\sigma^k\Gamma(k+1)\\
+            &=r!\sum_{k=0}^r\frac{\mu^{r-k}\sigma^k}{(r-k)!}.
+        \end{align*}
+        那么要求$\mu,\sigma^2$的矩估计,即求 
+        \begin{equation*}
+            \begin{cases}
+                \frac{X_1+\cdots+X_n}{n}=\mu+\sigma\\
+                \frac{X_1^2+\cdots+X_n^2}{n}=\mu^2+2\mu\sigma+2\sigma^2
+            \end{cases}
+        \end{equation*}
+        的解,解为 
+        \begin{equation*}
+            \begin{cases}
+                \hat{\sigma}=\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}\\
+                \hat{\mu}=\frac{X_1+\cdots+X_n}{n}-\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}
+            \end{cases}
+        \end{equation*}
+
+        又因为
+        \begin{align*}
+            \prob(X_1\geqslant t)&=\int_t^{+\infty}\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\dif x\\
+            &=\exp\left(-\frac{t-\mu}{\sigma}\right).
+        \end{align*}
+        那么$\prob(X_1\geqslant t)$的矩估计为 
+        \begin{equation*}
+            \widehat{\prob(X_1\geqslant t)}=\exp\left(-\frac{t-\frac{X_1+\cdots+X_n}{n}+\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}}{\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}}\right)
+        \end{equation*}
+
+        $X_1,\cdots,X_n$的联合概率密度为 
+        \begin{equation*}
+            L(\mu,\sigma)=\prod_{k=1}^nf(x_k,\mu,\sigma)=\prod_{k=1}^n\left(\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\right).
+        \end{equation*}
+        取对数,令 
+        \begin{equation*}
+            I(\mu,\sigma)=\log L(\mu,\sigma)=\sum_{k=1}^n\left(-\log\sigma-\frac{x_k-\mu}{\sigma}\right).
+        \end{equation*}
+        求一阶导和二阶导,
+        \begin{gather*}
+            \nabla I=\left(\frac{n}{\sigma},-\frac{n}{\sigma}+\frac{\sum_{k=1}^nx_k}{\sigma^2}+\frac{n\mu}{\sigma}\right),\\
+            \nabla^2 I=\begin{bmatrix}
+                0 & -\frac{n}{\sigma^2}\\
+                -\frac{n}{\sigma^2} & \frac{n}{\sigma^2}-\frac{2\sum_{k=1}^nx_k}{\sigma^3}+\frac{n\mu}{\sigma^3}.
+            \end{bmatrix}
+        \end{gather*}
+        得到$\sigma=+\infty$时取最大.极大似然估计:
+        \begin{equation*}
+            \hat{\mu}\in\R,\quad \hat{\sigma}=+\infty,\quad \widehat{\prob(X_1\geqslant t)}=1.
+        \end{equation*}
+    \end{solution}
 
     \begin{exercise}
         \label{ex:3}
-        设$X_1,X_2$是来自$N(0,1)$的随机样本,
-        \begin{enumerate}[(1)]
-            \item 求$(X_2-X_1)/\sqrt{2}$的分布.
-            \item 求$X_1^2+X_2^2$的分布.
-            \item 求$(X_1+X_2)^2/(X_2-X_1)^2$的分布.
-            \item 求$(X_2+X_1)/\sqrt{(X_1-X_2)^2}$的分布.
-            \item 求$X_1^2/X_2^2$的分布.
-        \end{enumerate}
+        设$X_1,\cdots,X_n$和$Y_1,\cdots,Y_n$分别为来自正态分布总体$N(\mu_1,\sigma^2)$和$N(\mu_2,\sigma^2)$的随机样本,求$\mu_1,\mu_2,\sigma^2$的MLE.
     \end{exercise}
+
+    \begin{solution}
+        $X_1,\cdots,X_n$的累计概率密度为 
+        \begin{equation*}
+            \prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x_i-\mu_1)^2}{2\sigma^2}\right).
+        \end{equation*}
+        取对数,关于$\mu,\sigma$求偏导,令偏导为0得到方程
+        \begin{equation*}
+            \begin{cases}
+                n\mu_1=\sum_{i=1}^nx_i\\
+                -n\sigma^2+\sum_{i=1}^n(x_i-\mu_1)^2=0.
+            \end{cases}
+        \end{equation*}
+        解,得 
+        \begin{equation*}
+            \begin{cases}
+                \hat{\mu}_1=\frac{1}{n}\sum_{i=1}^nx_i\\
+                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(x_i-\frac{1}{n}\sum_{i=1}^nx_i\right)^2.
+            \end{cases}
+        \end{equation*}
+
+        同理可得 
+        \begin{equation*}
+            \begin{cases}
+                \hat{\mu}_2=\frac{1}{n}\sum_{i=1}^ny_i\\
+                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(y_i-\frac{1}{n}\sum_{i=1}^ny_i\right)^2.
+            \end{cases}
+        \end{equation*}
+    \end{solution}
 
     \begin{exercise}
         \label{ex:4}
-        设$X_1,\cdots,X_n$是来自总体$X$的随机样本,$\expect(X)=\mu$,且$\var(X)=0.25$,假设至少以95\%的概率保证$\abs{\tilde{X}-\mu}<0.01$,
-        问样本量$n$至少应取多大?
+        设$X_1,\cdots,X_n$来自均匀分布$U(\theta,2\theta)$的随机样本,其中$\theta\in(0,\infty)$,求:
+        (1) $\theta$的极大似然估计$\hat{\theta}$;(2) 判断$\hat{\theta}$是否为无偏估计,如果不是无偏估计,基于$\hat{\theta}$构造一个无偏估计.
     \end{exercise}
+
+    \begin{solution}
+        (1) $X_i$的概率密度为 
+        \begin{equation*}
+            p(x)=\begin{cases}
+                \frac{1}{\theta}, &\theta<x<\theta\\
+                0,& x\leqslant\theta\text{或}x\geqslant\theta.
+            \end{cases}
+        \end{equation*}
+        那么当$(x_1,\cdots,x_n)\in(\theta,2\theta)^n$时,$X_1,\cdots,X_n$的联合密度函数为 
+        \begin{equation*}
+            f(x_1,\cdots,x_n,\theta)=\frac{1}{\theta^n},
+        \end{equation*}
+        其余情况下$f(x_1,\cdots,x_n,\theta)=0$.当$(x_1,\cdots,x_n)\in(\theta,2\theta)$时,$\frac{1}{2}\max_ix_i\leqslant\theta\leqslant\min_ix_i$.
+        那么$\theta$的极大似然估计为$\hat{\theta}=\frac{1}{2}X_{(n)}$.
+
+        (2) $X_{(n)}$的分布函数为 
+        \begin{equation*}
+                \prob(X_{(n)}<x)=\prod_{i=1}^n\prob(X_i<x)=F(x)^n
+        \end{equation*}
+        其中$F(x)$是$X_i$的分布函数,那么可以得到 
+        \begin{align*}
+            \expect(\hat{\theta})&=\frac{1}{2}\int_\theta^{2\theta}\frac{nx(x-\theta)^{n-1}}{\theta^n}\dif x\\
+            &=\frac{2n+1}{2n+2}\theta\neq\theta.
+        \end{align*}
+        则它不是无偏估计.
+
+        根据上面的期望,可知$\frac{n+1}{2n+1}X_{(n)}$是一个无偏估计.
+    \end{solution}
 
     \begin{exercise}
         \label{ex:5}
-        如果$X$服从自由度为$m$和$n$的$F$分布,
-        \begin{enumerate}[(1)]
-            \item 求$W=\frac{mX/n}{1+mX/n}$的分布.
-            \item 根据(1)的结果,计算$X$的期望和方差.
-        \end{enumerate}
+        设$X$服从对数正态分布,即$\log X\sim N(\mu,\sigma^2)$,其中$\mu\in \R,0<\sigma<+\infty$.设$X_1,\cdots,X_n$来自总体$X$的随机样本,
+        求:(1) $\mu,\sigma^2$的极大似然估计$\hat{\theta}$;(2) 求$\expect(X)$的极大似然估计. 
     \end{exercise}
+
+    \begin{solution}
+        (1) $\log X_1,\cdots,\log X_n$是$\log X$的随机样本,根据\cref{ex:3}的结果,可得极大似然估计 
+        \begin{equation*}
+            \begin{cases}
+                \hat{\mu}=\frac{1}{n}\sum_{i=1}^n\log X_i\\
+                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(\log X_i-\sum_{i=1}^n\log X_i\right)^2.
+            \end{cases}
+        \end{equation*}
+
+        (2) 注意到$X=e^{\log X}$,那么 
+        \begin{align*}
+            \expect(X)&=\expect(e^{\log X})\\
+            &=\int_{-\infty}^\infty\exp(x)\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\dif x\\
+            &=\exp\left(\frac{\sigma^2+2\mu}{2}\right)\int_{-\infty}^\infty\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-(\sigma^2+\mu))^2}{2\sigma^2}\right)\dif x\\
+            &=\exp\left(\frac{\sigma^2+2\mu}{2}\right).
+        \end{align*}
+        代入第(1)问的极大似然估计,得到 
+        \begin{equation*}
+            \hat{\expect}(X)=\exp\left(\frac{1}{2n}\sum_{i=1}^n\left(\log X_i-\sum_{i=1}^n\log X_i\right)^2+\frac{1}{n}\sum_{i=1}^n\log X_i\right).
+        \end{equation*}
+    \end{solution}
 \end{document}

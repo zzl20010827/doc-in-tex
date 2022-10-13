@@ -1,0 +1,130 @@
+\documentclass[a4paper,oneside,12pt]{ctexart}
+\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,listings}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[thmmarks,hyperref]{ntheorem}
+\usepackage{amsmath}
+\usepackage{cleveref}
+
+\setlength{\headheight}{15pt}
+\newfontfamily\consolas{Consolas}
+\allowdisplaybreaks[4]
+\linespread{1.5}
+\geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+\pagestyle{fancy}
+\fancyhead[L]{\kaishu 强基数学001}
+\fancyhead[C]{\kaishu 张卓立}
+\fancyhead[R]{\kaishu 2204110786}
+\definecolor{matlabgreen}{rgb}{0,0.5,0}
+\definecolor{matlabpurple}{rgb}{0.75,0,0.75}
+\lstset{
+    language=MATLAB,
+    basicstyle=\consolas,
+    keywordstyle=\color{blue},
+    commentstyle=\color{matlabgreen}\itshape,
+    stringstyle=\color{matlabpurple}\ttfamily,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\consolas
+}
+
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \theoremseparator{.}
+    \newtheorem{exercise}{习题}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \newtheorem{solution}{解.}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\ensuremath{\blacksquare}}
+    \newtheorem{proof}{证明.}
+}
+
+\crefname{exercise}{习题}{习题}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\expect}{\mathbb{E}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\prob}{\mathbb{P}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\poi}{\mathrm{Poi}}
+\newcommand{\Beta}{\mathrm{Beta}}
+
+\begin{document}
+    \begin{center}
+        \bfseries\LARGE
+        数理统计编程作业
+    \end{center}
+
+    \begin{exercise}
+        \label{ex:1}
+        假设$X_1,\cdots,X_n$是来自总体$X$的随机样本,$X\sim\chi^2(k)$.
+
+        (1) 求样本均值$\bar{X}$的密度函数.
+
+        (2) 求样本均值的渐进分布.
+
+        (3) 通过编程比较,在不同样本量下,样本均值的密度函数和其渐进分布的密度函数图像.
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:2}
+        在一个图上画出标准正态分布的密度曲线和$t(1),t(3),t(30),t(100)$的密度曲线.
+    \end{exercise}
+
+    \begin{exercise}
+        \label{ex:3}
+        令$X_1,\cdots,X_n$是来自均匀分布$U[\mu-\sqrt{3}\sigma,\mu+\sqrt{3}\sigma]$的随机样本,其中$-\infty <\mu<\infty,\sigma>0$.编程比较$\mu$
+        的矩估计和极大似然估计的偏,方差和均方误差.
+    \end{exercise}
+
+\begin{lstlisting}
+data=xlsread('历史预测数据输入.xlsx',4);
+%输入所有待拟合的数据
+X=data(:,1);
+Y_K=data(:,2);
+Y_Ca=data(:,3);
+Y_Al=data(:,4);
+Y_Fe=data(:,5);
+%定义拟合的坐标范围和步长
+x_min=63;
+x_max=95;
+x_int=0.01;
+%记录所有拟合参数并且写入excel中
+curve_fit=[];
+%将拟合的参数写入excel
+title= ['氧化钾(K2O)上界拟合  ';
+        '氧化钾(K2O)下界拟合  ';
+        '氧化钙(CaO)上界拟合  ';
+        '氧化钙(CaO)下界拟合  ';
+        '氧化铝(Al2O3)上界拟合';
+        '氧化铝(Al2O3)下界拟合';
+        '氧化铁(Fe2O3)上界拟合';
+        '氧化铁(Fe2O3)下界拟合'];
+title=cellstr(title);
+xlswrite('高钾类玻璃包络线拟合结果.xlsx',title,1,'A1')
+\end{lstlisting}
+\end{document}
