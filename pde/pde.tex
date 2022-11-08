@@ -3,6 +3,7 @@
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
+\usepackage{physics}
 \usepackage{cleveref}
 
 \setlength{\headheight}{15pt}
@@ -42,7 +43,6 @@
 \crefname{table}{表}{表}
 \crefname{equation}{式}{式}
 
-\newcommand{\dif}{\mathrm{d}}
 \newcommand{\differ}{\backslash}
 \newcommand{\ptl}{\partial}
 \newcommand{\R}{\mathbb{R}}
@@ -51,10 +51,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\diag}{\mathrm{diag}}
-\newcommand{\cond}[2]{\left. #1\right|_{#2}}
 
 
 
@@ -65,256 +62,357 @@
         PDE作业
     \end{center}
 
-    \subsection*{第二章第一次}
+    \subsection*{第二章第二次}
 
     \begin{exercise}
-        \label{ex:3}
-        用特征线求解下述Cauchy问题:
+        \label{ex:19}
+        求解三维波动方程的Cauchy问题:
+        \begin{equation*}
+            \begin{cases}
+                u_{tt}=a^2(u_{xx}+u_{yy}+u_{zz}),\\
+                \eval{u}_{t=0}=0,\quad t\geqslant 0,\\
+                \eval{u_t}_{t=0}=x^3+y^2z.
+            \end{cases}
+        \end{equation*}
+    \end{exercise}
+    
+    \begin{solution}
+        根据Kirchoff公式,解为 
+        \begin{equation*}
+            u(x,t)=\frac{1}{4\pi a^2t}\int_{S_{at}(0)}\psi(x+y)\dd y,
+        \end{equation*}
+        进一步计算,可得 
+        \begin{equation*}
+            u(x,t)=\frac{at^2}{3}\left[x_1^3+x_2^3x_3+(3x_1+x_3)\frac{a^2t^2}{3}\right].
+        \end{equation*}
+    \end{solution}
+    
+    \begin{exercise}
+        \label{ex:20}
+        用降维法导出一维波动方程Cauchy问题的求解公式.
+    \end{exercise}
+    
+    \begin{solution}
+        考虑一维波动方程
+        \begin{equation*}
+            \begin{cases}
+                \frac{\ptl^2 u}{\ptl t^2}-a^2\frac{\ptl^2 u}{\ptl x^2}=f(x,t),&\R\times (0,\infty),\\
+                \eval{u}_{t=0}=\phi(x),&x\in\R,\\
+                \eval{u_t}_{t=0}=\psi(x),&x\in\R.
+            \end{cases}
+        \end{equation*}
+        令$x_1=x,\tilde{u}(x_1,x_2,t)=u(x_1,t),\tilde{\phi}(x_1,x_2)=\phi(x_1),\tilde{\psi}(x_1,x_2)=\psi(x_1)$,那么原方程Cauchy问题
+        化为二维的波动方程的Cauchy问题,得到解为 
+        \begin{align*}
+            \tilde{u}(x_1,x_2,t)&=\frac{1}{2\pi a}\frac{\ptl}{\ptl t}\left[\iint_{\Sigma_{at}(x)}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dd y\right]\\
+            &\quad+\frac{1}{2\pi a}\iint_{\Sigma_{at}(x)}\frac{\psi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dd y\\
+            &\quad+\frac{1}{2\pi a}\int_0^t\iint_{\Sigma_{a(t-\tau)}(x)}\frac{f(y_1,\tau)}{\sqrt{a^2(t-\tau)^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dd y\dd\tau.
+        \end{align*}
+        又因为 
+        \begin{align*}
+            &\iint_{\Sigma_{at}(x)}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dd y\\
+            =&\int_{x_1-at}^{x_1+at}\dd y_1\int_{-\sqrt{a^2t^2-(y_1-x_1)^2}}^{\sqrt{a^2t^2-(y_1-x_1)^2}}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-y_2^2}}\dd y_2\\
+            =&\int_{x_1-at}^{x_1+at}\dd y_1\int_{-1}^1\frac{\phi(y_1)}{\sqrt{1-y_2^2}}\dd y_2\\
+            =&\pi\int_{x_1-at}^{x_1+at}\phi(y_1)\dd y_1,
+        \end{align*}
+        同理对剩下的积分也有类似的推导,
+        \begin{align*}
+            u(x_1,t)&=\frac{1}{2a}\frac{\ptl }{\ptl t}\left(\int_{x_1-at}^{x_1+at}\phi(y_1)\dd y_1\right)+\frac{1}{2a}\int_{x_1-at}^{x_1+at}\psi(y_1)\dd y_1\\
+            &\quad +\frac{1}{2a}\int_0^t\left(\int_{x_1-a(t-\tau)}^{x_1+a(t-\tau)}f(y_1,\tau)\dd y_1\right)\dd\tau.
+        \end{align*}
+    \end{solution}
+    
+    \begin{exercise}
+        \label{ex:21}
+        求解二维波动方程的Cauchy问题:
+        \begin{equation*}
+            \begin{cases}
+                u_{tt}=a^2(u_{xx}+u_{yy}),\\
+                \eval{u}_{t=0}=x^2(x+y).\\
+                \eval{u_t}_{t=0}=0.
+            \end{cases}
+        \end{equation*}
+    \end{exercise}
+    
+    \begin{solution}
+        根据Poisson公式,可以得到 
+        \begin{equation*}
+            u(x,y,t)=\frac{1}{2\pi a}\pdv{t}\left(\iint_{\Sigma_{at}(x,y)}\frac{x_1^2(x_1+y_1)}{\sqrt{a^2t^2-(x_1-x)^2-(y_1-y)^2}}\dd{y_1}\dd{y_2}\right),
+        \end{equation*}
+        进一步计算, 
+        \begin{equation*}
+            u(x,y,t)=a^2t^2(x+y)+x^2(x+y)+\frac{3\pi a^2t^2x}{4}.
+        \end{equation*}
+    \end{solution}
 
-        (2)$\begin{cases}
-            u_t+2u_x+u=xt, & t>0,-\infty<x<\infty,\\
-            \cond{u}{t=0}=2-x,&-\infty<x<\infty.
+    \begin{exercise}
+        \label{ex:22.(4)}
+        求一下特征值问题的特征函数:
+
+        (4) $\begin{cases}
+            X''(x)+\lambda X(x)=0, & 0<x<l,\\
+            X(0)=X'(l)+hX(l)=0\ (h>0\text{是常数}).
         \end{cases}$
     \end{exercise}
 
     \begin{solution}
-        设$x(t)$是解,那么 
+        因为特征值问题的特征值均大于0,那么 
         \begin{equation*}
-            \frac{\dif u}{\dif t}=\frac{\ptl u}{\ptl x}\frac{\dif x}{\dif t}+\frac{\ptl u}{\ptl t}.
+            X(x)=c_1\sin(\sqrt{\lambda}x)+c_2\cos(\sqrt{\lambda} x),
         \end{equation*}
-        令$\frac{\dif u}{\dif t}=xt-u,\frac{\dif x}{\dif t}=2$,那么 
+        代入条件得$c_2=0,\sqrt{\lambda}\cos(\sqrt{\lambda}l)+h\sin(\sqrt{\lambda}l)=0$,那么$\sqrt{\lambda}l\neq\frac{\pi}{2}+k\pi$,即$\lambda$是
+        $\sqrt{\lambda}=-h\tan(\sqrt{\lambda}l)$的正数解,且方程有正数解$\lambda_n$,那么特征方程为 
         \begin{equation*}
-            x(t)=2t+c,
-        \end{equation*}
-        则$\cond{u}{t=0}=2-c$,且 
-        \begin{equation*}
-            \frac{\dif u}{\dif t}=(2t+c)t-u.
-        \end{equation*}
-        解,得 
-        \begin{equation*}
-            u(x(t),t)=t^2+(c-2)(t-1)+c_1e^t.
-        \end{equation*}
-        综合上面两式可得
-        \begin{equation*}
-            u(x,t)=t^2+(x-2t-2)(t-1).
+            X_n(x)=\sin(\sqrt{\lambda_n}x).
         \end{equation*}
     \end{solution}
 
     \begin{exercise}
-        \label{ex:7}
-        试证明Cauchy问题 
-        \begin{equation*}
-            \begin{cases}
-                u_{tt}-u_{xx}=6(x+t),&\quad -\infty<x<\infty,t>x,\\
-                \cond{u}{t=x}=0,\cond{u_t}{t=x}=u_1(x),&-\infty<x<\infty
-            \end{cases}
-        \end{equation*}
-        有解的充要条件是$u_1(x)-3x^2=\mathrm{const}$,如有解,解不唯一.试问:若把初值给定在直线$t=ax$上,为什么在$a=\pm 1$与$a\neq\pm 1$的情况,
-        关于存在唯一性的结论不一样?
-    \end{exercise}
+        \label{ex:23.(2)}
+        用分离变量法求解下列定解问题:
 
-    \begin{proof}
-        ``$\Rightarrow$''.令$\tilde{t}=t-x,\tilde{u}(x,\tilde{t})=u(x,t)$,那么 
-        \begin{gather*}
-            u_x=\tilde{u}_x-\tilde{u}_{\tilde{t}},\\
-            u_t=\tilde{u}_{\tilde{t}},\\
-            u_{xx}=\tilde{u}_{xx}-2\tilde{u}_{x\tilde{t}}+\tilde{u}_{\tilde{t}\tilde{t}},\\
-            u_{tt}=\tilde{u}_{\tilde{t}\tilde{t}}.
-        \end{gather*}
-        得到关于$\tilde{u}$的方程:
-        \begin{equation*}
-            \begin{cases}
-                2\tilde{u}_{x\tilde{t}}-\tilde{u}_{xx}=6(2x+\tilde{t}),\\
-                \cond{\tilde{u}}{\tilde{t}=0}=0,\\
-                \cond{\tilde{u}_{\tilde{t}}}{\tilde{t}=0}=u_1(x).
-            \end{cases}
-        \end{equation*}
-        那么$2\tilde{u}_{\tilde{t}}-\tilde{u}_x=6x^2+6\tilde{t}x+c$,$\tilde{t}=0$代入,又因为$\tilde{u}(x,0)=0$,那么$\cond{\tilde{u}_x}{\tilde{t}=0}=0$,则
-        \begin{equation*}
-           u_1(x)=3x^2+c/2. 
-        \end{equation*}
-
-        ``$\Leftarrow$''.
-        根据上面的过程,考虑方程
-        \begin{equation*}
-            \begin{cases}
-                2\tilde{u}_{\tilde{t}}-\tilde{u}_x=6x^2+6\tilde{t}x+c,\\
-                \cond{\tilde{u}}{\tilde{t}=0}=0,\\
-                \cond{\tilde{u}_{\tilde{t}}}{\tilde{t}=0}=3x^2+c/2.
-            \end{cases}
-        \end{equation*}
-        利用特征线法求解,得到 
-        \begin{equation*}
-            x(\tilde{t})=-\frac{1}{2}\tilde{t}+c_1,
-        \end{equation*}
-        且
-        \begin{align*}
-            \tilde{u}(x,\tilde{t})&=2\left(-\frac{1}{2}\tilde{t}+c_1\right)^3-6c_1\left(-\frac{1}{2}t^2+c_1\right)^2+\frac{c}{2}\tilde{t}+4c_1^3\\
-            &=2x^3-6\left(x+\frac{\tilde{t}}{2}\right)x^2+\frac{c\tilde{t}}{2}+4\left(x+\frac{t}{2}\right)^3\\
-            &=2x^3-6\left(\frac{x+t}{2}\right)x^2+\frac{c(t-x)}{2}+4\left(\frac{t+x}{2}\right)^3.
-        \end{align*}
-        代入原方程验证确实是解.
-
-        考虑方程 
-        \begin{equation*}
-            \begin{cases}
-                u_{tt}-u_{xx}=0,&\quad -\infty<x<\infty,t>x,\\
-                \cond{u}{t=x}=0,\cond{u_t}{t=x}=0,&-\infty<x<\infty
-            \end{cases}
-        \end{equation*}
-        经过相同的变换得到 
-        \begin{equation*}
-            \begin{cases}
-                2\tilde{u}_{\tilde{t}}-\tilde{u}_x=c,\\
-                \cond{\tilde{u}}{\tilde{t}=0}=0,\\
-                \cond{\tilde{u}_{\tilde{t}}}{\tilde{t}=0}=c/2.
-            \end{cases}
-        \end{equation*}
-        显然有非零解$\tilde{u}(x,\tilde{t})=\frac{c\tilde{t}}{2}$,则原方程解不唯一.
-
-        当$a$取值不同的时候,解的唯一性不同的原因可能是$t=ax$与特征线的交点不同.
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:8}
-        若$u=u(x,y,z,t)$是波动方程初值问题 
-        \begin{equation*}
-            \begin{cases}
-                u_{tt}-a^2(u_{xx}+u_{yy}+u_{zz})=0,\\
-                \cond{u}{t=0}=f(x)+g(y),\\
-                \cond{u}{t=0}=\phi(y)+\psi(z)
-            \end{cases}
-        \end{equation*}
-        的解,试求解的表达式.
+        (2) $\begin{cases}
+            Lu=0, & (x,t)\in Q,\\
+            \eval{u}_{x=0}=\eval{u_x}_{x=l}=0, & t\geqslant 0,\\
+            \eval{u}_{t=0}=x(x-2l),\eval{u_t}_{t=0}=0, & 0\leqslant x\leqslant l.
+        \end{cases}$
     \end{exercise}
 
     \begin{solution}
-        根据Kirchoff公式,得到 
+        令$v=u-x(x-2l)$, 
+        \begin{equation*}
+            \begin{cases}
+                Lv=2a^2,\\
+                \eval{v}_{x=0}=\eval{v_x}_{x=0}=0,\\
+                \eval{v}_{t=0}=\eval{v_t}_{t=0}=0.
+            \end{cases}
+        \end{equation*}
+        令$v(x,t)=X(x)T(t)$,那么 
+        \begin{equation*}
+            \frac{T''(t)}{a^2T(t)}=\frac{X''(x)}{X(x)}=-\lambda,
+        \end{equation*}
+        即 
+        \begin{gather*}
+            X''(x)+\lambda X(x)=0,\\
+            T''(t)+\lambda a^2 T(t)=0.
+        \end{gather*}
+        且$X(0)=X'(l)=T(0)=T'(0)=0$.
+
+        类似\cref{ex:22.(4)}可得$X_k(x)=\sin\frac{(2k+1)\pi}{2l}x$,令$v(x,t)=\sum_{k=1}^\infty T_k(t)\sin\frac{(2k+1)\pi}{2l}x$和
+        $2a^2=\sum_{k=1}^\infty f_k\sin\frac{(2k+1)\pi}{2l}x=\sum_{k=1}^\infty \frac{8a^2}{(2k+1)\pi}\sin\frac{(2k+1)\pi}{2l}x$,则 
+        \begin{equation*}
+            \begin{cases}
+                T''_k(t)+a^2T_k(t)\left(\frac{(2k+1)\pi}{2l}\right)^2=\frac{8a^2}{(2k+1)\pi},\\
+                T_k(0)=0,T_k'(0)=0.
+            \end{cases}
+        \end{equation*}
+        解,得$T_k(t)=\frac{32l^2}{((2k+1)\pi)^3}\left(1-\cos a\left(\frac{(2k+1)\pi}{2l}\right)t\right)$,即 
+        \begin{equation*}
+            v(x,t)=\sum_{k=1}^\infty \frac{32l^2}{((2k+1)\pi)^3}\left(1-\cos a\left(\frac{(2k+1)\pi}{2l}\right)t\right)\sin\frac{(2k+1)\pi}{2l}x,
+        \end{equation*}
+        那么
+        \begin{equation*}
+            u(x,t)=x(x-2l)+\sum_{k=1}^\infty \frac{32l^2}{((2k+1)\pi)^3}\left(1-\cos a\left(\frac{(2k+1)\pi}{2l}\right)t\right)\sin\frac{(2k+1)\pi}{2l}x.
+        \end{equation*}
+    \end{solution}
+
+    \begin{exercise}
+        \label{ex:25}
+        设$u(x,t)$适合定解问题: 
+        \begin{equation*}
+            \begin{cases}
+                Lu=f(x,t), & (x,t)\in Q,\\
+                -\pdv{u}{x}+\alpha\eval{u}_{x=0}=\mu_1(t), & t\geqslant 0,\\
+                \pdv{u}{x}+\beta\eval{u}_{x=l}=\mu(t), & t\geqslant 0,\\
+                \eval{u}_{t=0}=\phi(x),\eval{u_t}_{t=0}=\psi(x), & 0\leqslant x\leqslant l,
+            \end{cases}
+        \end{equation*}
+        试引进辅助函数,把边值条件齐次化,设 
+        
+        (a) $a>0,\beta>0$; \quad (b) $\alpha=\beta=0$.
+    \end{exercise}
+
+    \begin{solution}
+        (a) 令
+        \begin{equation}
+            \label{eq:25a齐次化}
+            v(x,t)=\frac{l-x}{l}(-u_x(x,t)+\alpha u_1(x,t)-\mu_1(t))+\frac{x}{l}(u_x(x,t)+\beta u(x,t)-\mu(t)),
+        \end{equation}
+        则$\eval{v}_{x=0}=-u_x(0,t)+\alpha u(0,t)-\mu_1(t)=0,\eval{v}_{x=l}=u_x(l,t)+\beta u(x,t)-\mu(t)=0$.
+
+        (b) 令\cref{eq:25a齐次化}中的$\alpha=\beta=0$,$v(x,t)=\frac{l-x}{l}(-u_x(x,t)-\mu_1(t))+\frac{x}{l}(u_x(x,t)-\mu(t))$.
+    \end{solution}
+
+    \begin{exercise}
+        \label{ex:26.(2)}
+        用分离变量法求解下列定解问题: 
+        
+        (2) $\begin{cases}
+            Lu=-2b\pdv{u}{t}+g, & (x,t)\in Q,\\
+            \eval{u}_{x=0}=\eval{u}_{x=t}=0, & t\geqslant 0,\\
+            \eval{u}_{t=0}=\eval{u_t}_{t=0}=0, & 0\leqslant x\leqslant l.
+        \end{cases}$
+    \end{exercise}
+
+    \begin{solution}
+        首先先令$Lu=0$,然后令$U(x,t)=T(t)X(x)$,类似\cref{ex:22.(4)},得到$X_k(x)=\sin\frac{k\pi}{l}x,\\\lambda_n=\frac{n\pi }{l}$.
+
+        对于原方程,令$u(x)=\sum_{n=1}^\infty T_n(t)\sin\frac{n\pi}{l}x,g=\sum_{n=1}^\infty g_n\sin\frac{k\pi}{l}x$,则 
+        \begin{equation*}
+            T_n''(t)+a^2\left(\frac{k\pi}{l}\right)^2T_n(t)+2bT'_n(t)=g_n,
+        \end{equation*}
+        且$T_n(0)=0,T_n'(0)=0$,又因为$g_n=\frac{1-(-1)^n}{n\pi g}$,求解上面的常微分方程,得到:
+
+        1. 当$\Delta=4b^2-4a^2\left(\frac{n\pi}{l}\right)^2\geqslant 0$时, 
         \begin{align*}
-            u(x,y,z,t)&=\frac{\ptl}{\ptl t}\left[\frac{1}{4\pi a^2t}\iint_{S_{at}(x,y,z)}(f(u)+g(v))\dif u\dif v\dif w\right]\\
-            &\quad +\frac{1}{4\pi a^2t}\iint_{S_{at}(x,y,z)}(\phi(y)+\psi(z))\dif u\dif v\dif w.
+            T_n(t)&=\frac{l^2g_n}{a^2n^2\pi^2}+\frac{(b-\sqrt{b^2-a^2\lambda_n^2})g_n}{2\lambda_n^2a^2\sqrt{b^2-a^2\lambda_n^2}}\exp(\left(-b-\sqrt{b^2-a^2\lambda_n^2}\right)t)\\
+            &\quad +\frac{(b+\sqrt{b^2-a^2\lambda_n^2})g_n}{\lambda_n^2a^2}\exp((-b+\sqrt{b^2-a^2\lambda_n^2})t).
         \end{align*}
-        进一步化简,得到 
+
+        2. 当$\Delta<0$时, 
         \begin{align*}
-            u(x,y,z,t)&=\frac{1}{2\pi a}\frac{\ptl }{\ptl t}\left[\iint_{\Sigma_{at}(x,y)}\frac{f(u)+g(v)}{\sqrt{a^2t^2-(u-x)^2-(v-y)^2}}\dif u\dif v\right]\\
-            &\quad +\frac{1}{2\pi a}\iint_{\Sigma_{at}(y,z)}\frac{\phi(y)+\psi(z)}{\sqrt{a^2t^2-(v-y)^2-(w-z)^2}}\dif v\dif w.
+            T_n(t)&=\frac{l^2g_n}{a^2n^2\pi^2}-\frac{g_n}{\lambda_n^2a^2}e^{-bt}\cos(\sqrt{a^2\lambda_n^2-b^2}t)\\
+            &\quad+\frac{bg_n}{\lambda_n^2a^2\sqrt{a^2\lambda_n^2-b^2}}e^{-bt}\sin(\sqrt{a^2\lambda_n^2-b^2}t).
+        \end{align*}
+        
+        那么 
+        \begin{align*}
+            u(x,t)&=\sum_{n\leqslant\frac{bl}{a\pi}}\left[\frac{l^2g_n}{a^2n^2\pi^2}+\frac{(b-\sqrt{b^2-a^2\lambda_n^2})g_n}{2\lambda_n^2a^2\sqrt{b^2-a^2\lambda_n^2}}\exp(\left(-b-\sqrt{b^2-a^2\lambda_n^2}\right)t)\right.\\
+            &\quad +\left.\frac{(b+\sqrt{b^2-a^2\lambda_n^2})g_n}{\lambda_n^2a^2}\exp((-b+\sqrt{b^2-a^2\lambda_n^2})t)\right]\sin\frac{n\pi}{l}x\\
+            &\quad +\sum_{n>\frac{bl}{a\pi}}\left[\frac{l^2g_n}{a^2n^2\pi^2}-\frac{g_n}{\lambda_n^2a^2}e^{-bt}\cos(\sqrt{a^2\lambda_n^2-b^2}t)\right.\\
+            &\quad +\left.\frac{bg_n}{\lambda_n^2a^2\sqrt{a^2\lambda_n^2-b^2}}e^{-bt}\sin(\sqrt{a^2\lambda_n^2-b^2}t)\right]\sin\frac{n\pi}{l}x.
         \end{align*}
     \end{solution}
 
     \begin{exercise}
-        \label{ex:10}
-        试利用唯一性结果直接证明:当初值$\phi(x),\psi(x)$是偶函数,非齐次项$f(x,t)$是$x$的偶函数时非齐次波动方程初值问题的解$u(x,t)$关于$x$也是
-        偶函数.
+        \label{ex:27}
+        考虑定解问题: 
+        \begin{equation*}
+            \begin{cases}
+                u_{tt}-u_{xx}=f(x,t), & (x,t)\in Q,\\
+                \eval{u}_{x=0}=\eval{u}_{x=l}=0, & 0\leqslant t\leqslant T,\\
+                \eval{u}_{t=0}=\phi(x),\eval{u_t}_{t=0}\psi(x), & 0\leqslant x\leqslant l.
+            \end{cases}
+        \end{equation*}
+        试问对$\phi,\psi,f$加什么条件才能保证由Fourier方法所得的解是古典解?试证明之!
     \end{exercise}
 
     \begin{proof}
-        因为$u(-x,t)$也是方程组的解,如果$u$不是$x$的偶函数,那么方程有两个相异的解,矛盾.即$u$是关于$x$的偶函数.
-    \end{proof}
+        根据条件,$\phi$至少二阶连续可微,$\psi$至少连续可微,因为$u\in C^2$,那么$\lim_{x\to 0}u(x,0)\\=\lim_{t\to 0}u(0,t)$,则$\phi(0)=0$,同样可得$\phi(l)=0$.又因为$u_t(0,t)=u_t(l,t)=0$,那么类似
+        $\psi(0)=\psi(l)=0$.又因为$u_{xx}(x,0)=\phi''(x),u_{tt}(0,t)=u_{tt}(l,t)=0$,则$\phi''(0)=-f(0,0),\phi''(l)=-f(l,0)$.
 
-    \begin{exercise}
-        \label{ex:12}
-        证明半无界问题 
+        可将原问题分为三部分.
+
+        (1) $\begin{cases}
+            Lu=0\\
+            \eval{u}_{t=0}=\phi(x),\eval{u_t}_{t=0}=0\\
+            \eval{u}_{x=0}=0,\eval{u}_{x=l}=0
+        \end{cases}$,解是$u_1$.
+
+        (2) $\begin{cases}
+            Lu=0\\
+            \eval{u}_{t=0}=0,\eval{u_t}_{t=0}=\psi(x)\\
+            \eval{u}_{x=0}=0,\eval{u}_{x=l}=0
+        \end{cases}$,解是$u_2$.
+
+        (3) $\begin{cases}
+            Lu=f(x,t)\\
+            \eval{u}_{t=0}=0,\eval{u_t}_{t=0}=0\\
+            \eval{u}_{x=0}=0,\eval{u}_{x=l}=0
+        \end{cases}$,解是$u_3$.
+
+        原方程解$u=u_1+u_2+u_3$.且$u_1,u_2,u_3$满足$u_2=M_\phi(x,t),u_1=\pdv{t}M_\phi(x,t),u_3=\int_0^tM_{f_\tau}(t,x;\tau)\dd{\tau}$.
+        当$\phi\in C^3,\psi\in C^2$时,$u_1,u_2\in C^2$,要让$u_3\in C^2$,只需使$M_{f_\tau}(t,x;\tau)\in C^2$,它是 
         \begin{equation*}
             \begin{cases}
-                \frac{\ptl^2 u}{\ptl t^2}-a^2\frac{\ptl^2 u}{\ptl x^2}=f(x,t),&0<x<\infty,t>0,\\
-                \cond{u}{t=0}=\phi(x),\cond{u_t}{t=0}=\psi(x),& 0\leqslant x<\infty,\\
-                \cond{u}{x=0}=\mu(t),& t\geqslant 0
+                Lu=0\\
+            \eval{u}_{t=\tau}=\phi(x),\eval{u_t}_{t=\tau}=f(x,\tau)\\
+            \eval{u}_{x=0}=0,\eval{u}_{x=l}=0
             \end{cases}
         \end{equation*}
-        解的唯一性.
-    \end{exercise}
-
-    \begin{proof}
-        要证明解的唯一性,只需证明
-        \begin{equation*}
-            \begin{cases}
-                \frac{\ptl^2 u}{\ptl t^2}-a^2\frac{\ptl^2 u}{\ptl x^2}=f_1(x,t)=0,&0<x<\infty,t>0,\\
-                \cond{u}{t=0}=\phi_1(t)=0,\cond{u_t}{t=0}=\psi_1(t)=0,& 0\leqslant x<\infty,\\
-                \cond{u}{x=0}=\mu_1(t)=0,& t\geqslant 0
-            \end{cases}
-        \end{equation*}
-        只有零解.
-
-        考虑上面问题的奇延拓,那么它在区域$\{at-x_0\leqslant x\leqslant x_0-at,0\leqslant t\leqslant T\},x_0>0,0<T\leqslant\frac{x_0}{a}$上满足能量不等式,即
-        \begin{gather*}
-            \int_{\Omega_\tau}u^2(x,\tau)\dif x\leqslant M_1\left[\int_{\Omega_0}(\phi_1^2+\psi_1^2+a^2\phi_{1x}^2)\dif x+\iint_{K_\tau}f_1^2(x,t)\dif x\dif t\right],\\
-            \iint_{K_\tau}u^2(x,t)\dif x\dif t\leqslant M\left[\int_{\Omega_0}(\phi_1^2+\psi_1^2+a^2\phi_{1x}^2)\dif x+\iint_{K\tau}f_1^2(x,t)\dif x\dif t\right].
-        \end{gather*}
-        那么$u$在区域$\{0\leqslant x\leqslant x_0-at,0\leqslant t\leqslant T\}$内恒为0,根据$x_0$的任意性,原方程只有零解.
+        的解,又因为$0\leqslant \tau\leqslant t$,则$f\in C^2,f(0,t)=f(l,t)=0$.
     \end{proof}
     
+    \begin{exercise}
+        \label{ex:28}
+        用能量不等式证明一维波动方程带有第三边值条件的初边值问题解的唯一性.
+    \end{exercise}
+
+    \begin{proof}
+        考虑方程 
+        \begin{equation*}
+            \begin{cases}
+                Lu=f(x,t)\\
+                \eval{u}_{t=0}=\phi(x)\\
+                \eval{u_t}_{t=0}=\psi(x)\\
+                -\eval{\pdv{u}{x}}_{x=0}+\alpha_1 u(0,t)=g_1(t)\\
+                \eval{\pdv{u}{x}}_{x=l}+\alpha_2 u(l,t)=g_2(t)
+            \end{cases}
+        \end{equation*}
+        因为这个方程的解集是方程
+        \begin{equation}
+            \label{eq:28.转化后}
+            \begin{cases}
+                Lu=f(x,t)\\
+                \eval{u}_{t=0}=\phi(x)\\
+                \eval{u_t}_{t=0}=\psi(x)\\
+            \end{cases}
+        \end{equation}
+        的子集,且对这个方程
+        \begin{equation*}
+            \iint_{k_\tau}u^2(x,t)\dd{x}\dd{t}\leqslant M_1\left[\int_{\Omega_0}(\phi^2+\psi^2+a^2\phi_x^2)\dd{x}+\iint_{K_\tau}f^2\dd{x}\dd{t}\right],
+        \end{equation*}
+        则方程(\ref{eq:28.转化后})的解具有唯一性,即原方程解有唯一性.
+    \end{proof}
 \end{document}
 
-\begin{exercise}
-    \label{ex:19}
-    求解三维波动方程的Cauchy问题:
-    \begin{equation*}
-        \begin{cases}
-            u_{tt}=a^2(u_{xx}+u_{yy}+u_{zz}),\\
-            \cond{u}{t=0}=0,\quad t\geqslant 0,\\
-            \cond{u_t}{t=0}=x^3+y^2z.
-        \end{cases}
-    \end{equation*}
-\end{exercise}
 
-\begin{solution}
-    根据Kirchoff公式,解为 
-    \begin{equation*}
-        u(x,t)=\frac{1}{4\pi a^2t}\int_{S_{at}(0)}\psi(x+y)\dif y,
-    \end{equation*}
-    进一步计算,可得 
-    \begin{equation*}
-        u(x,t)=\frac{at^2}{3}\left[x_1^3+x_2^3x_3+(3x_1+x_3)\frac{a^2t^2}{3}\right].
-    \end{equation*}
-\end{solution}
+
+
+
+
+
+
+
 
 \begin{exercise}
-    \label{ex:20}
-    用降维法导出一维波动方程Cauchy问题的求解公式.
-\end{exercise}
-
-\begin{solution}
-    考虑一维波动方程
+    \label{ex:13}
+    证明以下Cauchy问题 
     \begin{equation*}
         \begin{cases}
-            \frac{\ptl^2 u}{\ptl t^2}-a^2\frac{\ptl^2 u}{\ptl x^2}=f(x,t),&\R\times (0,\infty),\\
-            \cond{u}{t=0}=\phi(x),&x\in\R,\\
-            \cond{u_t}{t=0}=\psi(x),&x\in\R.
+            \pdv[2]{u}{t}-a^2\pdv[2]{u}{x}+b(x,t)\pdv{u}{x}+c(x,t)\pdv{u}{t}=f(x,t), & -\infty<x<\infty,t>0,\\
+            \eval{u}_{t=0}=\phi(x),\eval{u_t}_{t=0}=\psi(x),-\infty<x<\infty
         \end{cases}
     \end{equation*}
-    令$x_1=x,\tilde{u}(x_1,x_2,t)=u(x_1,t),\tilde{\phi}(x_1,x_2)=\phi(x_1),\tilde{\psi}(x_1,x_2)=\psi(x_1)$,那么原方程Cauchy问题
-    化为二维的波动方程的Cauchy问题,得到解为 
-    \begin{align*}
-        \tilde{u}(x_1,x_2,t)&=\frac{1}{2\pi a}\frac{\ptl}{\ptl t}\left[\iint_{\Sigma_{at}(x)}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dif y\right]\\
-        &\quad+\frac{1}{2\pi a}\iint_{\Sigma_{at}(x)}\frac{\psi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dif y\\
-        &\quad+\frac{1}{2\pi a}\int_0^t\iint_{\Sigma_{a(t-\tau)}(x)}\frac{f(y_1,\tau)}{\sqrt{a^2(t-\tau)^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dif y\dif\tau.
-    \end{align*}
-    又因为 
-    \begin{align*}
-        &\iint_{\Sigma_{at}(x)}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-(y_2-x_2)^2}}\dif y\\
-        =&\int_{x_1-at}^{x_1+at}\dif y_1\int_{-\sqrt{a^2t^2-(y_1-x_1)^2}}^{\sqrt{a^2t^2-(y_1-x_1)^2}}\frac{\phi(y_1)}{\sqrt{a^2t^2-(y_1-x_1)^2-y_2^2}}\dif y_2\\
-        =&\int_{x_1-at}^{x_1+at}\dif y_1\int_{-1}^1\frac{\phi(y_1)}{\sqrt{1-y_2^2}}\dif y_2\\
-        =&\pi\int_{x_1-at}^{x_1+at}\phi(y_1)\dif y_1,
-    \end{align*}
-    同理对剩下的积分也有类似的推导,
-    \begin{align*}
-        u(x_1,t)&=\frac{1}{2a}\frac{\ptl }{\ptl t}\left(\int_{x_1-at}^{x_1+at}\phi(y_1)\dif y_1\right)+\frac{1}{2a}\int_{x_1-at}^{x_1+at}\psi(y_1)\dif y_1\\
-        &\quad +\frac{1}{2a}\int_0^t\left(\int_{x_1-a(t-\tau)}^{x_1+a(t-\tau)}f(y_1,\tau)\dif y_1\right)\dif\tau.
-    \end{align*}
-\end{solution}
-
-\begin{exercise}
-    \label{ex:21}
-    求解二维波动方程的Cauchy问题:
-    \begin{equation*}
-        \begin{cases}
-            u_{tt}=a^2(u_{xx}+u_{yy}),\\
-            \cond{u}{t=0}=x^2(x+y).\\
-            \cond{u_t}{t=0}=0.
-        \end{cases}
-    \end{equation*}
+    解的唯一性,其中$b(x,t),c(x,t)$都是有界连续函数.
 \end{exercise}
 
-\begin{solution}
-    根据Poisson公式,可以得到
-\end{solution}
+\begin{proof}
+    类似于能量不等式的证明过程,方程两边同时乘上$\pdv{u}{t}$,再在$K_\tau$上积分,得到 
+    \begin{equation*}
+        \iint_{K_\tau}\left[\frac{1}{2}\pdv{u}{t}\pdv[2]{u}{t}-a^2\pdv{u}{t}\pdv[2]{u}{x}+b(x,t)\pdv{u}{t}\pdv{u}{x}+c(x,t)\left(\pdv{u}{t}\right)^2\right]\dd{x}\dd{t}=0.
+    \end{equation*}
+    因为 
+    \begin{gather*}
+        \pdv{u}{t}\pdv[2]{u}{t}=\frac{1}{2}\pdv{t}\left(\pdv{u}{t}\right)^2,\\
+        \pdv{u}{t}\pdv[2]{u}{x}=\pdv{x}\left(\pdv{u}{t}\pdv{u}{x}\right),
+    \end{gather*}
+    将上式代入原先的积分,
+    \begin{align*}
+        &\iint_{K_\tau}\left(\frac{1}{2}\pdv{t}\left(\pdv{u}{t}\right)^2-a^2\pdv{x}\left(\pdv{u}{t}\pdv{u}{x}\right)+\frac{a^2}{2}\pdv{t}\left(\pdv{u}{x}\right)^2\right)\dd{x}\dd{t}\\
+        &\quad +\iint_{K_\tau}\left[c(x,t)\left(\pdv{u}{t}\right)^2+b(x,t)\pdv{u}{t}\pdv{u}{x}\right]\dd{x}\dd{t}=0.
+    \end{align*}
+    用Green公式,类似可以得到存在$M\geqslant 0$,
+    \begin{equation*}
+        \int_{\Omega_\tau}\left[\left(\pdv{u}{t}\right)^2+a^2\left(\pdv{u}{x}\right)^2\right]\dd{x}\leqslant 2M\iint_{K\tau}\left[\left(\pdv{u}{t}\right)^2+\pdv{u}{t}\pdv{u}{x}\right]\dd{x}\dd{t},
+    \end{equation*}
+    对右式$\pdv{u}{t}\pdv{u}{x}$用均值不等式,那么存在$k$,使得
+    \begin{equation*}
+        \int_{\Omega_\tau}\left[\left(\pdv{u}{t}\right)^2+k^2\left(\pdv{u}{x}\right)^2\right]\dd{x}\leqslant 2M'\iint_{K\tau}\left[\left(\pdv{u}{t}\right)^2+k^2\left(\pdv{u}{x}\right)^2\right]\dd{x}\dd{t}
+    \end{equation*}
+    应用Gronwall不等式可以得到$u_t=u_x=0$,又因为
+    \begin{equation*}
+        \iint_{K_\tau}u_tu\dd{x}\dd{t}=\iint_{K_\tau}\pdv{t}\left(\frac{u^2}{2}\right)\dd{x}\dd{t}=\frac{1}{2}\int_{\Omega_\tau}u^2(x,\tau)\dd{x},
+    \end{equation*}
+    再次用均值不等式和Gronwall不等式可以得到$u\equiv 0$.
+\end{proof}

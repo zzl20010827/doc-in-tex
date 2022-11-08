@@ -1,5 +1,5 @@
 \documentclass[a4paper,oneside,12pt]{ctexart}
-\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,listings}
+\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,listings,float}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
@@ -24,7 +24,9 @@
     stringstyle=\color{matlabpurple}\ttfamily,
     frame=single,
     numbers=left,
-    numberstyle=\tiny\consolas
+    numberstyle=\tiny\consolas,
+    emph={mean,var,moment,unifit,unifrnd,ones,tpdf,normpdf},
+    emphstyle=\color{blue}
 }
 
 {
@@ -39,15 +41,7 @@
     \theoremstyle{nonumberplain}
     \theoremheaderfont{\bfseries}
     \theorembodyfont{\normalfont}
-    \newtheorem{solution}{解.}
-}
-
-{
-    \theoremstyle{nonumberplain}
-    \theoremheaderfont{\bfseries}
-    \theorembodyfont{\normalfont}
-    \theoremsymbol{\ensuremath{\blacksquare}}
-    \newtheorem{proof}{证明.}
+    \newtheorem{solution}{结果.}
 }
 
 \crefname{exercise}{习题}{习题}
@@ -90,10 +84,61 @@
         (3) 通过编程比较,在不同样本量下,样本均值的密度函数和其渐进分布的密度函数图像.
     \end{exercise}
 
+    \begin{solution}
+        代码如下:
+        \begin{lstlisting}
+%第一题
+clear;clc;
+k=6;n=5;
+x=0:.1:15;
+y=(1/2)^(n*k/2)/gamma(n*k/2)*(n.*x).^(n*k/2-1).*exp(-n*x/2)*n;
+plot(x,y);
+hold on;
+yasym=normpdf(x,k,sqrt(2*k/n));
+plot(x,yasym);
+legend('样本均值n=5','渐进分布');
+        \end{lstlisting}
+
+        图像如图:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.7]{第一问.png}
+            \caption{第一题图}
+        \end{figure}
+    \end{solution}
+
     \begin{exercise}
         \label{ex:2}
         在一个图上画出标准正态分布的密度曲线和$t(1),t(3),t(30),t(100)$的密度曲线.
     \end{exercise}
+
+    \begin{solution}
+        代码:
+        \begin{lstlisting}
+%第二题
+clear;clc;
+x=-10:.1:10;
+y1=normpdf(x);%标准正态分布
+y2=tpdf(x,1);%t(1)分布
+y3=tpdf(x,3);%t(3)分布
+y4=tpdf(x,30);%t(30)分布
+y5=tpdf(x,100);%t(100)分布
+plot(x,y1);
+hold on;
+plot(x,y2);
+plot(x,y3);
+plot(x,y4);
+plot(x,y5);
+legend('标准正态分布','t=1','t=3','t=30','t=100');
+hold off;
+        \end{lstlisting}
+        图像:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.7]{第二问.png}
+            \caption{第二题图}
+        \end{figure}
+    \end{solution}
 
     \begin{exercise}
         \label{ex:3}
@@ -101,30 +146,64 @@
         的矩估计和极大似然估计的偏,方差和均方误差.
     \end{exercise}
 
-\begin{lstlisting}
-data=xlsread('历史预测数据输入.xlsx',4);
-%输入所有待拟合的数据
-X=data(:,1);
-Y_K=data(:,2);
-Y_Ca=data(:,3);
-Y_Al=data(:,4);
-Y_Fe=data(:,5);
-%定义拟合的坐标范围和步长
-x_min=63;
-x_max=95;
-x_int=0.01;
-%记录所有拟合参数并且写入excel中
-curve_fit=[];
-%将拟合的参数写入excel
-title= ['氧化钾(K2O)上界拟合  ';
-        '氧化钾(K2O)下界拟合  ';
-        '氧化钙(CaO)上界拟合  ';
-        '氧化钙(CaO)下界拟合  ';
-        '氧化铝(Al2O3)上界拟合';
-        '氧化铝(Al2O3)下界拟合';
-        '氧化铁(Fe2O3)上界拟合';
-        '氧化铁(Fe2O3)下界拟合'];
-title=cellstr(title);
-xlswrite('高钾类玻璃包络线拟合结果.xlsx',title,1,'A1')
-\end{lstlisting}
+    \begin{solution}
+        代码:
+        \begin{lstlisting}
+%第三题
+clear;clc;
+mu=0;sigma=2;
+size=[1,1000];
+a=mu-sqrt(sigma);b=mu+sqrt(sigma);
+meanx=(a+b)/2;varx=(b-a)^2/12;
+momentsampleset=zeros(1,100);
+mlesampleset=zeros(1,100);
+for k=1:100
+    r=unifrnd(a,b,size);%选取随机样本
+    momentsampleset(1,k)=mean(r);%样本矩估计
+    mlesampleset(1,k)=unifit(r);%样本MLE
+end
+momentbias=meanx-mean(momentsampleset)%矩估计的偏
+momentvar=var(momentsampleset)%矩估计的方差
+momentmse=moment(momentsampleset-meanx*ones(1,100),2)
+    %矩估计的MSE
+mlebias=meanx-mean(mlesampleset)%极大似然估计的偏
+mlevar=var(mlesampleset)%极大似然估计的方差
+mlemse=moment(mlesampleset-meanx*ones(1,100),2)
+    %极大似然估计的MSE
+        \end{lstlisting}
+
+        结果:
+        \begin{lstlisting}
+
+momentbias =
+
+    0.0022
+
+
+momentvar =
+
+   7.3353e-04
+
+
+momentmse =
+
+   7.2620e-04
+
+
+mlebias =
+
+    1.4113
+
+
+mlevar =
+
+   9.1934e-06
+
+
+mlemse =
+
+   9.1015e-06
+
+        \end{lstlisting}
+    \end{solution}
 \end{document}

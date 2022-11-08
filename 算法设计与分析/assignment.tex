@@ -1,13 +1,16 @@
 \documentclass[a4paper,oneside,12pt]{ctexart}
-\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,BOONDOX-cal,frame}
+\usepackage{enumerate,geometry,graphicx,float,setspace,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,BOONDOX-cal,frame}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
 \usepackage{listings}
+\usepackage{tikz}
+\usepackage{asymptote}
+\usepackage{cleveref}
 
 \setlength{\headheight}{15pt}
 \allowdisplaybreaks[4]
-\linespread{1.5}
+\onehalfspacing
 \geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
 \pagestyle{fancy}
 \fancyhead[L]{\kaishu 强基数学001}
@@ -26,11 +29,19 @@
     numbers=left,
     numberstyle=\tiny\consolas
 }
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt   
+
+\crefname{exercise}{习题}{习题}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\crefdefaultlabelformat{(#2#1#3)}
 
 {
     \theoremstyle{plain}
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\kaishu}
+    \theoremseparator{.}
     \newtheorem{exercise}{习题}
 }
 
@@ -64,211 +75,75 @@
     \end{center}
 
     \begin{exercise}
-        \label{ex:2-7}
-        设$P(x)=a_0+a_1x+\cdots+a_dx^d$是一个$d$次多项式.假设已有一算法能在$O(i)$时间内计算一个$i$次多项式与一个1次多项式的乘积,
-        以及一个算法能在$O(i\log i)$时间内计算两个$i$次多项式的乘积,对于任意给定的$d$个整数$n_1,n_2,\cdots,n_d$,用分治法设计一个有效算法,
-        计算出$P(n_1)=P(n_2)=\cdots=P(n_d)=0$且最高次项系数为1的$d$次多项式$P(x)$,并分析算法的效率.
+        \label{ex:4.3}
+        若在0-1背包问题中, 各物品依重量递增排列时, 其价值恰好依递减序排列. 对这个特殊的0-1背包问题, 设计一个有效的算法找出最优解, 并说明算法的
+        正确性.
     \end{exercise}
 
     \begin{solution}
-        将$P(x)$写为 
-        \begin{equation*}
-            P(x)=\prod_{i=1}^d(x-n_i)=\prod_{i=1}^{\lfloor d/2\rfloor}(x-n_i)\prod_{i=\lfloor d/2\rfloor+1}^d(x-n_i)=P_1(x)P_2(x)
-        \end{equation*}
-        用分治法将$d$次多项式转化为两个$d/2$次多项式的乘积.
-
-        设这个算法计算$d$次多项式所需时间为$T(d)$,那么$T(d)$满足 
-        \begin{equation*}
-            T(d)=\begin{cases}
-                O(1) & d=1\\
-                2T(d/2)+O(d\log d) & d>1
-            \end{cases}
-        \end{equation*}
-        那么$T(d)=O(d\log^2 d)$.
+        设所给的输入为$W>0,w_i>0,v_i>0,1\leqslant i\leqslant n$. 不妨设$0<w_1\leqslant w_2\leqslant \cdots\leqslant w_n$, 那么$v_1\geqslant v_2\geqslant \cdots\geqslant v_n>0$. 
+        则$\frac{v_i}{w_i}\geqslant \frac{v_{i+1}}{w_{i+1}},1\leqslant i\leqslant n-1$. 且当$w_1>W$时问题无解, $w_1\leqslant W$时, 存在0-1背包问题
+        的一个最优解, 且$1\notin S$. 对$\forall i\in S$, 取$S_i=S\cup\{1\}-\{i\}$即为满足贪心性质的最优解.
     \end{solution}
 
     \begin{exercise}
-        \label{ex:2-9}
-        设$T[0:n-1]$是$n$个元素的数组.对任一元素$x$,设$S(x)=\{i\mid T[i]=x\}$.当$\abs{S(x)}>n/2$时,称$x$为$T$的主元素.设计一个线性
-        时间算法,确定$T[0:n-1]$是否有一个主元素.
+        \label{ex:4.12}
+        试设计一个构造图$G$生成树的算法, 使得构造出的生成树的边的最大权值达到最小.
     \end{exercise}
 
     \begin{solution}
-        如果$T$有主元素$x$,那么$x$是$T$的中位数,即若$T$的中位数不是主元素,那么$T$无主元素.
+        首先证明最小生成树使得边的最大权值达到最小. 设$G$是一棵最小生成树, $T'$是$G$的一颗使最大权值达到最小的生成树. $e$是$T$中的最大权边, $e'$是$T'$中的最大权边, 
+        且$w(e')<w(e)$. 将$e$从$T$中删去后, $T$将分为两个连通分支. 则存在$T'$中的边$e''$连接这两个分支. 将$e''$加入$T$的这两个连通分支得到一棵新的
+        生成树$T''=T-e+e''$, $e'$是$T'$的最大权边, 故$w(e'')\leqslant w(e')<w(e)$, 那么$w(T'')=w(T)-w(e)+w(e'')<w(T)$, 与$T$是最小生成树矛盾. 
 
-        那么用线性时间寻找中位数算法可以在线性时间内判定$T$是否有主元素.
+        综上, 可用Kruscal算法构造$G$的最大权值达到最小的生成树.
     \end{solution}
 
     \begin{exercise}
-        \label{ex:2-10}
-        若在习题2-9中,数组$T$中的元素不存在序关系,只能测试任意两个元素是否相等,试设计一个有效算法确定$T$是否有一个主元素.算法的计算复杂性应为$O(n\log n)$.
-        更进一步,能找到一个线性时间算法吗?
+        \label{ex:4.13}
+        试举例说明如果允许带权有向图中某些边的权为负实数, 则Dijkstra算法不能正确求得从源到其他所有顶点的最短路径长度.
     \end{exercise}
 
     \begin{solution}
-        用分治法寻找$T[1:n]$的主元素,设$x$是主元素,那么$S_x=\{i\mid T[i]=x\}$,则$\abs{S_x}>n/2$.将$T[1:n]$分为数组$T[1:n/2]$和$T[(n/2+1:n]$,
-        那么$x$是$T[1:n/2]$的主元素或者$T[n/2+1:n]$的主元素,此时只需对两个数组线性扫描,那么 
-        \begin{equation*}
-            T(n)=\begin{cases}
-                O(1)&n\leqslant 4\\
-                2T(n/2)+O(n)&n>4
-            \end{cases}
-        \end{equation*}
-        则$T(n)=O(n\log n)$.
-
-        用下面的算法可以在$O(n)$时间内找出$T[1:n]$的主元素.
-
-        对$1\leqslant i\leqslant n/2$,当$T[2i-1]=T[2i]$,将$T[2i]$村存入数组$A$,否则不进行任何操作.
-
-        那么$A$中元素个数$\abs{A}\leqslant n/2$,若$x$是$T[1:n]$的主元素,那么$x$是$A$的主元素或者$T[n]$是$T[1:n]$的主元素.
-
-        程序:
-\begin{lstlisting}
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-using namespace std;
-#define N 10
-
-int Partition(int* T, int l, int r)
-{
-	if (l == r)
-	{
-		return T[l];
-	}
-
-	int m = (l + r) / 2;
-	int n1 = Partition(T, l, m);
-	int n2 = Partition(T, m + 1, r);
-
-	if (n1 == n2)
-		return n1;
-	else
-	{
-		int cnt1 = 0, cnt2 = 0;
-		for (int i = l; i <= r; i++)
-		{
-			if (T[i] == n1)
-				cnt1++;
-			if (T[i] == n2)
-				cnt2++;
-		}
-		int half = (l + r) / 2;
-		if (cnt1 > half)
-			return n1;
-		else if (cnt2 > half)
-			return n2;
-		else
-			return INT_MAX;
-	}
-}
-
-int main()
-{
-	int T[N] = { 5,5,5,5,5,5,1,3,4,6 };
-	cout << "数组T的元素如下：" << endl
-	for (int i = 0; i < N; i++)
-	{
-		cout << T[i] << " ";
-	}
-	cout << endl;
-	if (Partition(T, 0, N - 1) != INT_MAX)
-		cout << "该数组的主元素为：" ;
-        << Partition(T, 0, N - 1) << endl;
-	else
-		cout << "该数组没有主元素" << endl;
-	return 0;
-}
-\end{lstlisting}
-结果:
-    \begin{lstlisting}
-数组T的元素如下：
-5 5 5 5 5 5 1 3 4 6
-该数组的主元素为：5
-    \end{lstlisting}
-    \end{solution}
-
-    \begin{exercise}
-        \label{ex:2-28}
-        设$X[0:n-1]$和$Y[0:n-1]$为两个数组,每个数组中含有$n$个已排好序的数.试设计$O(\log n)$时间的算法,找出$X$和$Y$的$2n$个数的中位数.
-    \end{exercise}
-
-    \begin{solution}
-        设$X[i_1:j_1]$和$Y[i_2:j_2]$是$X$和$Y$的排好序的子数组,且$j_1-i_1=j_2-i_2$.
+        对于如\cref{fig:负边权有向图}的有向图$G$, 用Dijkstra算法找到顶点1到顶点3的最短路径是1,3, 其长度是1, 但是最短路径是1,2,3, 长度是0.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[>=latex,x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+                %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
         
-        若$X[i_1]\leqslant Y[j_2]$,则中位数$m$满足$X[i_1]\leqslant m\leqslant Y[j_2]$,若$X[i_1]\geqslant Y[j_2]$,则$Y[j_2]\leqslant m\leqslant X[i_1]$.
-
-        设$m_1=(i_1+j_2)/2$,$m_2=(i_2+j_2)/2$.那么$m_1+m_2=i_1+j_2$.
-
-        当$X[m_1]=Y[m_2]$时,$m=X[m_1]=Y[m_2]$.
-
-        当$X[m_1]<Y[m_2]$时,设$m_1$是$X[m_1:j_1]$和$Y[j_2:m_2]$的中位数,则$m=m_1$.
-
-        当$X[m_1]>Y[m_2]$时,设$m_2$是$X{i_1:m_1}$和$Y[m_2:j_2]$的中位数,类似地有$m=m_2$.
-
-        可得时间复杂度是$O(\log n)$.
-
-        程序:
-        \begin{lstlisting}
-#include <iostream>
-using namespace std;
-void find(int a[], int l1, int r1, int b[], int l2, int r2)
-{
-	int m1, m2;
-	if (r1 - l1 == 1) {
-		m1 = a[l1] < b[l2] ? b[l2] : a[l1];
-		m2 = a[r1] < b[r2] ? a[r1] : b[r2];
-		if (m1 < m2)cout << m1 << endl;
-		else cout << m2 << endl;
-		return;
-	}
-	if (r1 == l1)
-	{
-		int k = a[r1] < b[r2] ? a[r1] : b[r2];
-		cout << k << endl;
-		return;
-	}
-	int mid1 = (l1 + r1) / 2, mid2 = (l2 + r2 + 1) / 2;
-	if (a[mid1] == b[mid2])
-	{
-		cout << a[mid1] << endl;
-		return;
-	}
-	if (a[mid1] < b[mid2])find(a, mid1, r1, b, l2, mid2);
-	if (a[mid1] > b[mid2])find(a, l1, mid1, b, mid2, r2);
-}
-int main()
-{
-	int a[100001], b[100001];
-	int n;
-	cout << "输入n" << endl;
-	cin >> n;
-	cout << "输入a" << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> a[i];
-	}
-	cout << "输入b" << endl;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> b[i];
-	}
-	cout << "结果" << endl;
-	find(a, 0, n - 1, b, 0, n - 1);
-}
-        \end{lstlisting}
-        结果:
-        \begin{lstlisting}
-输入n
-5
-输入a
-1 6 8 3 4
-输入b
-9 4 6 8 5
-结果
-6
-        \end{lstlisting}
+                %Shape: Circle [id:dp5674390621255017] 
+                \draw   (309,44) .. controls (309,30.19) and (320.19,19) .. (334,19) .. controls (347.81,19) and (359,30.19) .. (359,44) .. controls (359,57.81) and (347.81,69) .. (334,69) .. controls (320.19,69) and (309,57.81) .. (309,44) -- cycle ;
+                %Shape: Circle [id:dp2591663517471079] 
+                \draw   (217,193) .. controls (217,179.19) and (228.19,168) .. (242,168) .. controls (255.81,168) and (267,179.19) .. (267,193) .. controls (267,206.81) and (255.81,218) .. (242,218) .. controls (228.19,218) and (217,206.81) .. (217,193) -- cycle ;
+                %Shape: Circle [id:dp30175075218788283] 
+                \draw   (396,194) .. controls (396,180.19) and (407.19,169) .. (421,169) .. controls (434.81,169) and (446,180.19) .. (446,194) .. controls (446,207.81) and (434.81,219) .. (421,219) .. controls (407.19,219) and (396,207.81) .. (396,194) -- cycle ;
+                %Straight Lines [id:da4694209047153999] 
+                \draw    (254.8,172) -- (320.75,65.7) ;
+                \draw [shift={(321.8,64)}, rotate = 121.81] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+                %Straight Lines [id:da3605084175531923] 
+                \draw    (345.8,66) -- (407.78,170.28) ;
+                \draw [shift={(408.8,172)}, rotate = 239.28] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+                %Straight Lines [id:da9565501593884216] 
+                \draw    (396,194) -- (269,193.02) ;
+                \draw [shift={(267,193)}, rotate = 0.44] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+        
+                % Text Node
+                \draw (329,37) node [anchor=north west][inner sep=0.75pt]   [align=left] {2};
+                % Text Node
+                \draw (237,185) node [anchor=north west][inner sep=0.75pt]   [align=left] {1};
+                % Text Node
+                \draw (416,185) node [anchor=north west][inner sep=0.75pt]   [align=left] {3};
+                % Text Node
+                \draw (267,104) node [anchor=north west][inner sep=0.75pt]   [align=left] {2};
+                % Text Node
+                \draw (387,104) node [anchor=north west][inner sep=0.75pt]   [align=left] {\mbox{-}2};
+                % Text Node
+                \draw (328,168) node [anchor=north west][inner sep=0.75pt]   [align=left] {1};
+        
+        
+                \end{tikzpicture}
+                \caption{负边权有向图}
+                \label{fig:负边权有向图}
+        \end{figure}
     \end{solution}
 \end{document}

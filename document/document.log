@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  5 SEP 2022 11:46
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.7.17)  2 NOV 2022 22:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -820,16 +820,27 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count349
-[1
+LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
+(e:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
+ (e:/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 34.
+ (e:/texlive/2022/texmf-dist/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+) [1
 
 ] (./document.aux) ) 
 Here is how much of TeX's memory you used:
- 24559 strings out of 476179
- 554739 string characters out of 5813072
- 835196 words of memory out of 5000000
- 44879 multiletter control sequences out of 15000+600000
- 471109 words of font info for 56 fonts, out of 8000000 for 9000
+ 24616 strings out of 476179
+ 555267 string characters out of 5813072
+ 836204 words of memory out of 5000000
+ 44902 multiletter control sequences out of 15000+600000
+ 479012 words of font info for 86 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,5n,97p,1205b,386s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,5n,97p,1205b,275s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on document.pdf (1 page).

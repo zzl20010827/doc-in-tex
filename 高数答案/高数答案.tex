@@ -1,0 +1,313 @@
+\documentclass[a4paper,oneside,12pt]{ctexart}
+\usepackage{titlesec,float,enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr,BOONDOX-cal}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[thmmarks,hyperref]{ntheorem}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{subcaption}
+\usepackage{asymptote}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{cleveref}
+
+\pgfplotsset{compat=1.15}
+\allowdisplaybreaks[4]
+\linespread{1.5}
+\pagestyle{plain}
+\geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
+
+{
+    \theoremstyle{plain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \theoremseparator{.}
+    \newtheorem{task}{题目}[section]
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremseparator{.}
+    \newtheorem{solution}{解答}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\bfseries}
+    \theorembodyfont{\normalfont}
+    \theoremsymbol{\ensuremath{\blacksquare}}
+    \theoremseparator{.}
+    \newtheorem{proof}{证明}
+}
+
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\ttfamily}
+    \theoremseparator{.}
+    \newtheorem{remark}{注}
+}
+
+{
+    \theoremstyle{nonumberbreak}
+    \theoremheaderfont{\normalfont\bfseries}
+    \theorembodyfont{\kaishu}
+    \theoremseparator{.}
+    \newtheorem{theorem}{定理}
+}
+
+\crefname{task}{题目}{题目}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\creflabelformat{task}{(#2\thetask#3)}
+\crefdefaultlabelformat{(#2\thefigure#3)}
+\crefdefaultlabelformat{(#2\thetable#3)}
+\crefdefaultlabelformat{(#2\theequation#3)}
+
+\titleformat{\section}[block]{\Large\bfseries}{\chinese{section}、}{0pt}{}[]
+
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\blank}{\rule[-4pt]{3cm}{0.5pt}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\liminf}{\varliminf}
+\renewcommand{\limsup}{\varlimsup}
+
+\title{高数选择、填空答案解析}
+\date{}
+\author{}
+
+\begin{document}
+    
+    \maketitle
+
+    \section{单项选择题}
+
+    \begin{task}
+        \label{ts:1.1}
+        当$x\to 0$时,与$\ln(1+2\sin x)$等价的无穷小是(\qquad).
+
+        \begin{tabular}{llll}
+            A. $1+2\sin x$; & B. $x$ & C. $2x^2$; & D. $2x$.
+        \end{tabular}
+    \end{task}
+
+    \begin{solution}
+        答案:D.
+
+        当$x\to 0$时,$\ln(1+2\sin x)\sim 2\sin x\sim 2x$.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:1.2}
+        设$f(x)=\begin{cases}
+            \sqrt{\abs{x}}\sin\frac{1}{x^2}& x\neq 0\\
+            0 & x=0
+        \end{cases}$,则$f(x)$在$x=0$处(\qquad).
+
+        \begin{tabular}{llll}
+            A. 极限不存在; & B. 极限存在但不连续; & C. 连续; & D. 连续且可导.
+        \end{tabular}
+    \end{task}
+
+    \begin{solution}
+        答案:C.
+
+        当$x\to 0$时,$\abs{f(x)}=\sqrt{\abs{x}}\abs{\sin\frac{1}{x^2}}\leqslant \sqrt{\abs{x}}\to 0$,则
+        $f$在$x=0$处连续.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:1.3}
+        设$f(x)=\frac{1-e^{\frac{1}{x}}}{1+e^{\frac{1}{x}}}\arctan \frac{1}{x}$,则$x=0$是$f(x)$的(\qquad).
+
+        \begin{tabular}{llll}
+            A. 可去间断点; & B. 跳跃间断点; & C. 无穷间断点; & D.震荡间断点.
+        \end{tabular}
+    \end{task}
+
+    \begin{solution}
+        答案:A.
+
+        因为$f(x)=\frac{e^{-\frac{1}{x}}-1}{e^{-\frac{1}{x}}+1}\arctan\frac{1}{x}\to -\frac{\pi}{2},x\to 0^+$,且
+        $f(x)=\frac{1-e^{\frac{1}{x}}}{1+e^{\frac{1}{x}}}\arctan \frac{1}{x}\to-\frac{\pi}{2},x\to 0^-$,那么$x=0$是
+        可去间断点.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:1.4}
+        设$f(x)$可导,$F(x)=f(x)(1+\abs{\sin x})$.若$F(x)$在$x=0$处可导,则必有\\(\qquad).
+
+        \begin{tabular}{llll}
+            A. $f'(0)=0$; & B. $f(0)=0$; & C. $f(0)+f'(0)=0$; & $f(0)-f'(0)=0$.
+        \end{tabular}
+    \end{task}
+
+    \begin{solution}
+        答案:B.
+
+        $F$在$x=0$处可导,即
+        \begin{equation*}
+            \lim_{x\to 0}\frac{f(x)(1+\abs{\sin x})}{x}=\lim_{x\to 0}\frac{f(x)}{x}
+        \end{equation*}
+        存在,那么就有$f(0)=0$.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:1.5}
+        已知$f(x)$在$x=0$的某个邻域内连续,且$\lim_{x\to 0}\frac{f(x)}{\sqrt{1+x^2}-1}=2$.则$f(x)$在$x=0$处(\qquad).
+        
+        \begin{tabular}{llll}
+            A. 不可导; & B. 可导且$f'(0)\neq 0$; & C. 取得极小值; & D.取得极大值.
+        \end{tabular}
+    \end{task}
+
+    \begin{solution}
+        答案:C.
+
+        因为
+        \begin{equation*}
+            \frac{f(x)}{\sqrt{1+x^2}-1}=\frac{f(x)(\sqrt{1+x^2}+1)}{(\sqrt{1+x^2}-1)(\sqrt{1+x^2}+1)}=\frac{f(x)(\sqrt{1+x^2}+1)}{x^2},
+        \end{equation*}
+        那么有 
+        \begin{equation*}
+            \lim_{x\to 0}\frac{f(x)}{x^2}=1.
+        \end{equation*}
+        首先有$f(0)=0$,则 
+        \begin{equation*}
+            \lim_{x\to 0}\frac{f(x)-f(0)}{x-0}=\lim_{x\to 0}\frac{f(x)}{x^2}\cdot x=0,
+        \end{equation*}
+        得到$f'(0)=0$,排除A、B选项.又因为$\frac{f(x)}{\sqrt{1+x^2}-1}\to 2,x\to 0$且$\sqrt{1+x^2}-1\geqslant 0$,那么$f(x)\geqslant 0$,即
+        选项C.
+    \end{solution}
+
+    \section{填空题}
+
+    \begin{task}
+        \label{ts:2.1}
+        设$f(x)$可微,$y=f(\sqrt{x})e^{f(-x)}$,则$y'=\blank$.
+    \end{task}
+
+    \begin{solution}
+        答案:$y'=e^{f(-x)}\left[f'(\sqrt{x})\frac{1}{2\sqrt{x}}-f(\sqrt{x})f'(-x)\right]$.
+
+        用函数相乘的求导和链式求导法则,
+        \begin{align*}
+            y'&=[f(\sqrt{x})]'e^{f(-x)}+f(\sqrt{x})(e^{f(-x)})'\\
+            &=f'(\sqrt{x})\frac{1}{2\sqrt{x}}e^{f(-x)}+f(\sqrt{x})e^{f(-x)}f'(-x)\cdot(-1)\\
+            &=e^{f(-x)}\left[f'(\sqrt{x})\frac{1}{2\sqrt{x}}-f(\sqrt{x})f'(-x)\right].
+        \end{align*}
+    \end{solution}
+
+    \begin{task}
+        \label{ts:2.2}
+        $\lim_{n\to\infty}\left(\frac{1}{n^2+n+1}+\frac{2}{n^2+n+2}+\cdots+\frac{n}{n^2+n+n}\right)=\blank$.
+    \end{task}
+
+    \begin{solution}
+        答案:$\frac{1}{2}$.
+        
+        考虑夹逼定理.因为 
+        \begin{equation*}
+            \sum_{i=1}^n\frac{i}{n^2+n+n}\leqslant \frac{i}{n^2+n+1}+\frac{2}{n^2+n+2}+\cdots+\frac{n}{n^2+n+n}\leqslant\sum_{i=1}^n\frac{i}{n^2+n+1},
+        \end{equation*}
+        上式左边等于$\frac{n+1}{2(n+2)}$,右边等于$\frac{n^2+n}{2(n^2+n+1)}$,令$n\to\infty$,得到极限为$\frac{1}{2}$.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:2.3}
+        设$y=\frac{x^4+x^2+x}{x^2-1}$,则$y'''(0)=\blank$.
+    \end{task}
+
+    \begin{solution}
+        答案:$-6$.
+
+        两边同时乘$x^2-1$, 
+        \begin{equation}
+            \label{ts:2.1恒等式}
+            y(x^2-1)=x^4+x^2+x.
+        \end{equation}
+        首先,\cref{ts:2.1恒等式}两边同时求三阶导,
+        \begin{equation*}
+            y'''(x^2-1)+6y''x+6y'=24x,
+        \end{equation*}
+        令$x=0$,
+        \begin{equation*}
+            y'''(0)=6y'(0).
+        \end{equation*}
+        在\cref{ts:2.1恒等式}两边同时求导,得到 
+        \begin{equation*}
+            y'(x^2-1)+2yx=4x^3+2x+1,
+        \end{equation*}
+        将$x=0$代入, 
+        \begin{equation*}
+            y'(0)=-1,
+        \end{equation*}
+        那么$y'''(0)=-6$.
+    \end{solution}
+
+    \begin{task}
+        \label{ts:2.4}
+        函数$y=-\frac{1}{2}x^2e^x$的一个极小值是\blank.
+    \end{task}
+
+    \begin{solution}
+        答案:$-2e^{-2}$.
+
+        因为$y'=-\frac{e^x}{2}(x^2+2x)$,因为$e^x>0$,只需考虑函数$g(x)=-x^2-2x$,$g$有零点$x_1=-2,x_2=0$,结合$g$函数图像\cref{fig:g(x)的函数图像}得到$y$的一个极小值为$y(-2)=-2e^{-2}$.       
+
+        \begin{figure}[H]
+            \centering
+            \definecolor{uuuuuu}{rgb}{0.26666666666666666,0.26666666666666666,0.26666666666666666}
+            \definecolor{qqwuqq}{rgb}{0,0.39215686274509803,0}
+            \begin{tikzpicture}[line cap=round,line join=round,>=stealth,x=1cm,y=1cm]
+            \begin{axis}[
+            x=1cm,y=1cm,
+            axis lines=middle,
+            xmin=-6.432169108238253,
+            xmax=6.07607786582543,
+            ymin=-3.7174393530374608,
+            ymax=4.3453679298955805,
+            xtick={-6,-5,...,6},
+            ytick={-3,-2,...,4},]
+            \draw[line width=2pt,color=qqwuqq,smooth,samples=100,domain=-6.432169108238253:6.07607786582543] plot(\x,{0-(\x)^(2)-2*(\x)});
+            \draw (-3.6380674805483395,1.6124896953515388) node[anchor=north west] {$g(x)=-x^2-2x$};
+            \begin{scriptsize}
+            \draw [fill=uuuuuu] (-2,0) circle (2pt);
+            \draw [fill=uuuuuu] (0,0) circle (2pt);
+            \draw (6,0) node[anchor=south] {$x$};
+            \draw (0,4) node[anchor=west] {$y$};
+            \end{scriptsize}
+            \end{axis}
+            \end{tikzpicture}
+            \caption{$g(x)$的函数图像}
+            \label{fig:g(x)的函数图像}
+        \end{figure}
+    \end{solution}
+
+    \begin{task}
+        \label{ts:2.5}
+        设$y=y(x)$由方程$xy+e^y=x+1$确定,则$\dd{y}=\blank$.
+    \end{task}
+
+    \begin{solution}
+        答案:$\dd{y}=\frac{1-y}{x+e^y}\dd{x}$.
+
+        因为$\dv{y}{x}=y'$,对原方程两边求导, 
+        \begin{equation*}
+            y+xy'+e^yy'=1,
+        \end{equation*}
+        将$y'=\dv{y}{x}$代入化简得到, 
+        \begin{equation*}
+            \dd{y}=\frac{1-y}{x+e^y}\dd{x}.
+        \end{equation*}
+    \end{solution}
+\end{document}

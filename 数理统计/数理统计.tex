@@ -1,23 +1,25 @@
 \documentclass[a4paper,oneside,12pt]{ctexart}
-\usepackage{enumerate,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr}
+\usepackage{enumerate,setspace,geometry,graphicx,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,amssymb,indentfirst,fancyhdr}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
+\usepackage{physics}
 \usepackage{cleveref}
 
 \setlength{\headheight}{15pt}
 \allowdisplaybreaks[4]
-\linespread{1.5}
+\onehalfspacing
 \geometry{centering,left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
 \pagestyle{fancy}
 \fancyhead[L]{\kaishu 强基数学001}
 \fancyhead[C]{\kaishu 张卓立}
-\fancyhead[R]{\kaishu 2204110786}
+\fancyhead[R]{\kaishu 学号:2204110786\ 序号:15}
 
 {
     \theoremstyle{plain}
     \theoremheaderfont{\normalfont\bfseries}
     \theorembodyfont{\kaishu}
+    \theoremseparator{.}
     \newtheorem{exercise}{习题}
 }
 
@@ -25,7 +27,8 @@
     \theoremstyle{nonumberplain}
     \theoremheaderfont{\bfseries}
     \theorembodyfont{\normalfont}
-    \newtheorem{solution}{解.}
+    \theoremseparator{.}
+    \newtheorem{solution}{解}
 }
 
 {
@@ -33,13 +36,15 @@
     \theoremheaderfont{\bfseries}
     \theorembodyfont{\normalfont}
     \theoremsymbol{\ensuremath{\blacksquare}}
-    \newtheorem{proof}{证明.}
+    \theoremseparator{.}
+    \newtheorem{proof}{证明}
 }
 
 \crefname{exercise}{习题}{习题}
 \crefname{figure}{图}{图}
 \crefname{table}{表}{表}
 \crefname{equation}{式}{式}
+\creflabelformat{exercise}{(#2\theexercise#3)}
 
 \newcommand{\dif}{\mathrm{d}}
 \newcommand{\differ}{\backslash}
@@ -48,13 +53,13 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\cR}{\mathcal{R}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\expect}{\mathbb{E}}
-\newcommand{\var}{\mathrm{Var}}
+\newcommand{\Var}{\mathrm{Var}}
 \newcommand{\prob}{\mathbb{P}}
+\newcommand{\bias}{\mathrm{Bias}}
 \newcommand{\Exp}{\mathrm{Exp}}
 \newcommand{\poi}{\mathrm{Poi}}
 \newcommand{\Beta}{\mathrm{Beta}}
@@ -66,205 +71,204 @@
     \end{center}
 
     \begin{exercise}
-        \label{ex:1}
-        设$X_1,\cdots.X_n$是来自$N(0,1)$的随机样本,令 
-    \begin{equation*}
-        \bar{X}_k=\frac{1}{k}\sum_{i=1}^kX_i,\quad \bar{X}_{n-k}=\frac{1}{n-k}\sum_{i=k+1}^nX_i.
-    \end{equation*}
-    求(1)-(4)的分布.(1) $\frac{1}{2}(\bar{X}_k+\bar{X}_{n-k})$.(2) $k\bar{X}^2_k+(n-k)\bar{X}_{n-k}^2$.(3) $X_1^2/X_2^2$.(4) 
-    $X_1/X_n$.
+        \label{ex:44}
+        Let $X_1,\cdots,X_n$ be a random sample from 
+        \begin{equation*}
+            f(x;\theta)=e^{-(x-\theta)}I_{[\theta,\infty)}(x) \quad \text{for}\ -\infty<\theta<\infty.
+        \end{equation*}
+
+        \begin{enumerate}[($a$)]
+            \item Find a sufficient statistic.
+            \item Find a maximum-likelihood estimator of $\theta$.
+            \item Find a method-of-moments estimator of $\theta$.   
+            \item Is there a complete sufficient statistic? If so, find it.
+            \item Find the UMVUE of theta if one exists.
+            \item Find the Pitman estimator for the location parameter $\theta$.
+            \item Using the prior density $g(\theta)=e^{-\theta}I_{(0,\infty)}(\theta)$, find the posterior Bayes estimator of $\theta$.
+        \end{enumerate}
     \end{exercise}
 
     \begin{solution}
-        (1) 因为$X_i\sim N(0,1)$且相互独立,则$\bar{X}_k\sim N(0,1/k),\bar{X}_{n-k}\sim N(0,1/(n-k))$,那么$\frac{1}{2}(\bar{X}_k+\bar{X}_{n-k})\sim N\left(0,\frac{n}{4k(n-k)}\right)$.
-
-        (2) $(n-k)\bar{X}_{n-k}^2=\left(\sqrt{n-k}\bar{X}_{n-k}\right)^2$,因为$\sqrt{n-k}\bar{X}_{n-k}\sim N(0,1)$,那么
-        \begin{equation*}
-            \left(\sqrt{n-k}\bar{X}_{n-k}\right)^2\sim \chi^2(1).
-        \end{equation*}
-        同理,$k\bar{X}_k^2\sim \chi^2(1)$,那么$k\bar{X}_k^2+(n-k)\bar{X}_{n-k}^2\sim \chi^2(2)$.
-
-        (3) $X_1^2\sim\chi^2(1)$且$X_2^2\sim\chi^2(1)$,则
-        \begin{equation*}
-            \frac{X_1^2}{X_2^2}\sim F(1,1).
-        \end{equation*}
-
-        (4) 设$X_1/X_n$的分布函数为$F(x)$,$X_1,X_n$的联合概率密度函数为$p(x_1,x_n)$,那么
-        \begin{align*}
-            F(x)&=\prob\left(\frac{X_1}{X_n}<x\right)=\prob\left(\frac{X_1}{X_n}<x,X_n>0\right)+\prob\left(\frac{X_1}{X_n}<x,X_n<0\right)\\
-            &=\int_0^{+\infty}\dif x_n\int_{-\infty}^{xx_n}p(x_1,x_n)\dif x_1+\int_{-\infty}^0\dif x_n\int_{xx_n}^{+\infty}p(x_1,x_n)\dif x_1.
+        ($a$) \begin{align*}
+            L(\theta)&=e^{n\theta}e^{-\sum_{i=1}^nx_i}\prod_{i=1}^nI_{[\theta,\infty)}(x_i)\\
+            &=e^{n\theta}e^{-\sum_{i=1}^nx_i}I_{(-\infty,y_1]}(x_i),
         \end{align*}
-        $X_1,X_n$为独立的标准正态分布随机变量,那么$X_1/X_n$的概率密度函数为 
+        $Y_1$是充分统计量. 
+
+        ($b$) 当$x_i\geqslant \theta$时, $L(\theta)=e^{n\theta-\sum_{i=1}^nx_i}$, 则$\theta$的MLE是$\hat{\theta}_1=Y_1$.
+
+        ($c$) 令\begin{align*}
+            \bar{X}=\expect(X)&=\int_\theta^\infty e^{-(x-\theta)}x\dd{x}\\
+            &=\theta+1,
+        \end{align*}
+        $\theta$的矩估计$\hat{\theta}_2=\bar{X}-1$.
+
+        ($d$) 若对任意的统计量$z(Y_1),\expect[z(Y_1)]=0$, 即 
         \begin{equation*}
-            f(x)=\frac{\dif F(x)}{\dif x}=\frac{1}{x^2}\sqrt{\frac{2}{\pi}}.
+            \int_\theta ne^{n\theta-ny_1}z(y_1)\dd{y_1}=0,
         \end{equation*}
+        关于$\theta$求导, 得
+        \begin{equation*}
+            -nz(\theta)+\int_\theta^\infty n^2e^{n\theta-ny_1}z(y_1)\dd{y_1}=0,
+        \end{equation*}
+        则对$\forall \theta, z(\theta)=0$, 那么$\prob(z(Y_1)=0)=1$, $Y_1$是完备充分统计量.
+
+        ($e$) \begin{equation*}
+            \expect(Y_1)=\int_0^\infty ne^{n\theta-ny_1}y_1\dd{y_1}=\frac{1}{n}+\theta,
+        \end{equation*}
+        $Y_1-\frac{1}{n}$是$\theta$的无偏估计, 那么$Y_1-\frac{1}{n}$是$\theta$的UMVUE.
+
+        ($f$) $\theta$的Pitman估计是 
+        \begin{align*}
+            T_1(X_1,\cdots,X_n)&=\frac{\int \theta L(\theta)\dd{\theta}}{\int L(\theta)\dd{\theta}}\\
+            &=\frac{\int_{-\infty}^{y_1}e^{n\theta-\sum_{i=1}^nX_i}\theta\dd{\theta}}{\int_{-\infty}^{y_1}e^{n\theta-\sum_{i=1}^nX_i}\dd{\theta}}\\
+            &=Y_1-\frac{1}{n}.
+        \end{align*}
+
+        ($g$) $\theta$的Bayes后验估计是 
+        \begin{align*}
+            T_2(X_1,\cdots,X_n)&=\frac{\int\theta L(\theta)g(\theta)\dd{\theta}}{\int L(\theta)g(\theta)\dd{\theta}}\\
+            &=\frac{\int_0^{y_1}e^{(n-1)\theta-\sum_{i=1}^nX_i}\theta\dd{\theta}}{\int_0^{y_1}e^{(n-1)\theta-\sum_{i=1}^nX_i}\dd{\theta}}\\
+            &=\frac{((n-1)Y_1-1)e^{(n-1)Y_1}+1}{(n-1)(e^{(n-1)Y_1}-1)}.
+        \end{align*}
     \end{solution}
 
     \begin{exercise}
-        \label{ex:2}
-        设$X_1,\cdots,X_n$是来自双参数指数分布 
+        \label{ex:47}
+        Let $X_1,\cdots,X_n$ be a random sample of size $n$ from the following discrete density: 
         \begin{equation*}
-            f(x,\mu,\sigma)=\frac{1}{\sigma}\exp\left\{-\frac{x-\mu}{\sigma}\right\},\quad x\geqslant \mu
+            f(x;\theta)=\begin{pmatrix}
+                2\\
+                x
+            \end{pmatrix}\theta^x(1-\theta)^{2-x}I_{\{0,1,2\}}(x),
         \end{equation*}
-        的简单随机样本,其中$-\infty<\mu<\infty,\sigma>0$,求$\mu,\sigma$和$\prob(X_1\geqslant t)(t>\mu)$的矩估计和极大似然估计.
+        where $\theta>0$.
+
+        \begin{enumerate}[($a$)]
+            \item Is there a unidimensional sufficient statistic? If so, is it complete?
+            \item Find a maximum-likelihood estimator of $\theta^2=\prob(X_l=2)$. Is it unbiased?
+            \item Find an unbiased estimator of $\theta$ whose variance coincides with the corresponding Cram\'er-Rao lower bound if such 
+            exists. If such an estimate does not exist, prove that it does not.
+            \item Find a uniformly minimum-variance unbiased estimator of $\theta^2$ if such exists.
+            \item Using the squared-error loss function find a Bayes estimator of $\theta$ with respect to the beta prior distribution \begin{equation*}
+                g(\theta)=\frac{1}{\Beta(a,b)}\theta^{a-1}(1-\theta)^{b-1}I_{(0,1)}(\theta).
+            \end{equation*}
+            \item Using the squared-error loss function, find a minimax estimator of $\theta$.
+            \item Find a mean-squared error consistent estimator of $\theta^2$.
+        \end{enumerate}
     \end{exercise}
 
     \begin{solution}
-        令$r$是正整数,那么 
-        \begin{align*}
-            \expect(X^r)&=\int_\mu^{+\infty}x^r\frac{1}{\sigma}\exp\left\{-\frac{x-\mu}{\sigma}\right\}\\
-            &=\int_0^{+\infty}(x+\mu)^r\frac{1}{\sigma}\exp\left\{-\frac{x}{\sigma}\right\}\\
-            &=\sum_{k=0}^r\left(\begin{array}{c}
-                r\\
-                k
-            \end{array}\right)\mu^{r-k}\sigma^k\int_0^{+\infty}\left(\frac{x}{\sigma}\right)^k\exp\left(-\frac{x}{\sigma}\right)\dif \frac{x}{\sigma}\\
-            &=\sum_{k=0}^r\left(\begin{array}{c}
-                r\\
-                k
-            \end{array}\right)\mu^{r-k}\sigma^k\Gamma(k+1)\\
-            &=r!\sum_{k=0}^r\frac{\mu^{r-k}\sigma^k}{(r-k)!}.
-        \end{align*}
-        那么要求$\mu,\sigma^2$的矩估计,即求 
-        \begin{equation*}
-            \begin{cases}
-                \frac{X_1+\cdots+X_n}{n}=\mu+\sigma\\
-                \frac{X_1^2+\cdots+X_n^2}{n}=\mu^2+2\mu\sigma+2\sigma^2
-            \end{cases}
+        ($a$) \begin{equation*}
+            f(x;\theta)=(1-\theta)^2I_{\{0,1,2\}}(x)\exp(x\log\frac{\theta}{1-\theta}),
         \end{equation*}
-        的解,解为 
-        \begin{equation*}
-            \begin{cases}
-                \hat{\sigma}=\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}\\
-                \hat{\mu}=\frac{X_1+\cdots+X_n}{n}-\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}
-            \end{cases}
-        \end{equation*}
+        则该分布属于指数族, 那么有完备充分统计量$\sum_{i=1}^nX_i$, 令$n=1$, 有完备充分统计量$X_1$.
 
-        又因为
-        \begin{align*}
-            \prob(X_1\geqslant t)&=\int_t^{+\infty}\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\dif x\\
-            &=\exp\left(-\frac{t-\mu}{\sigma}\right).
+        ($b$) \begin{align*}
+            L(\theta)&=\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}\theta^{x_i}(1-\theta)^{2-x_i}I_{\{0,1,2\}}(x_i)\\
+            &\propto\theta^{\sum_{i=1}^nx_i}(1-\theta)^{2n-\sum_{i=1}^nx_i}.
         \end{align*}
-        那么$\prob(X_1\geqslant t)$的矩估计为 
+        则令 
         \begin{equation*}
-            \widehat{\prob(X_1\geqslant t)}=\exp\left(-\frac{t-\frac{X_1+\cdots+X_n}{n}+\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}}{\sqrt{\frac{X_1^2+\cdots+X_n^2}{n}-\frac{(X_1+\cdots+X_n^2)^2}{n^2}}}\right)
+            \frac{\sum_{i=1}^nx_i}{\theta}+\frac{2n-\sum_{i=1}^nx_i}{1-\theta}=0,
         \end{equation*}
+        得$\hat{\theta}=\frac{\sum_{i=1}^nx_i}{2n}$, 又$\theta>0$, 
+        \begin{equation*}
+            \widehat{\theta^2}=\frac{\left(\sum_{i=1}^nx_i\right)^2}{4n^2}.
+        \end{equation*}
+        因为$\expect\left(\sum_{i=1}^nX_i\right)^2=2n\theta+(4n^2-2n)\theta^2$, $\widehat{\theta^2}$不是无偏的.
 
-        $X_1,\cdots,X_n$的联合概率密度为 
+        ($c$) 首先
         \begin{equation*}
-            L(\mu,\sigma)=\prod_{k=1}^nf(x_k,\mu,\sigma)=\prod_{k=1}^n\left(\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\right).
+            l(\theta)=\log\left[\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}I_{\{0,1,2\}}(x_i)\right]+\left(\sum_{i=1}^nx_i\right)\log\theta+(2n-\sum_{i=1}^nx_i)\log(1-\theta),
         \end{equation*}
-        取对数,令 
+        则 
         \begin{equation*}
-            I(\mu,\sigma)=\log L(\mu,\sigma)=\sum_{k=1}^n\left(-\log\sigma-\frac{x_k-\mu}{\sigma}\right).
+            \pdv{l}{\theta}=\frac{\sum_{i=1}^nx_i}{\theta}-\frac{2n-\sum_{i=1}^nx_i}{1-\theta}=\frac{\left(\sum_{i=1}^nx_i\right)/2n-\theta}{\theta(1-\theta)/2n}.
         \end{equation*}
-        求一阶导和二阶导,
+        则$\frac{\sum_{i=1}^nX_i}{2n}$是达到C-R下界的无偏估计.
+
+        ($d$) 因为$\expect\left(\sum_{i=1}^nX_i\right)=2n\theta,\expect\left(\sum_{i=1}^nX_i\right)^2=2n\theta+(4n^2-2n)\theta^2$, 那么 
+        \begin{equation*}
+            \expect\left(\frac{\left(\sum_{i=1}^nX_i\right)^2-\sum_{i=1}^nX_i}{4n^2-2n}\right)=\theta^2,
+        \end{equation*}
+        即$\frac{\left(\sum_{i=1}^nX_i\right)^2-\sum_{i=1}^nX_i}{4n^2-2n}$是$\theta^2$的一个无偏估计, 又因为$\sum_{i=1}^nX_i$是完备充分统计量, 
+        则$\frac{\left(\sum_{i=1}^nX_i\right)^2-\sum_{i=1}^nX_i}{4n^2-2n}$是$\theta^2$是UMVUE.
+
+        ($e$) 在均方误差损失函数下, $\theta$的Bayes估计是
+        \begin{equation}
+            \label{eq:ex47(e)的Bayes公式}
+            \expect(\theta\mid X_1=x_1,\cdots,X_n=x_n)=\frac{\int_0^\infty \theta L(\theta)g(\theta)\dd{\theta}}{\int_0^\infty L(\theta)g(\theta)\dd{\theta}}.
+        \end{equation}
+        首先计算\cref{eq:ex47(e)的Bayes公式}的分子, 
+        \begin{align*}
+            \int_0^\infty \theta L(\theta)g(\theta)\dd{\theta}&=\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}I_{\{0,1,2\}}(x_i)\int_0^\infty \theta\cdot\theta^{\sum_{i=1}^nx_i}(1-\theta)^{2n-\sum_{i=1}^nx_i}\\
+            &\quad\cdot \frac{1}{\Beta(a,b)}\theta^{a-1}(1-\theta)^{b-1}I_{(0,1)}(\theta)\dd{\theta}\\
+            &=\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}I_{\{0,1,2\}}(x_i)\cdot\frac{1}{\Beta(a,b)}\int_0^1\theta^{a+\sum_{i=1}^nx_i+1-1}\\
+            &\quad\cdot(1-\theta)^{2n-\sum_{i=1}^nx_i+b-1}\dd{\theta}\\
+            &=\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}I_{\{0,1,2\}}(x_i)\cdot\frac{\Beta\left(a+\sum_{i=1}^nx_i+1,2n-\sum_{i=1}^nx_i+b\right)}{\Beta(a,b)}.
+        \end{align*}
+        类似可得分母为 
+        \begin{equation*}
+            \int_0^\infty L(\theta)g(\theta)\dd{\theta}=\prod_{i=1}^n\begin{pmatrix}
+                2\\
+                x_i
+            \end{pmatrix}I_{\{0,1,2\}}(x_i)\frac{\Beta\left(\sum_{i=1}^nx_i+a,2n-\sum_{i=1}^nx_i+b\right)}{\Beta(a,b)}.
+        \end{equation*}
+        代入到\cref{eq:ex47(e)的Bayes公式}, 得到Bayes估计为
+        \begin{equation}
+            \label{eq:ex47(e)Bayes估计}
+            T(X_1,\cdots,X_n)=\frac{\Beta\left(a+\sum_{i=1}^nX_i+1,2n-\sum_{i=1}^nX_i+b\right)}{\Beta\left(\sum_{i=1}^nX_i+a,2n-\sum_{i=1}^nX_i+b\right)}.
+        \end{equation}
+        又因为 
         \begin{gather*}
-            \nabla I=\left(\frac{n}{\sigma},-\frac{n}{\sigma}+\frac{\sum_{k=1}^nx_k}{\sigma^2}+\frac{n\mu}{\sigma}\right),\\
-            \nabla^2 I=\begin{bmatrix}
-                0 & -\frac{n}{\sigma^2}\\
-                -\frac{n}{\sigma^2} & \frac{n}{\sigma^2}-\frac{2\sum_{k=1}^nx_k}{\sigma^3}+\frac{n\mu}{\sigma^3}.
-            \end{bmatrix}
+            \Beta\left(a+\sum_{i=1}^nX_i+1,2n-\sum_{i=1}^nX_i+b\right)=\frac{\Gamma(a+\sum_{i=1}^nX_i+1)\Gamma(2n-\sum_{i=1}^nX_i+b)}{\Gamma(2n+a+b+1)},\\
+            \Beta\left(\sum_{i=1}^nX_i+a,2n-\sum_{i=1}^nX_i+b\right)=\frac{\Gamma(\sum_{i=1}^nX_i+a)\Gamma(2n-\sum_{i=1}^nX_i+b)}{\Gamma(2n+a+b)},\\
+            \Gamma\left(a+\sum_{i=1}^nX_i+1\right)=\left(a+\sum_{i=1}^nX_i\right)\Gamma\left(a+\sum_{i=1}^nX_i\right),\\
+            \Gamma(2n+a+b+1)=(2n+a+b)\Gamma(2n+a+b),
         \end{gather*}
-        得到$\sigma=+\infty$时取最大.极大似然估计:
-        \begin{equation*}
-            \hat{\mu}\in\R,\quad \hat{\sigma}=+\infty,\quad \widehat{\prob(X_1\geqslant t)}=1.
-        \end{equation*}
-    \end{solution}
+        将上式全部代入\cref{eq:ex47(e)Bayes估计}, 得到$\theta$的Bayes估计为 
+        \begin{equation}
+            \label{eq:ex47(e)答案}
+            T(X_1,\cdots,X_n)=\frac{a+\sum_{i=1}^nX_i}{2n+a+b}.
+        \end{equation}
 
-    \begin{exercise}
-        \label{ex:3}
-        设$X_1,\cdots,X_n$和$Y_1,\cdots,Y_n$分别为来自正态分布总体$N(\mu_1,\sigma^2)$和$N(\mu_2,\sigma^2)$的随机样本,求$\mu_1,\mu_2,\sigma^2$的MLE.
-    \end{exercise}
-
-    \begin{solution}
-        $X_1,\cdots,X_n$的累计概率密度为 
-        \begin{equation*}
-            \prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x_i-\mu_1)^2}{2\sigma^2}\right).
-        \end{equation*}
-        取对数,关于$\mu,\sigma$求偏导,令偏导为0得到方程
-        \begin{equation*}
-            \begin{cases}
-                n\mu_1=\sum_{i=1}^nx_i\\
-                -n\sigma^2+\sum_{i=1}^n(x_i-\mu_1)^2=0.
-            \end{cases}
-        \end{equation*}
-        解,得 
-        \begin{equation*}
-            \begin{cases}
-                \hat{\mu}_1=\frac{1}{n}\sum_{i=1}^nx_i\\
-                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(x_i-\frac{1}{n}\sum_{i=1}^nx_i\right)^2.
-            \end{cases}
-        \end{equation*}
-
-        同理可得 
-        \begin{equation*}
-            \begin{cases}
-                \hat{\mu}_2=\frac{1}{n}\sum_{i=1}^ny_i\\
-                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(y_i-\frac{1}{n}\sum_{i=1}^ny_i\right)^2.
-            \end{cases}
-        \end{equation*}
-    \end{solution}
-
-    \begin{exercise}
-        \label{ex:4}
-        设$X_1,\cdots,X_n$来自均匀分布$U(\theta,2\theta)$的随机样本,其中$\theta\in(0,\infty)$,求:
-        (1) $\theta$的极大似然估计$\hat{\theta}$;(2) 判断$\hat{\theta}$是否为无偏估计,如果不是无偏估计,基于$\hat{\theta}$构造一个无偏估计.
-    \end{exercise}
-
-    \begin{solution}
-        (1) $X_i$的概率密度为 
-        \begin{equation*}
-            p(x)=\begin{cases}
-                \frac{1}{\theta}, &\theta<x<\theta\\
-                0,& x\leqslant\theta\text{或}x\geqslant\theta.
-            \end{cases}
-        \end{equation*}
-        那么当$(x_1,\cdots,x_n)\in(\theta,2\theta)^n$时,$X_1,\cdots,X_n$的联合密度函数为 
-        \begin{equation*}
-            f(x_1,\cdots,x_n,\theta)=\frac{1}{\theta^n},
-        \end{equation*}
-        其余情况下$f(x_1,\cdots,x_n,\theta)=0$.当$(x_1,\cdots,x_n)\in(\theta,2\theta)$时,$\frac{1}{2}\max_ix_i\leqslant\theta\leqslant\min_ix_i$.
-        那么$\theta$的极大似然估计为$\hat{\theta}=\frac{1}{2}X_{(n)}$.
-
-        (2) $X_{(n)}$的分布函数为 
-        \begin{equation*}
-                \prob(X_{(n)}<x)=\prod_{i=1}^n\prob(X_i<x)=F(x)^n
-        \end{equation*}
-        其中$F(x)$是$X_i$的分布函数,那么可以得到 
+        ($f$) 利用($e$)的结果, 其中$a,b$是待定的. 首先计算$\sum_{i=1}^nX_i$的分布, 因为对任意的$i$, $X_i$独立且$X_i\sim B(2,\theta)$, 那么$\sum_{i=1}^nX_i\sim B(2n,\theta)$, 根据\cref{eq:ex47(e)答案}, 
         \begin{align*}
-            \expect(\hat{\theta})&=\frac{1}{2}\int_\theta^{2\theta}\frac{nx(x-\theta)^{n-1}}{\theta^n}\dif x\\
-            &=\frac{2n+1}{2n+2}\theta\neq\theta.
+            \cR_T(\theta)&=\expect[(T-\theta)^2]\\
+            &=\frac{1}{(2n+a+b)^2}\expect\left(a-(a+b)\theta+\sum_{i=1}^nX_i-2n\theta\right)\\
+            &=\frac{\Var\left(\sum_{i=1}^nX_i\right)+(a-(a+b)\theta)^2}{(2n+a^b)^2}\\
+            &=\frac{2(n-a(a+b))\theta+((a+b)^2-2n)\theta^2+a^2}{(2n+a+b)^2},
         \end{align*}
-        则它不是无偏估计.
+        为了使上式等于常数, 令$(a+b)^2=2n,a(a+b)=n$, 即$a=b=\sqrt{\frac{n}{2}}$, 上式为常数, 即此时$T$是minimax估计.
 
-        根据上面的期望,可知$\frac{n+1}{2n+1}X_{(n)}$是一个无偏估计.
-    \end{solution}
-
-    \begin{exercise}
-        \label{ex:5}
-        设$X$服从对数正态分布,即$\log X\sim N(\mu,\sigma^2)$,其中$\mu\in \R,0<\sigma<+\infty$.设$X_1,\cdots,X_n$来自总体$X$的随机样本,
-        求:(1) $\mu,\sigma^2$的极大似然估计$\hat{\theta}$;(2) 求$\expect(X)$的极大似然估计. 
-    \end{exercise}
-
-    \begin{solution}
-        (1) $\log X_1,\cdots,\log X_n$是$\log X$的随机样本,根据\cref{ex:3}的结果,可得极大似然估计 
+        ($g$) 因为$X_i\sim B(2,\theta)$, $\expect(X_i)=2\theta,\expect(X_i^2)=2\theta+2\theta^2$, 则
         \begin{equation*}
-            \begin{cases}
-                \hat{\mu}=\frac{1}{n}\sum_{i=1}^n\log X_i\\
-                \hat{\sigma}^2=\frac{1}{n}\sum_{i=1}^n\left(\log X_i-\sum_{i=1}^n\log X_i\right)^2.
-            \end{cases}
+            \expect\left(\frac{X_i^2-X_i}{2}\right)=\theta^2,
         \end{equation*}
-
-        (2) 注意到$X=e^{\log X}$,那么 
-        \begin{align*}
-            \expect(X)&=\expect(e^{\log X})\\
-            &=\int_{-\infty}^\infty\exp(x)\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\dif x\\
-            &=\exp\left(\frac{\sigma^2+2\mu}{2}\right)\int_{-\infty}^\infty\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-(\sigma^2+\mu))^2}{2\sigma^2}\right)\dif x\\
-            &=\exp\left(\frac{\sigma^2+2\mu}{2}\right).
-        \end{align*}
-        代入第(1)问的极大似然估计,得到 
+        根据Khinchin大数定律, 
         \begin{equation*}
-            \hat{\expect}(X)=\exp\left(\frac{1}{2n}\sum_{i=1}^n\left(\log X_i-\sum_{i=1}^n\log X_i\right)^2+\frac{1}{n}\sum_{i=1}^n\log X_i\right).
+            \frac{\sum_{i=1}^nX_i^2-\sum_{i=1}^nX_i}{2n}\overset{p}{\longrightarrow} \theta^2,
         \end{equation*}
+        即$\prob\left(\abs{\frac{\sum_{i=1}^nX_i^2-\sum_{i=1}^nX_i}{2n}-\theta^2}>\epsilon\right)\to 0, n\to\infty$, 又$0\leqslant \frac{\sum_{i=1}^nX_i^2-\sum_{i=1}^nX_i}{2n}\leqslant 1$, 
+        则\begin{equation*}
+            \lim_{n\to\infty}\expect\left(\frac{\sum_{i=1}^nX_i^2-\sum_{i=1}^nX_i}{2n}-\theta^2\right)^2=0,
+        \end{equation*}
+        即$\frac{\sum_{i=1}^nX_i^2-\sum_{i=1}^nX_i}{2n}$是$\theta^2$的均方相合估计量.
     \end{solution}
 \end{document}
