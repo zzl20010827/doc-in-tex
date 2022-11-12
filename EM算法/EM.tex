@@ -1,0 +1,44 @@
+\documentclass[UTF8]{ctexbeamer}
+\usepackage{float,enumerate,setspace,geometry,graphicx,bm,mathrsfs,xcolor,amsfonts,amssymb,indentfirst,fancyhdr,BOONDOX-cal}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{subcaption}
+\usepackage{asymptote}
+
+\allowdisplaybreaks[4]
+
+\newcommand{\differ}{\backslash}
+\newcommand{\ptl}{\partial}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\i}{\mathrm{i}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\liminf}{\varliminf}
+\renewcommand{\limsup}{\varlimsup}
+
+\usetheme{Malmoe}
+\usefonttheme{default}
+\usecolortheme{crane}
+\title{最大期望算法}
+\author{张卓立、吴天阳}
+\institute{强基数学001\& 002}
+\date{2022年11月14日}
+
+\begin{document}
+
+        \maketitle
+    
+    \begin{frame}{概述}
+        EM算法是用于解决含有隐变量的参数估计方法, 分为求取期望(E步骤)和期望最大化(M步骤)两个步骤: 
+        \begin{itemize}
+            \item E步骤: 先假设模型参数初始值, 估计隐变量取值;
+            \item M步骤: 基于观测数据、模型参数和隐变量取值一起来最大化``拟合''数据, 更新模型参数.
+        \end{itemize}
+    \end{frame}
+\end{document}

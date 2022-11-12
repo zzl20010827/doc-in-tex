@@ -1,22 +1,21 @@
 \documentclass[12pt,a4paper,oneside]{ctexart}
-\usepackage{caption,graphicx,amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs,extarrows,
+\usepackage{caption,graphicx,amsmath,amsthm,amsfonts,bm,mathrsfs,extarrows,
 indentfirst,setspace,textcomp,xcolor,color,colortbl,booktabs,float,subcaption,
-fancyhdr}
+fancyhdr,fourier-otf}
 \usepackage[centering]{geometry}
 \usepackage{array,blkarray}
 \usepackage{tikz,tikz-3dplot,asymptote}
 \usepackage{listings}
+\usepackage{physics}
 
 \geometry{left=2.54cm,right=2.54cm,top=3.18cm,bottom=3.18cm}
 \usetikzlibrary{arrows.meta}
 \setlength{\headheight}{15pt}
 \newfontfamily\consolas{Consolas}
 \definecolor{lightgray}{gray}{0.5}
-\linespread{1.5}
+\onehalfspacing
 
-\newcommand{\dif}{\mathrm{d}}
 \newcommand{\differ}{\backslash}
-\newcommand{\ptl}{\partial}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
@@ -24,18 +23,23 @@ fancyhdr}
 \newcommand{\Z}{\mathbb{Z}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\sX}{\mathcal{X}}
+\newcommand{\sL}{\mathcal{L}}
 
 
 
 \begin{document}
 
-\begin{equation}
-    \label{eq:勾股定理}
-    a^2+b^2=c^2.
-\end{equation}
+    若(1) 成立. 此时对$\forall x,\norm{x}=1,\forall y\in \sX$, 有 
+    \begin{equation*}
+        \abs{Tx(y)}=\abs{Ty(x)}\leqslant \norm{Ty}<\infty,
+    \end{equation*}
+    那么$\sup_{\norm{x}=1}\abs{Tx(y)}\leqslant \norm{Ty}<\infty,\forall y$, 根据
+    共鸣定理, 存在$M$
+    \begin{equation*}
+        \norm{T}=\sup_{\norm{x}=1}\norm{Tx}\leqslant M,
+    \end{equation*}
+    则$T\in\sL(\sX,\sX^\ast)$.
 
-式\eqref{eq:勾股定理}是勾股定理公式.
 \end{document}
 
