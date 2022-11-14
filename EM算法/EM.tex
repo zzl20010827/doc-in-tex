@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{physics}
 \usepackage{subcaption}
-\usepackage{asymptote}
+\usepackage{algorithm2e}
 
 \allowdisplaybreaks[4]
 
@@ -14,6 +14,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\K}{\mathbb{K}}
 \renewcommand{\i}{\mathrm{i}}
 \renewcommand{\phi}{\varphi}
@@ -22,23 +23,87 @@
 \renewcommand{\liminf}{\varliminf}
 \renewcommand{\limsup}{\varlimsup}
 
-\usetheme{Malmoe}
+\usetheme{Madrid}
 \usefonttheme{default}
-\usecolortheme{crane}
+\usecolortheme{whale}
 \title{最大期望算法}
-\author{张卓立、吴天阳}
-\institute{强基数学001\& 002}
+\author{吴天阳\and 张卓立}
+\institute{XJTU\and 强基数学}
 \date{2022年11月14日}
 
 \begin{document}
 
         \maketitle
     
-    \begin{frame}{概述}
-        EM算法是用于解决含有隐变量的参数估计方法, 分为求取期望(E步骤)和期望最大化(M步骤)两个步骤: 
-        \begin{itemize}
-            \item E步骤: 先假设模型参数初始值, 估计隐变量取值;
-            \item M步骤: 基于观测数据、模型参数和隐变量取值一起来最大化``拟合''数据, 更新模型参数.
-        \end{itemize}
+    \begin{frame}{收敛性}
+        问题: 
+        \begin{enumerate}
+            \item EM算法是否收敛?
+            \item 如果收敛, 能否收敛到全局最大值?
+        \end{enumerate}
+    \end{frame}
+
+    \begin{frame}{收敛性}{问题1: EM算法是否收敛?}
+        设有$m$个样本观察数据, $x=(x^{(1)},\cdots,x^{(m)})$, 
+        模型参数$\theta$, 在观测数据中有未观察到的隐含数据$z=(z^{(1)},\cdots,z^{(m)})$, 
+        令$Q_i\left(z^{(i)}\right)=\P\left(z^{(i)}\mid x^{(i)};\theta\right)$, 
+        $\theta_j$表示根据EM算法迭代得到的参数$\theta$的各个估计值.
+
+        要证明EM算法的收敛性, 只需证明对数似然的值在迭代过程中单调递增, 即 
+        \begin{equation*}
+            \sum_{i=1}^m\log \P\left(x^{(i)};\theta^{j+1}\right)\geqslant \sum_{i=1}^m\log\P\left(x^{(i)};\theta^j\right).
+        \end{equation*}
+
+        由于
+        \begin{equation}
+            \label{eq:L}
+            L\left(\theta,\theta^j\right)=\sum_{i=1}^m\sum_{z^{(i)}}\P\left(z^{(i)}\mid x^{(i)};\theta^j\right)\log\P\left(x^{(i)},z^{(i)};\theta\right), 
+        \end{equation}
+        令
+        \begin{equation}
+            \label{eq:H}
+            H(\theta,\theta^j)=\sum_{i=1}^m\sum_{z^{(i)}}\P\left(z^{(i)}\mid x^{(i)};\theta^j\right)\log\P\left(z^{(i)}\mid x^{(i)};\theta\right)
+        \end{equation}
+    \end{frame}
+
+    \begin{frame}{收敛性}{问题1: EM算法是否收敛?}
+        式$(\ref{eq:L})-(\ref{eq:H})$得到: 
+        \begin{equation*}
+            \sum_{i=1}^m\log\P\left(x^{(i)};\theta\right)=L(\theta,\theta^j)-H(\theta,\theta^j),
+        \end{equation*}
+
+        将$\theta^j,\theta^{j+1}$分别代入上式, 相减可得 
+        \begin{align}
+            &\sum_{i=1}^m\log\P\left(x^{(i)};\theta^{j+1}\right)-\sum_{i=1}^m\log\P\left(x^{(i)};\theta^j\right)\notag\\
+            =&[L\left(\theta^{j+1},\theta^j\right)-L\left(\theta^j,\theta^j\right)]-[H\left(\theta^{j+1},\theta^j\right)-H\left(\theta^{j},\theta^j\right)].\label{eq:L-L,H-H}
+        \end{align}
+        下面证明式(\ref{eq:L-L,H-H})右端非负.
+    \end{frame}
+
+    \begin{frame}{收敛性}{问题1: EM算法是否收敛?}
+        由于$\theta^{j+1}$使得$L(\theta,\theta^j)$极大, 所以 
+        \begin{equation*}
+            L\left(\theta^{j+1},\theta^j\right)-L\left(\theta^j,\theta^j\right)\geqslant 0,
+        \end{equation*}
+        又因为 
+        \vspace*{-1pt}
+        \begin{align}
+            H\left(\theta^{j+1},\theta^j\right)-H\left(\theta^j,\theta^j\right)&=\sum_{i=1}^m\sum_{z^{(i)}}\P\left(z^{(i)}\mid x^{(i)};\theta^j\right)\log\frac{\P\left(z^{(i)}\mid x^{(i)};\theta^{j+1}\right)}{\P\left(z^{(i)}\mid x^{(i)};\theta^j\right)}\notag\\
+            &\leqslant \sum_{i=1}^m\log\left[\sum_{z^{(i)}}\P\left(z^{(i)}\mid x^{(i)};\theta^{j+1}\right)\right.\notag\\
+            &\quad\cdot \left.\frac{\P\left(z^{(i)}\mid x^{(i)};\theta^{j+1}\right)}{\P\left(z^{(i)}\mid x^{(i)};\theta^j\right)}\right]\label{eq:H-H jensen}\\
+            &=\sum_{i=1}^m\log\sum_{z^{(i)}}\P\left(z^{(i)}\mid x^{(i)};\theta^{j+1}\right)=0,\notag
+        \end{align}
+    \end{frame}
+
+    \begin{frame}{收敛性}{问题1: EM算法是否收敛?}
+        其中式(\ref{eq:H-H jensen})用到Jensen不等式. 综上, 式(\ref{eq:L-L,H-H})得证, 即EM算法
+        具有收敛性.
+    \end{frame}
+
+    \begin{frame}{收敛性}{问题2: 如果收敛, 能否收敛到全局最大值?}
+        根据问题1的推导, EM算法可以保证收敛到一个稳定点, 但不能保证是
+        全局最优的, 所以它是局部最优的算法. 
+
+        若$L(\theta,\theta^j)$是凸的, 则可以收敛到全局最大值.
     \end{frame}
 \end{document}
