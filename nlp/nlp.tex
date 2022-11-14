@@ -1,5 +1,5 @@
 \documentclass[a4paper,oneside,12pt]{ctexart}
-\usepackage{enumerate,geometry,graphicx,float,setspace,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,indentfirst,fancyhdr,BOONDOX-cal,frame}
+\usepackage{enumerate,geometry,graphicx,float,setspace,bm,mathrsfs,xcolor,varwidth,framed,amsfonts,indentfirst,fancyhdr,BOONDOX-cal,tabularx,booktabs,colortbl}
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
@@ -26,7 +26,9 @@
     stringstyle=\color{matlabpurple}\ttfamily,
     frame=single,
     numbers=left,
-    numberstyle=\tiny\consolas
+    numberstyle=\tiny\consolas,
+    breaklines,
+    columns=flexible
 }
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt   
 
@@ -35,6 +37,8 @@
 \crefname{table}{表}{表}
 \crefname{equation}{式}{式}
 \crefdefaultlabelformat{(#2#1#3)}
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
 
 \titleformat{\section}[block]{\Large\bfseries}{\arabic{section}.}{0pt}{}[]
 
@@ -53,6 +57,8 @@
     \newtheorem{solution}{解答.}
 }
 
+\newcommand{\pr}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\emptyset}{\varnothing}
@@ -71,15 +77,49 @@
         \end{center}
 
         {
-            \noindent\color{red}\rule{\textwidth}{3pt}
-            \vspace*{1pt}
-            \rule{\textwidth}{0.5pt}
+            \noindent\color[RGB]{200,22,30}\rule{\textwidth}{3pt}\\
+            \rule[1.25em]{\textwidth}{0.75pt}
         }
-
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.4]{logo.png}
+            \label{fig:logo}
+        \end{figure}
+        \vfill
+        \begin{table}[H]
+            \label{tab:报告人信息}
+            \centering
+            \LARGE
+            \renewcommand{\arraystretch}{1.5}
+            \setlength{\doublerulesep}{0pt}
+            \arrayrulecolor[RGB]{200,22,30}
+            \begin{tabularx}{\textwidth}{p{2cm}C}
+                \textbf{名称} & \texttt{}\\
+                \cmidrule{2-2}\morecmidrules\cmidrule{2-2}
+                \textbf{姓名} & \texttt{孙思雨\quad 张卓立}\\
+                \cmidrule{2-2}\morecmidrules\cmidrule{2-2}
+                \textbf{班级} & \texttt{强基数学002\quad 强基数学001}\\
+                \cmidrule{2-2}\morecmidrules\cmidrule{2-2}
+                \textbf{学号} & \texttt{2206124483\quad 2204110786}\\
+                \cmidrule{2-2}\morecmidrules\cmidrule{2-2}
+                \textbf{日期} & \texttt{\today}\\
+                \cmidrule{2-2}\morecmidrules\cmidrule{2-2}
+            \end{tabularx}
+        \end{table}
+        \vfill
     \end{titlepage}
     \pagestyle{fancy}
     \fancyhead[C]{自然语言处理及应用实验报告}
     \fancyhead[L]{}
     \fancyhead[R]{}
     \section{实验要求}
+ 
+    \section{实验环境}
+
+    \section{实验思路}
+
+    \section{实验结果}
+
+    \section{实验总结}
 \end{document}
