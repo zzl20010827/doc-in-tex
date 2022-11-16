@@ -30,16 +30,8 @@ fancyhdr,fourier-otf}
 
 \begin{document}
 
-    若(1) 成立. 此时对$\forall x,\norm{x}=1,\forall y\in \sX$, 有 
-    \begin{equation*}
-        \abs{Tx(y)}=\abs{Ty(x)}\leqslant \norm{Ty}<\infty,
-    \end{equation*}
-    那么$\sup_{\norm{x}=1}\abs{Tx(y)}\leqslant \norm{Ty}<\infty,\forall y$, 根据
-    共鸣定理, 存在$M$
-    \begin{equation*}
-        \norm{T}=\sup_{\norm{x}=1}\norm{Tx}\leqslant M,
-    \end{equation*}
-    则$T\in\sL(\sX,\sX^\ast)$.
+    令$a'(x,y)=(T'y,x)=(y,Tx)$, 则
+    $$\norm{T}=\sup_{x,y\neq\theta}\frac{\abs{a'(x,y)}}{\norm{x}\norm{y}}\leqslant\sup_{x,y\neq\theta}\frac{\norm{T'y}\norm{x}}{\norm{x}\norm{y}}\leqslant\norm{T'}. $$
 
 \end{document}
 
