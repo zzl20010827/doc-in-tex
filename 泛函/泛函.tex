@@ -3,6 +3,7 @@
 \usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage[thmmarks,hyperref]{ntheorem}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{cleveref}
 \usepackage{physics}
 \usepackage{subcaption}
@@ -72,6 +73,7 @@
 \newcommand{\toinmeasure}[1]{\underset{#1}{\Rightarrow}}
 \newcommand{\DEF}{\overset{\triangle}{=}}
 \newcommand{\sL}{\mathscr{L}}
+\newcommand{\leftperp}{\prescript{\perp}{}}
 
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\Ker}{Ker}
@@ -84,312 +86,33 @@
     \end{center}
 
     \begin{exercise}
-        \label{ex:2.3.1}
-        设$\sX$是$B$空间, $\sX_0$是$\sX$的闭子空间. 映射$\phi:\sX\to\sX/\sX_0$定义为 
-        \begin{equation*}
-            \phi:x\mapsto [x]\quad(\forall x\in\sX),
-        \end{equation*}
-        其中$[x]$表示含$x$的商类. 求证$\phi$是开映射.
+        \label{ex:1 on note}
+        当$\sX$是复Hilbert空间, $T\in\sL(\sX)$, $T^\ast=T\Leftrightarrow (Tx,x)\in\R,\forall x\in\sX$.
     \end{exercise}
-
-    \begin{proof}
-        因为$\phi(\alpha x+\beta y)=[\alpha x+\beta y]=\alpha[x]+\beta[y]=\alpha\phi(x)+\beta\phi(y)$, $\phi$是线性算子. 又因为$\sX$
-        是$B$空间, $\sX_0$是闭子空间, 则$\sX/\sX_0$是$B$空间, 因此$\sX/\sX_0$是第二纲的. 又因为$\phi$是满射, 则$\phi$是开映射.
-    \end{proof}
 
     \begin{exercise}
-        \label{ex:2.3.2}
-        设$\sX,\sY$是$B$空间, 又设方程$Ux=y$对$\forall y\in\sY$有解$x\in\sX$, 其中$U\in\sL(\sX,\sY)$, 并且$\exists m>0$, 使得 
-        \begin{equation*}
-            \norm{Ux}\geqslant m\norm{x}\quad(\forall x\in\sX).
-        \end{equation*}
-        求证:$U$有连续逆$U^{-1}$, 并且$\norm{U^{-1}}\leqslant 1/m$. 
+        \label{ex:2 on note}
+        设$\sX$是Hilbert空间, $T_1,T_2\in\sL(\sX)$, $T_1^\ast=T_1,T_2^\ast=T_2$, $T_1T_2=T_2T_1\Leftrightarrow (T_1T_2)^\ast=T_1T_2$.
     \end{exercise}
-
-    \begin{proof}
-        因为对任意的$y\in\sY$, 方程$Ux=y$有解, 那么$U$是满射, 又因为$\forall x,y\in\sX$, $x\neq y$, 有$\norm{Ux-Uy}\geqslant m\norm{x-y}>0$, 
-        则$U$是单射, 即$U$是双射. $\sX$, $\sY$是$B$空间, 那么$U$可逆且$U^{-1}$连续. 又因为 
-        \begin{equation*}
-            \norm{x}=\norm{U(U^{-1}x)}\geqslant m\norm{U^{-1}x},
-        \end{equation*}
-        则$\norm{U^{-1}}\leqslant \frac{1}{m}$.
-    \end{proof}
 
     \begin{exercise}
-        \label{ex:2.3.3}
-        设$H$是Hilbert空间, $A\in\sL(H)$, 并且$\exists m>0$, 使得
-        \begin{equation*}
-            \abs{(Ax,x)}\geqslant m\norm{x}^2\quad(\forall x\in H).
-        \end{equation*}
-        求证:$\exists A^{-1}\in\sL(H)$.
+        \label{ex:3 on note}
+        设$\sX$是Hilbert空间, $T\in\sL(\sX)$, 证明: $\Ker(T^\ast)=R(T)^\perp=\left(\overline{R(T)}\right)^\perp$.
     \end{exercise}
-
-    \begin{proof}
-        因为$R(A)$是闭子空间, 若$R(A)\neq H$, 则$R(A)^\perp\neq\{\theta\}$, 即存在$y\in H$, $y\neq \theta$, 使得对$\forall x\in H$, $(Ax,y)=0$.
-        那么$0=\abs{(Ay,y)}\geqslant m\norm{y}^2>0$, 矛盾. 则$R(A)=H$, $A$是满射.
-
-        又因为 
-        \begin{equation*}
-            \norm{Ax}\norm{x}\geqslant \abs{(Ax,x)}\geqslant m\norm{x}^2,
-        \end{equation*}
-        则$\norm{Ax}\geqslant m\norm{x}$, 那么$A$是单射, 则$A$是双射, 又$H$是Hilbert空间, 则$A^{-1}\in\sL(H)$.
-    \end{proof}
 
     \begin{exercise}
-        \label{ex:2.3.4}
-        设$\sX, \sY$是$B^\ast$空间, $D$是$\sX$的线性子空间, 并且$A:D\to\sY$是线性映射. 求证: 
-        
-        (1) 如果$A$连续且$D$是闭的, 那么$A$是闭算子;
-
-        (2) 如果$A$连续且是闭算子, 那么$\sY$完备蕴含$D$闭;
-
-        (3) 如果$A$是单射的闭算子, 那么$A^{-1}$也是闭算子;
-
-        (4) 如果$\sX$完备, $A$是单射的闭算子, $R(A)$在$\sY$中稠密, 并且$A^{-1}$连续, 那么$R(A)=\sY$.
+        \label{ex:4 on note}
+        证明: $^\perp(M)^\perp=\overline{M}$.
     \end{exercise}
-
-    \begin{proof}
-        (1) 设$x_n\to x,Ax_n\to y$, 那么$x\in D$. 又因为$A$连续, $Ax_n\to Ax$, 则$Ax=y$, 那么$A$是闭算子.
-
-        (2) 若$\sY$完备. 若$x_n\to x,x_n\in \sX,\forall n$. 因为$A$连续, 则$A$有界, 那么\begin{equation*}
-            \norm{Ax_n-Ax_m}\leqslant \norm{A}\norm{x_n-x_m},
-        \end{equation*} 
-        即$\{Ax_n\}$是Cauchy列, 又因为$\sY$完备, 则$\{Ax_n\}$收敛, 记极限为$y$. $A$又是闭算子, 则$x\in D,Ax=y$, $D$是闭集.
-
-        (3) $A$为闭算子, 则$G_A=\{(x,Ax)\in\sX\times \sY:x\in D\}$是闭集. 又因为$G_{A^{-1}}=\{(y,A^{-1}y)\in\sY\times\sX:y\in R(A)\}$, 
-        对任意的$(y_n,A^{-1}y_n)\in G_{A^{-1}}$, 若存在$(y,z)\in\sY\times\sX$, 使得$(y_n,A^{-1}y_n)\to (y,z)$, 则$\norm{(y_n,A^{-1}y_n)}\to\norm{(y,z)}$即 
-        \begin{equation*}
-            \norm{y_n}+\norm{A^{-1}y_n}\to\norm{y}+\norm{z},
-        \end{equation*}
-        又因为存在$x_n,Ax_n=y_n$, 则 
-        \begin{equation*}
-            \norm{x_n}+\norm{Ax_n}\to\norm{z}+\norm{y},
-        \end{equation*}
-        即$(x_n,Ax_n)\to(z,y)$,则$z\in \sX, y=Az$, 那么$z=A^{-1}y$且$y\in R(A)$, $G_{A^{-1}}$是闭集, $A^{-1}$是闭算子.
-
-        (4) 由(3), $A^{-1}$是闭算子. 根据(2), $R(A)$是闭集, 即$R(A)=\overline{R(A)}=\sY$.
-    \end{proof}
 
     \begin{exercise}
-        \label{ex:2.3.5}
-        用等价范数定理证明: $(C[0,1],\norm{\cdot}_1)$不是$B$空间, 其中$\norm{f}_1=\int_0^1\abs{f(t)}\dd{t},\forall f\in C[0,1]$.
+        \label{ex:5 on note}
+        设$\sX,\sY$是$B^\ast$空间, $T\in\sL(\sX,\sY)$, 则$\Ker(T^\ast)=\leftperp R(T),\Ker(T)=R(T^\ast)^\perp$.
     \end{exercise}
-
-    \begin{proof}
-        设$\norm{f}_2=\max_{0\leqslant t\leqslant 1}\abs{f(t)}$, 那么
-        \begin{equation*}
-            \norm{f}_1=\int_0^1\abs{f(t)}\dd{t}\leqslant \max_{0\leqslant t\leqslant 1}\abs{f(t)}=\norm{f}_2,
-        \end{equation*}
-        则$\norm{\cdot}_1$与$\norm{\cdot}_2$等价. 存在$M>0$, 使得对任意的$f\in C[0,1]$, $\norm{f}_2\leqslant M\norm{f}_1$.
-
-        令$f(x)=\begin{cases}
-            -n^2x+n & 0\leqslant x\leqslant \frac{1}{n}\\
-            0 & \frac{1}{n}<x\leqslant 1
-        \end{cases}$, 则$\norm{f}_1=\int_0^1\abs{f(t)}\dd{t}=\frac{1}{2}$但$\norm{f}_2=n$, 矛盾.
-    \end{proof}
-
-    \begin{exercise}[Gelfand引理]
-        \label{ex:2.3.6}
-        设$\sX$是$B$空间, $p:\sX\to\R$满足 
-        
-        (1) $p(x)\geqslant 0\quad (\forall x\in\sX)$;
-
-        (2) $p(\lambda x)=\lambda p(x)\quad (\forall \lambda>0,\forall x\in\sX)$;
-
-        (3) $p(x_1+x_2)\leqslant p(x_1)+p(x_2)\quad (\forall x_1,x_2\in\sX)$;
-
-        (4) 当$x_n\to x$时, $\liminf_{n\to\infty}p(x_n)\geqslant p(x)$.
-
-        求证: $\exists M>0$, 使得$p(x)\leqslant M\norm{x},\forall x\in\sX$.
-    \end{exercise}
-
-    \begin{proof}
-        
-    \end{proof}
 
     \begin{exercise}
-        \label{ex:2.3.7}
-        设$\sX$和$\sY$是$B$空间, $A_n\in\sL(\sX,\sY)(n=1,2,\cdots)$, 又对$\forall x\in\sX,\{A_nx\}$在$\sY$中收敛. 求证: 
-        $\exists A\in\sL(\sX,\sY)$, 使得 
-        \begin{equation*}
-            A_nx\to Ax\quad (\forall x\in\sX),\quad\text{并且}\quad \norm{A}\leqslant \liminf_{n\to\infty}\norm{A_n}.
-        \end{equation*}
+        \label{ex:6 on note}
+        设$X=\left\{\xi=(x_1,x_2,\cdots)\in l^2:\sum_{n=1}^\infty\abs{nx_n}^2<\infty\right\},\norm{\xi}_X=\left(\sum_{n=1}^\infty \abs{nx_n}^2\right)^{\frac{1}{2}}$.
     \end{exercise}
 
-    \begin{proof}
-        令$Ax:=\lim_{n\to\infty}A_nx$, 则$A$是线性算子. 又 
-        \begin{equation*}
-            \norm{Ax}=\lim_{n\to\infty}\norm{A_n x}\leqslant \liminf_{n\to\infty}\norm{A_n}\norm{x}, 
-        \end{equation*}
-        则$\norm{A}\leqslant \liminf_{n\to\infty}\norm{A_n}$. 下证$A\in\sL(\sX,\sY)$.
-
-        因为对$\forall x,\{A_nx\}$收敛, 那么$\sup_{n}\norm{Ax}<\infty,\forall x$, 由共鸣定理, 存在$M$, 使得 
-        \begin{equation*}
-            \sup_n\norm{A_n}\leqslant M,
-        \end{equation*}
-        则$\norm{A}\leqslant M$, 即$A\in\sL(\sX,\sY)$.
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.8}
-        设$1<p<\infty$, 并且$1/p+1/q=1$. 如果序列$\{\alpha_k\}$使得对$\forall x=\{\xi_k\}\in l^p$保证$\sum_{k=1}^\infty \alpha_k\xi_k$收敛, 
-        求证: $\{\alpha_k\}\in l^q$. 又若$f:x\mapsto\sum_{k=1}^\infty\alpha_k\xi_k$, 求证: $f$作为$l^p$上的线性泛函, 有 
-        \begin{equation*}
-            \norm{f}=\left(\sum_{k=1}^\infty\abs{\alpha_k}^q\right)^{\frac{1}{q}}.
-        \end{equation*}
-    \end{exercise}
-
-    \begin{proof}
-        令$f_n(x)=\sum_{k=1}^n\alpha_k\xi_k$, 又因为$\forall x\in l^p,\sum_{k=1}^\infty\alpha_k\xi_k$收敛, 则$\forall x\in l^p,\{f_n(x)\}$收敛, 
-        那么存在$f\in\K^\ast$使得$f_n\overset{s}{\to}f$, 即$f(x)=\sum_{k=1}^\infty \alpha_k\xi_k$. 
-
-        令$x_n=\left(\alpha_1^{q-1}e^{-\i\theta_1},\cdots,\alpha_k^{q-1}e^{-\i\theta_n},0,\cdots\right)\in l^p$, 那么 
-        \begin{equation*}
-            f(x_n)=\sum_{k=1}^n\abs{\alpha_k}^q\leqslant \norm{f}\left(\sum_{k=1}^n\abs{\alpha_k}^{(q-1)p}\right)^{\frac{1}{p}}=\norm{f}\left(\sum_{k=1}^n\abs{\alpha_k}^q\right)^{\frac{1}{p}},
-        \end{equation*}
-        上式对任意的$n$成立, 则$\norm{\{\alpha_k\}}\leqslant\norm{f}<\infty$, 即$\{\alpha_k\}\in l^q$. 又根据H\"older不等式, 
-        \begin{equation*}
-            \abs{f(x)}\leqslant\sum_{k=1}^n\abs{\alpha_k\xi_k}\leqslant \norm{\{\alpha_k\}}\norm{x},
-        \end{equation*}
-        则$\norm{f}\leqslant \norm{\{\alpha_k\}}$, 综上$\norm{f}=\norm{\{\alpha_k\}}$.
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.9}
-        如果序列$\{\alpha_k\}$使得对$\forall x=\{\xi_k\}\in l^1$, 保证$\sum_{k=1}^\infty\alpha_k\xi_k$收敛, 求证: $\{\alpha_k\}\in l^\infty$. 
-        又若$f:x\mapsto\sum_{k=1}^\infty\alpha_k\xi_k$作为$l^1$上的线性泛函, 求证: 
-        \begin{equation*}
-            \norm{f}=\sup_{k\geqslant 1}\abs{\alpha_k}.
-        \end{equation*}
-    \end{exercise}
-
-    \begin{proof}
-        类似\cref{ex:2.3.8}, 令$f_n(x)=\sum_{k=1}^n\alpha_k\xi_k$, 则对$\forall x\in l^1,\{f_n(x)\}$收敛, 则存在$f\in\K^\ast$, 使得$f_n\overset{s}{\to}f$, 即
-        $f(x)=\sum_{k=1}^\infty \alpha_k\xi_k$. 令$x_n=(\underbrace{0,\cdots,0}_{n-1\text{个}},\overline{\alpha_n},0\cdots)$, 那么对$\forall n$, 有 
-        \begin{equation*}
-            \abs{\alpha_n}\leqslant \norm{f}, 
-        \end{equation*}
-        即$\norm{\{\alpha_k\}}\sup_n\alpha_n<\infty$, 那么$\{\alpha_k\}\in l^\infty$. 又 
-        \begin{equation*}
-            \abs{f(x)}\leqslant \sum_{k=1}^\infty\abs{\alpha_k\xi_k}\leqslant \norm{\{\alpha_k\}}\norm{x}, 
-        \end{equation*}
-        则$\norm{f}\leqslant \norm{\{\alpha_k\}}$, 综上$\norm{f}=\norm{\{\alpha_k\}}$.
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.10}
-        用Gelfand引理证明共鸣定理.
-    \end{exercise}
-
-    \begin{proof}
-        已知$\sX,\sY$是$B$空间, $W\subset \sL(\sX,\sY)$, 且$\sup_{A\in W}\norm{Ax}<\infty\ (\forall x)$, 下面证明存在$M$使得$\sup_{A\in W}\norm{A}\leqslant M$.
-
-        令$p(x)=\sup_{A\in W}\norm{Ax}$, 则$p:\sX\to\R$且 
-
-        (1) $p(x)\geqslant 0$, 且$\forall \lambda>0,p(\lambda x)=\sup_{A\in W}\norm{A(\lambda x)}=\lambda\sup_{A\in W}\norm{Ax}=\lambda p(x)$.
-
-        (2) $p(x_1+x_2)=\sup_{A\in W}\norm{A(x_1+x_2)}\leqslant \sup_{A\in W}\norm{Ax_1}+\sup_{A\in W}\norm{Ax_2}=p(x_1)+p(x_2)$.
-
-        (3) 若$x_n\to x$, 对$\forall A\in W,p(x_n)\geqslant \norm{Ax_n}\geqslant \norm{Ax}-\norm{Ax_n-Ax}$, 则$\liminf_{n\to\infty}p(x_n)\\\geqslant \norm{Ax}$, 两边
-        同时取上确界, 
-        \begin{equation*}
-            \liminf_{n\to\infty}p(x_n)\geqslant \sup_{A\in W}\norm{Ax}=p(x).
-        \end{equation*}
-
-        综上, 根据Gelfand引理, 存在$M>0$, 使得$p(x)\leqslant M\norm{x}$, 即$\sup_{A\in W}\norm{Ax}\leqslant M\norm{x}$, 则 
-        \begin{equation*}
-            \sup_{A\in W}\norm{A}\leqslant M.\qquad \blacksquare
-        \end{equation*}
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.11}
-        设$\sX,\sY$是$B$空间, $A\in\sL(\sX,\sY)$是满射的.求证: 如果在$\sY$中$y_n\to y_0$, 则$\exists C>0$与$x_n\to x_0$, 使得$Ax_n=y_n$, 
-        且$\norm{x_n}\leqslant C\norm{y_n}$.
-    \end{exercise}
-
-    \begin{proof}
-        考虑$A_1:\sX/\Ker A,A_1([x])=Ax$. 因为$A$是满射, $A_1$也是满射, 对$[x_1]\neq [x_2],A_1([x_1])=Ax_1\neq Ax_2=A_1([x_2])$, 则$A_1$是
-        单射, $A_1$是双射. 且$A_1(\alpha[x_1]+\beta[x_2])=\alpha Ax_1+\beta Ax_2=\alpha A_1([x_1])+\beta A_1([x_2])$, $A_1$是线性算子. 
-        
-        下面证明$A_1\in\sL(\sX/\Ker A,\sY)$, 因为 
-        \begin{equation*}
-            \norm{A_1[x']}=\norm{Ay'}\leqslant \norm{A}\norm{y'}\quad\forall y'\in[x']
-        \end{equation*}
-        且$\norm{[x']}=\rho(x',\Ker A)$, 那么存在$\{z_n\}\subset \Ker A$, 使得$\norm{x'-z_n}\to [x']$, 令$y'_n=x'-z_n$, $Ay'_n=Ax'$则$y'_n\in[x']$, 且$\norm{y'_n}\to\norm{[x']}$, 
-        则
-        \begin{equation*}
-            \norm{A_1[x']}\leqslant \norm{A}\lim_{n\to\infty}\norm{y'_n}=\norm{A}\norm{[x']},
-        \end{equation*}
-        即$A_1$是有界线性算子. 
-        
-        $A$是满射, $\sX,\sY$是$B$空间, 存在$x_n,x_0$, $Ax_n=y_n,Ax_0=y_0$且$x_n\to x_0$, 根据逆算子定理, $A^{-1}\in\sL(\sY,\sX/\Ker A)$, 
-        又因为$\norm{x}=\rho(x,\Ker A)\leqslant \norm{x}$, 则
-        \begin{equation*}
-            \norm{x_n}=\norm{A_1^{-1}y_n}\leqslant \norm{A_1^{-1}}\norm{[y_n]}\leqslant \norm{A^{-1}}\norm{y_n}.\qquad \blacksquare
-        \end{equation*}
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.12}
-        设$\sX,\sY$是$B$空间, $T$是闭线性算子, $D(T)\subset \sX,R(T)\subset \sY,N(T)\DEF\{x\in\sX\mid Tx=\theta\}$.
-
-        (1) 求证: $N(T)$是$\sX$的闭线性子空间.
-
-        (2) 求证: $N(T)=\{\theta\}$, $R(T)$在$\sY$中闭的充要条件是, $\exists \alpha>0$, 使得 
-        \begin{equation*}
-            \norm{x}\leqslant \alpha\norm{Tx}\quad(\forall x\in D(T)).
-        \end{equation*}
-
-        (3) 如果用$d(x,N(T))$表示点$x\in\sX$到集合$N(T)$的距离$\left(\inf_{x\in N(T)}\norm{z-x}\right)$. 求证: $R(T)$在$\sY$中闭的充要条件是, 
-        $\exists\alpha>0$, 使得\begin{equation*}
-            d(x,N(T))\leqslant \alpha\norm{Tx}\quad (\forall x\in D(T)).
-        \end{equation*}
-    \end{exercise}
-
-    \begin{proof}
-        (1) 由闭图像定理, $T\in\sL(\sX,\sY)$, 则$N(T)$是闭线性子空间.
-
-        (2) ``$\Rightarrow$''. 由$N(T)=\{\theta\}$, $T$是单射, 根据\cref{ex:2.3.4}, $D(T)$是闭子空间, 又$R(T)$也是闭子空间, 那么 
-        $R(T),D(T)$是$B$空间, $T$是从$D(T)$到$R(T)$的双射, 则$T^{-1}\in\sL(R(T),D(T))$, $\norm{T^{-1}y}\leqslant \norm{T^{-1}}\norm{y}$即 
-        \begin{equation*}
-            \norm{x}\leqslant \norm{T^{-1}}\norm{Tx}.
-        \end{equation*}
-
-        ``$\Leftarrow$''. 同样有$D(T)$是闭子空间, 又因为$\norm{x}\leqslant \alpha\norm{Tx}$, $T$是单射即$N(T)=\{\theta\}$. 设$y_n\in R(T),y_n\to y$, 
-        存在$x_n,Tx_n=y_n$又因为$\norm{x}\leqslant \alpha\norm{Tx}$和$\sX$是$B$空间, 则$\{x_n\}$收敛, 设极限是$x$, 则$Tx_n\to Tx$那么$Tx=y$, 
-        $R(T)$是闭集.
-
-        (3) 因为$\sX/\Ker A$是$B$闭空间, 令$T_1:\sX/\Ker A\to\sY,T_1([x])=Tx$, 类似于\cref{ex:2.3.11}, $T_1$是有界线性算子且是单射. 那么第(3)问等价于$R(T_1)$
-        是闭集的充要条件是$\exists \alpha>0$, 使得
-        \begin{equation*}
-            \norm{[x]}\leqslant\alpha\norm{T_1([x])},
-        \end{equation*}
-        即第(2)问的结论.
-    \end{proof}
-
-    \begin{exercise}
-        \label{ex:2.3.13}
-        设$a(x,y)$是Hilbert空间$H$上的一个共轭双线性泛函, 满足: 
-        
-        (1) $\exists M>0$, 使得$\abs{a(x,y)}\leqslant M\norm{x}\norm{y}$\quad$(\forall x,y\in H)$;
-
-        (2) $\exists\delta>0$, 使得$\abs{a(x,x)}\geqslant \delta\norm{x}^2\quad(\forall x\in H)$.
-
-        求证: $\forall f\in H^\ast,\exists y_f\in H$, 使得 
-        \begin{equation*}
-            a(x,y_f)=f(x)\quad (\forall x\in H),
-        \end{equation*}
-        而且$y_f$连续地依赖于$f$.
-    \end{exercise}
-
-    \begin{proof}
-        由Lax-Milgram定理, 存在唯一的$A\in\sL(H)$, 使得$a(x,y)=(x,Ay)$, 且$A^{-1}\in\sL(H),\norm{A^{-1}}\leqslant\frac{1}{\delta}$. 又
-        由Riesz表示定理, 对任意的$f\in H^\ast$, 存在唯一的$u$, 使得$f(x)=(x,u),\norm{f}=\norm{u}$, $A$是满射, 则存在$y_f,Ay_f=u$, 那么 
-        \begin{equation*}
-            a(x,y_f)=(x,Ay_f)=f(x),
-        \end{equation*}
-        且$\norm{f}=\norm{Ay_f}$. 若$f_n\to f$, $f_n-f\in H^\ast$且$a(x,y_{f_n}-y_f)=(x,Ay_{f_n})-(x,Ay_f)=f_n(x)-f(x)$, 则$\norm{f_n-f}=
-        \norm{A(y_{f_n}-y_f)}\to 0$, $A$是双射, 则$y_{f_n}\to y_f$.
-    \end{proof}
 \end{document}
