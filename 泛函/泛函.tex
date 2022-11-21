@@ -90,29 +90,114 @@
         当$\sX$是复Hilbert空间, $T\in\sL(\sX)$, $T^\ast=T\Leftrightarrow (Tx,x)\in\R,\forall x\in\sX$.
     \end{exercise}
 
+    \begin{proof}
+        ``$\Rightarrow$''. 若$T^\ast=T$, 则$(Tx,y)=(x,Ty)$, 令$x=y$, $(Tx,x)=(x,Tx)=\overline{(Tx,x)}$, 即$(Tx,x)\in\R$.
+
+        ``$\Leftarrow$''. 对$\forall x,(Tx,x)=(x,Tx)$.
+        \begin{gather*}
+            (Tx+Ty,x+y)=(Tx,x)+(Ty,y)+(Tx,y)+(Ty,x),\\
+            (x+y,Tx+Ty)=(x,Tx)+(y,Ty)+(x,Ty)+(y,Tx),
+        \end{gather*}
+        则
+        \begin{gather*}
+            \Im(Tx,y)+\Im(Ty,x)=0,\\
+            \Im(x,Ty)+\Im(y,Tx)=0,
+        \end{gather*}
+        即
+        \begin{equation*}
+            \Im(y,Tx)=\Im(Ty,x),
+        \end{equation*}
+        同理, 对$(Tx+T(iy),x+iy)$和$(x+iy,Tx+T(iy))$做类似的分解, 可得 
+        \begin{equation*}
+            \Re(Tx,y)=\Re(x,Ty),
+        \end{equation*}
+        即$(Tx,y)=(x,Ty)$, $T^\ast=T$.
+    \end{proof}
+
     \begin{exercise}
         \label{ex:2 on note}
         设$\sX$是Hilbert空间, $T_1,T_2\in\sL(\sX)$, $T_1^\ast=T_1,T_2^\ast=T_2$, $T_1T_2=T_2T_1\Leftrightarrow (T_1T_2)^\ast=T_1T_2$.
     \end{exercise}
+
+    \begin{proof}
+        ``$\Rightarrow$''. $(T_1T_2)^\ast=T_2^\ast T_1^\ast=T_2T_1=T_1T_2$.
+
+        ``$\Leftarrow$''. 因为$T_1T_2$是自伴的, $(T_1T_2)^{\ast\ast}=(T_1T_2)^\ast$, 即 
+        \begin{equation*}
+            T_1T_2=T_1^{\ast\ast}T_2^{\ast\ast}=T_2^\ast T_1^\ast=T_2T_1.\qquad \blacksquare
+        \end{equation*}
+    \end{proof}
 
     \begin{exercise}
         \label{ex:3 on note}
         设$\sX$是Hilbert空间, $T\in\sL(\sX)$, 证明: $\Ker(T^\ast)=R(T)^\perp=\left(\overline{R(T)}\right)^\perp$.
     \end{exercise}
 
+    \begin{proof}
+        对$\forall x\in\Ker(T^\ast)$, 对$\forall y,(Ty,x)=(y,T^\ast x)=0$, 则$x\in R(T)^\perp$. 
+        
+        对$\forall x\in R(T)^\perp$, 对$\forall y, (y,T^\ast x)=(Ty,x)=0$, 则$T^\ast x=\theta$, $x\in\Ker(T^\ast)$.
+
+        综上, $\Ker(T^\ast)=R(T)^\perp$且$R(T)^\perp=\left(\overline{R(T)}\right)^\perp$.
+    \end{proof}
+
     \begin{exercise}
         \label{ex:4 on note}
-        证明: $^\perp(M)^\perp=\overline{M}$.
+        证明: $(\leftperp M)^\perp=\overline{M}$, 且$\leftperp (N^\perp)\supset \overline{N}$.
     \end{exercise}
+
+    \begin{proof}
+        对$\forall x\in\overline{M}, f\in\leftperp M$, $f(x)=0$, 则$\overline{M}\subset (\leftperp M)^\perp$. 对$\forall x\in (\leftperp M)^\perp$, 
+        若$x\notin \overline{M}$, 则存在$\delta>0$, 使得$\rho(x,\overline{M})=\delta>0$, 根据Hahn-Banach定理, 存在$g\in X^\ast$, $\eval{g}_{\overline{M}}=0$, 
+        $g(x)=\delta$, 则$g\in\leftperp M$但$g(x)\neq 0$, 则$x\notin (\leftperp M)^\perp$, 矛盾. 综上$(\leftperp M)^\perp=\overline{M}$. 
+
+        对$\forall f\in\overline{N}$, 存在$f_n\in N$, $f_n\to f$. 对$\forall x\in N^\perp$, $f_n(x)=0$, 则$\abs{f_n(x)-f(x)}\leqslant \norm{f_n-f}\norm{x}\to 0$, 
+        则$f(x)=0$, 即$\overline{N}\subset\leftperp(N^\perp)$.
+    \end{proof}
 
     \begin{exercise}
         \label{ex:5 on note}
         设$\sX,\sY$是$B^\ast$空间, $T\in\sL(\sX,\sY)$, 则$\Ker(T^\ast)=\leftperp R(T),\Ker(T)=R(T^\ast)^\perp$.
     \end{exercise}
 
+    \begin{proof}
+        因为$f\in\Ker(T^\ast)\Leftrightarrow T^\ast f=f\circ T=0\Leftrightarrow f\in\leftperp R(T)$, $\Ker(T^\ast)=\leftperp R(T)$.
+
+        同样, $x\in R(T^\ast)^\perp\Leftrightarrow $对$\forall f\in Y^\ast,T^\ast f(x)=0=f(Tx)\Leftrightarrow Tx=0$, 其中最后一个等价条件是根据Hahn-Banach定理.
+        则$\Ker(T)=R(T^\ast)^\perp$.
+    \end{proof}
+
     \begin{exercise}
         \label{ex:6 on note}
-        设$X=\left\{\xi=(x_1,x_2,\cdots)\in l^2:\sum_{n=1}^\infty\abs{nx_n}^2<\infty\right\},\norm{\xi}_X=\left(\sum_{n=1}^\infty \abs{nx_n}^2\right)^{\frac{1}{2}}$.
+        设$\sX=\left\{\xi=(x_1,x_2,\cdots)\in l^2:\sum_{n=1}^\infty\abs{nx_n}^2<\infty\right\},\norm{\xi}_{\sX}=\left(\sum_{n=1}^\infty \abs{nx_n}^2\right)^{\frac{1}{2}}$, 
+        $T:\sX\rightarrow l^2, Tx=x$, 证明:$\overline{R(T)}=l^2$.
     \end{exercise}
+
+    \begin{proof}
+        因为$\overline{R(T)}=(\leftperp R(T))^\perp=(\Ker T^\ast)^\perp$, 对$\forall f\in\Ker T^\ast$, $T^\ast f=f\circ T=f\equiv 0$, 则
+        $\Ker T^\ast=\{0\}$, 那么$\overline{R(T)}=\{0\}^\perp=l^2$.
+    \end{proof}
+
+    \begin{exercise}
+        \label{ex:7 on note}
+        若$\sX$是自反空间, 则$\sX^\ast$是自反空间.
+    \end{exercise}
+
+    \begin{proof}
+        令$J:\sX\longrightarrow \sX^{\ast\ast}\in\sL(\sX^{\ast\ast\ast},\sX^\ast)$是自然嵌入映射, $\sX$自反, 则$J$是双射, $(J^{-1})^\ast\in\sL(\sX^\ast,\sX^{\ast\ast\ast})$, 
+        下面证明对$\forall \psi\in\sX^{\ast\ast\ast}$, s.t.对$\forall x^{\ast\ast}\in\sX^{\ast\ast}$, $\langle\psi,x^{\ast\ast}\rangle=\langle x^{\ast\ast},J^\ast\psi\rangle$.
+
+        因为对$\forall x^{\ast\ast}\in\sX^{\ast\ast}$, 存在$x_0\in\sX$, $\expval{\psi,x^{\ast\ast}}=\expval{\psi,J(x_0)}=\expval{\psi\circ J,x_0}=
+        \expval{J^\ast\psi,x_0}=\expval{J_{x_0},J^\ast\psi}=\expval{x^{\ast\ast},J^\ast\psi}$, 则$\sX^\ast$是自反的.
+    \end{proof}
+
+    \begin{exercise}
+        \label{ex:8 on note}
+        设$\sX$是$B$空间, 若$\sX^\ast$是自反空间, 则$\sX$是自反空间.
+    \end{exercise}
+
+    \begin{proof}
+        
+    \end{proof}
 
 \end{document}
